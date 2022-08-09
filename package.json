@@ -1,0 +1,68 @@
+{
+	"name": "anta-element-ui-vue3-template",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"serve": "vue-cli-service serve",
+		"build": "vue-cli-service build",
+		"lint": "vue-cli-service lint",
+		"prepare": "husky install"
+	},
+	"dependencies": {
+		"@element-plus/icons-vue": "~1.1.1",
+		"anta-element-ui-components-next": "^0.2.4",
+		"anta-element-ui-schema-form": "^0.0.3",
+		"anta-element-ui-schema-table": "^0.0.3",
+		"anta-element-ui-styles": "^0.0.38",
+		"core-js": "~3.8.3",
+		"pinia": "^2.0.17",
+		"stylelint-config-recommended-vue": "^1.4.0",
+		"vue": "^3.2.37",
+		"vue-class-component": "~8.0.0-0",
+		"vue-router": "~4.0.14"
+	},
+	"devDependencies": {
+		"@babel/core": "~7.12.16",
+		"@babel/eslint-parser": "~7.12.16",
+		"@babel/plugin-proposal-nullish-coalescing-operator": "~7.16.7",
+		"@babel/plugin-proposal-optional-chaining": "~7.16.7",
+		"@commitlint/cli": "^17.0.3",
+		"@commitlint/config-angular": "^17.0.3",
+		"@typescript-eslint/eslint-plugin": "~5.4.0",
+		"@typescript-eslint/parser": "~5.4.0",
+		"@vue/cli-plugin-babel": "~5.0.0",
+		"@vue/cli-plugin-eslint": "~5.0.0",
+		"@vue/cli-plugin-typescript": "~5.0.0",
+		"@vue/cli-service": "~5.0.0",
+		"@vue/compiler-sfc": "~3.2.31",
+		"@vue/eslint-config-typescript": "~9.1.0",
+		"eslint": "~7.32.0",
+		"eslint-config-prettier": "~8.5.0",
+		"eslint-plugin-prettier": "~4.0.0",
+		"eslint-plugin-vue": "~8.5.0",
+		"fs-extra": "^10.1.0",
+		"husky": ">=7",
+		"lint-staged": ">=10",
+		"postcss-html": "^1.5.0",
+		"postcss-scss": "^4.0.4",
+		"sass": "~1.49.9",
+		"sass-loader": "~12.6.0",
+		"stylelint": "^14.9.1",
+		"stylelint-config-prettier-scss": "^0.0.1",
+		"stylelint-config-recess-order": "^3.0.0",
+		"stylelint-config-standard-scss": "^5.0.0",
+		"stylelint-order": "^5.0.0",
+		"stylelint-webpack-plugin": "^3.3.0",
+		"typescript": "~4.5.5"
+	},
+	"browserslist": [
+		"> 1%",
+		"last 2 versions",
+		"not dead",
+		"not ie 11"
+	],
+	"lint-staged": {
+		"*.{js,jsx,ts,tsx}": "eslint",
+		"*.scss": "stylelint"
+	}
+}

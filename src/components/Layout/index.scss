@@ -1,0 +1,34 @@
+@import 'anta-element-ui-styles/src/variables';
+
+$bg-color: #eff2f9;
+$aside-bg-color: #01285a;
+
+.container {
+	height: 100vh;
+	background-color: $bg-color;
+}
+
+.aside {
+	background-color: $aside-bg-color;
+
+	&__title {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		height: 48px;
+		padding: 0 15px;
+		font-size: 18px;
+		font-weight: bold;
+		color: $--color-white;
+	}
+
+	&__toggle {
+		cursor: pointer;
+	}
+
+	&--collapse {
+		.aside__toggle {
+			transform: rotate(180deg);
+		}
+	}
+}
