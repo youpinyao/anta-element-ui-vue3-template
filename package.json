@@ -2,6 +2,18 @@
 	"name": "anta-element-ui-vue3-template",
 	"version": "0.0.1",
 	"private": true,
+	"repository": {
+		"type": "git",
+		"url": "git+ssh://git@github.com/youpinyao/anta-element-ui-vue3-template.git"
+	},
+	"bugs": {
+		"url": "https://github.com/youpinyao/anta-element-ui-vue3-template/issues"
+	},
+	"homepage": "https://github.com/youpinyao/anta-element-ui-vue3-template#readme",
+	"engines": {
+		"node": "16.x",
+		"npm": "8.x"
+	},
 	"scripts": {
 		"serve": "vue-cli-service serve",
 		"build": "vue-cli-service build",
