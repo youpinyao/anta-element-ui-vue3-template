@@ -84,7 +84,10 @@ const fetchMenu: AutocompleteFetchSuggestions = (searchKey, cb) => {
 				let { fullTitle } = item;
 
 				matchs?.forEach((match) => {
-					fullTitle?.replace(match, `<b>${match}</b>`);
+					fullTitle = fullTitle?.replace(
+						match,
+						`<b style="color: #d40000;">${match}</b>`
+					);
 				});
 				return {
 					...item,
