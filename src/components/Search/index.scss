@@ -1,0 +1,47 @@
+@import 'anta-element-ui-styles/src/variables';
+
+.search {
+	position: relative;
+	margin: 0 10px;
+	color: $--color-text-regular;
+
+	&__icon {
+		position: absolute;
+		top: 0;
+		right: 0;
+		display: flex;
+		align-items: center;
+		height: 32px;
+		cursor: pointer;
+		transition: all 300ms ease;
+	}
+
+	:deep(.at-autocomplete--plus) {
+		width: 240px;
+		visibility: hidden;
+		opacity: 0;
+		transition: all 300ms ease;
+	}
+
+	:deep(.at-icon-search) {
+		font-size: 20px;
+	}
+
+	:deep(.at-autocomplete--plus .el-input__wrapper) {
+		padding-right: 10px;
+		padding-left: 16px;
+		border-radius: 30px;
+	}
+
+	&--focus {
+		:deep(.at-autocomplete--plus) {
+			visibility: visible;
+			opacity: 1;
+		}
+
+		.search__icon {
+			opacity: 0;
+			transform: translateX(-6px);
+		}
+	}
+}

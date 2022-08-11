@@ -2,18 +2,6 @@
 	"name": "anta-element-ui-vue3-template",
 	"version": "0.0.1",
 	"private": true,
-	"repository": {
-		"type": "git",
-		"url": "git+ssh://git@github.com/youpinyao/anta-element-ui-vue3-template.git"
-	},
-	"bugs": {
-		"url": "https://github.com/youpinyao/anta-element-ui-vue3-template/issues"
-	},
-	"homepage": "https://github.com/youpinyao/anta-element-ui-vue3-template#readme",
-	"engines": {
-		"node": "16.x",
-		"npm": "8.x"
-	},
 	"scripts": {
 		"serve": "vue-cli-service serve",
 		"build": "vue-cli-service build",
@@ -21,14 +9,16 @@
 		"prepare": "husky install"
 	},
 	"dependencies": {
-		"@element-plus/icons-vue": "~1.1.1",
-		"anta-element-ui-components-next": "^0.2.4",
-		"anta-element-ui-schema-form": "^0.0.3",
-		"anta-element-ui-schema-table": "^0.0.3",
+		"@element-plus/icons-vue": "^2.0.6",
+		"anta-element-ui-components-next": "0.2.6",
+		"anta-element-ui-schema-form": "0.0.5",
+		"anta-element-ui-schema-table": "0.0.5",
 		"anta-element-ui-styles": "^0.0.38",
+		"axios": "^0.27.2",
 		"core-js": "~3.8.3",
 		"pinia": "^2.0.17",
 		"stylelint-config-recommended-vue": "^1.4.0",
+		"throttle-debounce": "^5.0.0",
 		"vue": "^3.2.37",
 		"vue-class-component": "~8.0.0-0",
 		"vue-router": "~4.0.14"
@@ -40,6 +30,7 @@
 		"@babel/plugin-proposal-optional-chaining": "~7.16.7",
 		"@commitlint/cli": "^17.0.3",
 		"@commitlint/config-angular": "^17.0.3",
+		"@types/throttle-debounce": "^5.0.0",
 		"@typescript-eslint/eslint-plugin": "~5.4.0",
 		"@typescript-eslint/parser": "~5.4.0",
 		"@vue/cli-plugin-babel": "~5.0.0",
@@ -76,5 +67,17 @@
 	"lint-staged": {
 		"*.{js,jsx,ts,tsx}": "eslint",
 		"*.scss": "stylelint"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+ssh://git@github.com/youpinyao/anta-element-ui-vue3-template.git"
+	},
+	"bugs": {
+		"url": "https://github.com/youpinyao/anta-element-ui-vue3-template/issues"
+	},
+	"homepage": "https://github.com/youpinyao/anta-element-ui-vue3-template#readme",
+	"engines": {
+		"node": "16.x",
+		"npm": "8.x"
 	}
 }

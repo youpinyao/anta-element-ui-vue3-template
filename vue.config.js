@@ -12,6 +12,14 @@ module.exports = defineConfig({
 		'anta-element-ui-styles',
 		'element-plus',
 	],
+	devServer: {
+		proxy: {
+			'/api': {
+				target: 'https://cli.vuejs.org/zh/',
+				changeOrigin: true,
+			},
+		},
+	},
 	pages: {
 		index: {
 			entry: 'src/main.ts',
@@ -38,6 +46,9 @@ module.exports = defineConfig({
 				'@components': path.resolve('./src/components'),
 				'@store': path.resolve('./src/store'),
 				'@utils': path.resolve('./src/utils'),
+				'@hooks': path.resolve('./src/utils/hooks'),
+				'@services': path.resolve('./src/services'),
+				'@models': path.resolve('./src/models'),
 			},
 		},
 		plugins: [

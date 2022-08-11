@@ -1,34 +1,82 @@
 @import 'anta-element-ui-styles/src/variables';
 
-$bg-color: #eff2f9;
-$aside-bg-color: #01285a;
-
 .container {
 	height: 100vh;
-	background-color: $bg-color;
+	background-color: var(--global-bg-color);
+}
+
+.header {
+	--el-header-height: var(--global-header-height);
+
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background-color: $--color-white;
+
+	&__user {
+		display: flex;
+		align-items: center;
+
+		:deep(.at-image) {
+			margin-right: 8px;
+		}
+	}
 }
 
 .aside {
-	background-color: $aside-bg-color;
+	background-color: var(--global-aside-bg-color);
+	transition: width 300ms ease;
 
 	&__title {
+		position: relative;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		height: 48px;
+		height: var(--global-header-height);
 		padding: 0 15px;
 		font-size: 18px;
 		font-weight: bold;
 		color: $--color-white;
+		background-color: var(--global-aside-header-title-color);
+
+		> div:nth-child(1) {
+			white-space: nowrap;
+			transition: all 300ms ease;
+		}
 	}
 
 	&__toggle {
+		position: absolute;
+		top: 0;
+		right: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: var(--global-header-height);
+		height: var(--global-header-height);
 		cursor: pointer;
 	}
 
 	&--collapse {
+		--el-aside-width: 50px !important;
+
 		.aside__toggle {
 			transform: rotate(180deg);
 		}
+
+		.aside__title > div:nth-child(1) {
+			visibility: hidden;
+			opacity: 0;
+		}
+
+		.aside__search {
+			height: 0;
+			padding: 0;
+			opacity: 0;
+		}
 	}
+}
+
+.main {
+	position: relative;
 }

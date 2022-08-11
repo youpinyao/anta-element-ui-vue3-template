@@ -90,6 +90,10 @@
 			}
 
 			&__content {
+				:deep(.at-input-plus > .el-input__wrapper .el-input__inner) {
+					box-shadow: 0 0 0 100px $--color-white inset;
+				}
+
 				.forget {
 					padding: 12px 0;
 					line-height: 17px;

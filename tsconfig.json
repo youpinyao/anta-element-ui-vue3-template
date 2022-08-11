@@ -17,7 +17,13 @@
 		"typeRoots": ["node_modules/@types", "global.d.ts"],
 		"types": ["webpack-env"],
 		"paths": {
-			"@/*": ["src/*"]
+			"@/*": ["src/*"],
+			"@store/*": ["src/store/*"],
+			"@utils/*": ["src/utils/*"],
+			"@hooks/*": ["src/utils/hooks/*"],
+			"@components/*": ["src/components/*"],
+			"@services/*": ["src/services/*"],
+			"@models/*": ["src/models/*"]
 		},
 		"lib": ["esnext", "dom", "dom.iterable", "scripthost"]
 	},

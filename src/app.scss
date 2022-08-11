@@ -1,1 +1,12 @@
 // empty
+
+:root {
+	--global-aside-bg-color: #01285a;
+	--global-aside-header-title-color: #03234c;
+	--global-bg-color: #eff2f9;
+	--global-header-height: 48px;
+}
+
+.user-select-none {
+	user-select: none;
+}
