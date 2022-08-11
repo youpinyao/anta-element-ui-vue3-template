@@ -14,8 +14,8 @@ module.exports = defineConfig({
 	],
 	devServer: {
 		proxy: {
-			'/api': {
-				target: 'https://cli.vuejs.org/zh/',
+			'/admin/api': {
+				target: 'http://10.131.128.107:31093',
 				changeOrigin: true,
 			},
 		},
@@ -46,9 +46,10 @@ module.exports = defineConfig({
 				'@components': path.resolve('./src/components'),
 				'@store': path.resolve('./src/store'),
 				'@utils': path.resolve('./src/utils'),
-				'@hooks': path.resolve('./src/utils/hooks'),
 				'@services': path.resolve('./src/services'),
 				'@models': path.resolve('./src/models'),
+				'@axios': path.resolve('./src/utils/axios'),
+				'@hooks': path.resolve('./src/utils/hooks'),
 			},
 		},
 		plugins: [

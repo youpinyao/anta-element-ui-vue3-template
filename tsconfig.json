@@ -20,10 +20,11 @@
 			"@/*": ["src/*"],
 			"@store/*": ["src/store/*"],
 			"@utils/*": ["src/utils/*"],
-			"@hooks/*": ["src/utils/hooks/*"],
 			"@components/*": ["src/components/*"],
 			"@services/*": ["src/services/*"],
-			"@models/*": ["src/models/*"]
+			"@models/*": ["src/models/*"],
+			"@hooks/*": ["src/utils/hooks/*"],
+			"@axios": ["src/utils/axios/index"]
 		},
 		"lib": ["esnext", "dom", "dom.iterable", "scripthost"]
 	},

@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import { useTabStore } from '@/store/tab';
-import { useLoadingStore } from '@/store/loading';
+import { useRouterStore } from '@/store/router';
 import Layout from '@/components/Layout/Index.vue';
 import NotFound from '@/views/NotFound.vue';
 import Login from '@/views/Login/Index.vue';
@@ -43,12 +43,12 @@ const router = createRouter({
 });
 
 router.beforeEach((guard) => {
-	useLoadingStore().routeStart(guard.fullPath);
+	useRouterStore().routeStart(guard.fullPath);
 	console.time(guard.path);
 });
 
 router.afterEach((to) => {
-	useLoadingStore().routeEnd(to.fullPath);
+	useRouterStore().routeEnd(to.fullPath);
 	console.timeEnd(to.path);
 
 	if (to.meta?.keepAlive !== false) {

@@ -1,3 +1,7 @@
 {
-	"stylelint.validate": ["css", "less", "scss", "postcss"]
+	"stylelint.validate": ["css", "less", "scss", "postcss"],
+	"editor.codeActionsOnSave": {
+		"source.fixAll.stylelint": false,
+		"source.fixAll": false
+	}
 }

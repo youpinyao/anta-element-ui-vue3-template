@@ -1,9 +1,13 @@
+import { MenuItem } from '@/models/menu';
 import { queryMenu } from '@/services/menu';
-import useRequest from '@hooks/useRequest';
 import { defineStore } from 'pinia';
+import { computed, ref } from 'vue';
 
 export const useMenuStore = defineStore('menu', function () {
-	const { data: items } = useRequest(queryMenu());
+	const result = ref<MenuItem[]>();
+	const items = computed(() => result.value);
+
+	queryMenu().then((res) => (result.value = res));
 
 	return {
 		items,

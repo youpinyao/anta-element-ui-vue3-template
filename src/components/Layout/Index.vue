@@ -34,7 +34,7 @@
 			<ElMain class="main">
 				<RouterView v-slot="{ Component }">
 					<KeepAlive :include="include" v-if="$route.meta.keepAlive !== false">
-						<component :is="Component" />
+						<component :is="Component" :key="Component" />
 					</KeepAlive>
 					<component v-else :is="Component" />
 				</RouterView>
@@ -63,19 +63,19 @@ import { computed, ref } from 'vue';
 import Menu from '@/components/Menu/Index.vue';
 import Search from '@/components/Search/Index.vue';
 import { useMenuStore } from '@/store/menu';
-import { useLoadingStore } from '@/store/loading';
+import { useRouterStore } from '@/store/router';
 
 const router = useRouter();
 const tabStore = useTabStore();
 const menuStore = useMenuStore();
 const menuItems = computed(() => menuStore.items);
-const loadingStore = useLoadingStore();
+const routerStore = useRouterStore();
 const include = computed(() => tabStore.items.map((item) => item.name));
 const collapse = ref(
 	window.localStorage.getItem('anta-aside-menu-collapse') === 'true'
 );
 const loading = computed(() =>
-	Object.values(loadingStore.routes).some((item) => item === true)
+	Object.values(routerStore.routes).some((item) => item === true)
 );
 
 const toggleMenu = () => {
