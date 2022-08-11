@@ -13,6 +13,6 @@ import { AtEmpty } from 'anta-element-ui-components-next';
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 100vh;
+	height: calc(100vh - 48px);
 }
 </style>
