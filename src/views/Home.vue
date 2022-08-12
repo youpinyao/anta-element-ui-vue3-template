@@ -1,23 +1,9 @@
-<template>
-	<div>result: {{ result }}</div>
-	<div>error: {{ error }}</div>
-	<div>loading: {{ loading }}</div>
-	<div>loading effects: {{ loadingStore.effects }}</div>
-</template>
+<template>Home</template>
 
-<script lang="ts" setup>
-import { useRequest } from '@hooks/useRequest';
-import { post } from '@axios';
-import { useLoadingStore } from '@/store/loading';
+<script lang="ts">
+import { defineComponent } from 'vue';
 
-const { result, loading, error } = useRequest(
-	post({
-		url: 'token',
-		data: {
-			a: 1,
-		},
-	})
-);
-
-const loadingStore = useLoadingStore();
+export default defineComponent({
+	setup() {},
+});
 </script>

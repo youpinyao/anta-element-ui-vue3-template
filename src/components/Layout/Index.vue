@@ -1,10 +1,6 @@
 <template>
 	<ElContainer class="container">
-		<ElAside
-			class="aside"
-			:class="{ 'aside--collapse': collapse }"
-			width="208px"
-		>
+		<ElAside class="aside" :class="{ 'aside--collapse': collapse }">
 			<div class="aside__title">
 				<div>ANTA BMS</div>
 				<div class="aside__toggle" @click="toggleMenu">
@@ -15,28 +11,26 @@
 		</ElAside>
 		<ElContainer>
 			<ElHeader class="header">
-				<div></div>
-				<div class="header__user">
+				<div class="header__left"></div>
+				<div class="header__right">
 					<Search />
-					<AtDropdown trigger="click" @command="handleDropdown">
-						<div class="header__user__info">
-							<AtCustomerImage :size="28" />
-							<span>Hi, 游品尧</span>
-						</div>
-						<template #dropdown>
-							<AtDropdownMenu slot="dropdown">
-								<AtDropdownItem command="logout">退出</AtDropdownItem>
-							</AtDropdownMenu>
-						</template>
-					</AtDropdown>
+					<User />
 				</div>
 			</ElHeader>
 			<ElMain class="main">
-				<RouterView v-slot="{ Component }">
-					<KeepAlive :include="include" v-if="$route.meta.keepAlive !== false">
-						<component :is="Component" :key="Component" />
+				<RouterView v-slot="{ Component, route }">
+					<KeepAlive :include="include">
+						<component
+							:is="Component"
+							:key="route.name"
+							v-if="route.meta.keepAlive !== false"
+						/>
 					</KeepAlive>
-					<component v-else :is="Component" />
+					<component
+						:is="Component"
+						:key="route.name"
+						v-if="route.meta.keepAlive === false"
+					/>
 				</RouterView>
 				<AtLoading text="资源加载中..." :visible="loading" />
 			</ElMain>
@@ -51,21 +45,17 @@ import {
 	ElHeader,
 	ElMain,
 	AtIcon,
-	AtCustomerImage,
 	AtLoading,
-	AtDropdown,
-	AtDropdownMenu,
-	AtDropdownItem,
 } from 'anta-element-ui-components-next';
 import { useTabStore } from '@/store/tab';
-import { RouterView, useRouter } from 'vue-router';
+import { RouterView } from 'vue-router';
 import { computed, ref } from 'vue';
-import Menu from '@/components/Menu/Index.vue';
-import Search from '@/components/Search/Index.vue';
+import Menu from '@/components/Layout/Menu/Index.vue';
+import Search from '@/components/Layout/Search/Index.vue';
+import User from '@/components/Layout/User/Index.vue';
 import { useMenuStore } from '@/store/menu';
 import { useRouterStore } from '@/store/router';
 
-const router = useRouter();
 const tabStore = useTabStore();
 const menuStore = useMenuStore();
 const menuItems = computed(() => menuStore.items);
@@ -81,12 +71,6 @@ const loading = computed(() =>
 const toggleMenu = () => {
 	collapse.value = !collapse.value;
 	window.localStorage.setItem('anta-aside-menu-collapse', `${collapse.value}`);
-};
-
-const handleDropdown = (command: string) => {
-	if (command === 'logout') {
-		router.replace('/login');
-	}
 };
 </script>
 

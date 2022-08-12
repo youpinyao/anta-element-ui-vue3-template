@@ -1,0 +1,12 @@
+@import 'anta-element-ui-styles/src/variables';
+
+.user {
+	display: flex;
+	align-items: center;
+	color: $--color-text-primary;
+	cursor: pointer;
+
+	:deep(.at-image) {
+		margin-right: 8px;
+	}
+}
