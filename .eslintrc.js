@@ -22,10 +22,10 @@ module.exports = {
 	],
 	rules: {
 		'prettier/prettier': 'error',
-		'vue/valid-v-model': [0],
 		'vue/multi-word-component-names': [0],
-		'vue/no-deprecated-slot-attribute': [0],
-		'vue/no-deprecated-slot-scope-attribute': [0],
-		'vue/no-deprecated-v-bind-sync': [0],
+		// 'vue/valid-v-model': [0],
+		// 'vue/no-deprecated-slot-attribute': [0],
+		// 'vue/no-deprecated-slot-scope-attribute': [0],
+		// 'vue/no-deprecated-v-bind-sync': [0],
 	},
 };

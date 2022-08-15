@@ -5,7 +5,7 @@
 			<span>Hi, 游品尧</span>
 		</div>
 		<template #dropdown>
-			<AtDropdownMenu slot="dropdown">
+			<AtDropdownMenu>
 				<AtDropdownItem command="logout">退出</AtDropdownItem>
 			</AtDropdownMenu>
 		</template>

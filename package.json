@@ -65,7 +65,7 @@
 	],
 	"lint-staged": {
 		"*.{js,jsx,ts,tsx}": "eslint",
-		"*.scss": "stylelint"
+		"*.{scss,vue}": "stylelint"
 	},
 	"repository": {
 		"type": "git",
