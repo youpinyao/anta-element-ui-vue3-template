@@ -46,7 +46,7 @@ module.exports = defineConfig({
 				'@components': path.resolve('./src/components'),
 				'@store': path.resolve('./src/store'),
 				'@utils': path.resolve('./src/utils'),
-				'@services': path.resolve('./src/services'),
+				'@apis': path.resolve('./src/apis'),
 				'@models': path.resolve('./src/models'),
 				'@axios': path.resolve('./src/utils/axios'),
 				'@hooks': path.resolve('./src/utils/hooks'),

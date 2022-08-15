@@ -21,7 +21,7 @@
 			"@store/*": ["src/store/*"],
 			"@utils/*": ["src/utils/*"],
 			"@components/*": ["src/components/*"],
-			"@services/*": ["src/services/*"],
+			"@apis/*": ["src/apis/*"],
 			"@models/*": ["src/models/*"],
 			"@hooks/*": ["src/utils/hooks/*"],
 			"@axios": ["src/utils/axios/index"]

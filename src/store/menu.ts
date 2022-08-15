@@ -1,5 +1,5 @@
 import { MenuItem } from '@/models/menu';
-import { queryMenu } from '@/services/menu';
+import { queryMenu } from '@/apis/menu';
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 
