@@ -1,18 +1,38 @@
 const path = require('path');
+const webpack = require('webpack');
+const CopyPlugin = require('copy-webpack-plugin');
 const { defineConfig } = require('@vue/cli-service');
 const StylelintPlugin = require('stylelint-webpack-plugin');
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
+const manifest = require(path.join(__dirname, './.dll/element-manifest.json'));
+const dllPlugins = [
+	new webpack.DllReferencePlugin({
+		context: path.join(__dirname, './.dll'),
+		manifest,
+	}),
+	...['css', 'js'].map(
+		(typeOfAsset) =>
+			new AddAssetHtmlPlugin({
+				filepath: path.join(
+					__dirname,
+					'./.dll',
+					`${manifest.name}.${typeOfAsset}`
+				),
+				typeOfAsset,
+			})
+	),
+	new CopyPlugin({
+		patterns: [{ from: '.dll/dll_assets', to: 'dll_assets' }],
+	}),
+];
 
 module.exports = defineConfig({
 	filenameHashing: true,
 	runtimeCompiler: true,
-	transpileDependencies: [
-		'anta-element-ui-components-next',
-		'anta-element-ui-schema-form',
-		'anta-element-ui-schema-table',
-		'anta-element-ui-styles',
-		'element-plus',
-	],
 	devServer: {
+		static: {
+			directory: path.join(__dirname, '.dll'),
+		},
 		proxy: {
 			'/admin/api': {
 				target: 'http://10.131.128.107:31093',
@@ -62,6 +82,7 @@ module.exports = defineConfig({
 				emitError: true,
 				emitWarning: true,
 			}),
+			...dllPlugins,
 		],
 		module: {
 			rules: [],

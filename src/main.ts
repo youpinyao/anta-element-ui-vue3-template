@@ -1,7 +1,6 @@
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import * as icons from '@element-plus/icons-vue';
-import 'anta-element-ui-components-next/src/scss/index.scss';
 import './app.scss';
 import AntaElementUIPlus, {
 	ClickOutside,
