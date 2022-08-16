@@ -43,12 +43,12 @@ const router = createRouter({
 });
 
 router.beforeEach((guard) => {
-	useRouterStore().routeStart(guard.fullPath);
+	useRouterStore().start(guard.fullPath);
 	console.time(guard.path);
 });
 
 router.afterEach((to) => {
-	useRouterStore().routeEnd(to.fullPath);
+	useRouterStore().end(to.fullPath);
 	console.timeEnd(to.path);
 
 	if (to.meta?.keepAlive !== false) {

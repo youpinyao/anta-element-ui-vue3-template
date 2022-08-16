@@ -7,13 +7,12 @@ export const useRouterStore = defineStore('router', function () {
 
 	return {
 		routes,
-
-		routeStart(fullPath: string) {
+		start(fullPath: string) {
 			timer.value = setTimeout(() => {
 				routes[fullPath] = true;
 			}, 200);
 		},
-		routeEnd(fullPath: string) {
+		end(fullPath: string) {
 			clearTimeout(timer.value);
 			routes[fullPath] = false;
 		},
