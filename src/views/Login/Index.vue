@@ -25,7 +25,7 @@
 							<AtCol style="margin-bottom: 20px">
 								<AtInput
 									:prefix-icon="atIconUser"
-									v-model="user.account"
+									v-model="user.email"
 									size="large"
 									block
 									placeholder="输入账号"
@@ -65,6 +65,11 @@
 	</div>
 </template>
 <script lang="ts" setup>
+import { adminApiTokens } from '@/apis/adminApiTokens';
+import { useMenuStore } from '@/store/menu';
+import { useTokenStore } from '@/store/token';
+import { useUserStore } from '@/store/user';
+import { getAxiosErrorMsg } from '@/utils/axios/error';
 import {
 	AtIconRender,
 	AtMessage,
@@ -89,24 +94,37 @@ const loading = ref(false);
 const errorMessage = ref('');
 
 const user = reactive({
-	account: '',
+	email: '',
 	password: '',
 });
 
 const forgot = () => {
 	AtMessage.warning('别点我，点了也没用！');
 };
-const login = () => {
-	const { account, password } = user;
-	if (!account || !password) {
+const login = async () => {
+	const { email, password } = user;
+	if (!email || !password) {
 		errorMessage.value = '账号或密码错误,请重新输入';
 		return;
 	}
 	loading.value = true;
-	setTimeout(() => {
-		loading.value = false;
+
+	try {
+		const result = await adminApiTokens({
+			email,
+			password,
+		});
+		AtMessage.success('登录成功');
+		useTokenStore().setToken(result.data.data.token);
+		useUserStore().updateUserInfo();
+		useMenuStore().updateMenu();
 		router.push('/');
-	}, 1000);
+	} catch (err: any) {
+		errorMessage.value = getAxiosErrorMsg(err);
+		console.error(err);
+	} finally {
+		loading.value = false;
+	}
 };
 
 watch(user, () => {

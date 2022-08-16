@@ -58,7 +58,7 @@ import { useRouterStore } from '@/store/router';
 
 const tabStore = useTabStore();
 const menuStore = useMenuStore();
-const menuItems = computed(() => menuStore.items);
+const menuItems = computed(() => menuStore.menu);
 const routerStore = useRouterStore();
 const include = computed(() => tabStore.items.map((item) => item.name));
 const collapse = ref(

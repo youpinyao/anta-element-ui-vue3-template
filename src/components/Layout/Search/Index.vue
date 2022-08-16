@@ -56,7 +56,7 @@ const menuItems = computed(() => {
 		});
 	};
 
-	flatMenu(menuStore.items ?? [], []);
+	flatMenu(menuStore.menu ?? [], []);
 
 	return newItems;
 });

@@ -1,16 +1,20 @@
-import { AxiosError, AxiosInstance } from 'axios';
+import { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import { useRouter } from 'vue-router';
 import router from '@/router';
+import { ResponseBody } from '../types';
 
 let timer: NodeJS.Timeout;
 
 export function loginInterceptor(instance: AxiosInstance) {
 	instance.interceptors.response.use(
-		function (response) {
+		function (response: AxiosResponse<ResponseBody>) {
 			return response;
 		},
-		function (error: AxiosError) {
-			if (error?.response?.status === 401) {
+		function (error: AxiosError<ResponseBody>) {
+			if (
+				error?.response?.status === 401 ||
+				error.response?.data.code === 401
+			) {
 				clearTimeout(timer);
 				timer = setTimeout(() => {
 					router.replace({

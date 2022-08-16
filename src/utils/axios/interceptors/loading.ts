@@ -1,9 +1,10 @@
-import { AxiosError, AxiosInstance, AxiosInterceptorManager } from 'axios';
+import { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import { useLoadingStore } from '@/store/loading';
+import { RequestConfig, ResponseBody } from '../types';
 
 export function loadingInterceptor(instance: AxiosInstance) {
 	instance.interceptors.request.use(
-		function (config) {
+		function (config: RequestConfig) {
 			useLoadingStore().set(config.url ?? '', true);
 			return config;
 		},
@@ -12,11 +13,11 @@ export function loadingInterceptor(instance: AxiosInstance) {
 		}
 	);
 	instance.interceptors.response.use(
-		function (response) {
+		function (response: AxiosResponse<ResponseBody>) {
 			useLoadingStore().set(response.config.url ?? '', false);
 			return response;
 		},
-		function (error: AxiosError) {
+		function (error: AxiosError<ResponseBody>) {
 			useLoadingStore().set(error.response?.config?.url ?? '', false);
 			return Promise.reject(error);
 		}

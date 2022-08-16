@@ -1,27 +1,73 @@
-import axios, { AxiosPromise, AxiosRequestConfig } from 'axios';
+import axios, { AxiosError, AxiosPromise, AxiosRequestConfig } from 'axios';
+import { tokenInterceptor } from './interceptors/token';
 import { loadingInterceptor } from './interceptors/loading';
 import { toastInterceptor } from './interceptors/toast';
 import { loginInterceptor } from './interceptors/login';
+import { RequestConfig, ResponseBody } from './types';
 
 const defaultConfig: AxiosRequestConfig = {
 	timeout: 100000,
 	responseType: 'json',
-	baseURL: '/admin/api',
+	withCredentials: true,
 };
 const instance = axios.create(defaultConfig);
 
+tokenInterceptor(instance);
 loadingInterceptor(instance);
 toastInterceptor(instance);
 loginInterceptor(instance);
 
-export type RequestConfig<D> = AxiosRequestConfig<D>;
-export type RequestBody<T> = {
-	data: T;
-	code: number;
-	msg: string;
-};
+export function get<T, D = any>(
+	url: string | RequestConfig<D>,
+	config?: RequestConfig<D>
+) {
+	return request<T, D>(url, {
+		...config,
+		method: 'GET',
+	});
+}
 
-export function request<T = any, D = any>(
+export function post<T, D = any>(
+	url: string | RequestConfig<D>,
+	config?: RequestConfig<D>
+) {
+	return request<T, D>(url, {
+		...config,
+		method: 'POST',
+	});
+}
+
+export function del<T, D = any>(
+	url: string | RequestConfig<D>,
+	config?: RequestConfig<D>
+) {
+	return request<T, D>(url, {
+		...config,
+		method: 'DELETE',
+	});
+}
+
+export function put<T, D = any>(
+	url: string | RequestConfig<D>,
+	config?: RequestConfig<D>
+) {
+	return request<T, D>(url, {
+		...config,
+		method: 'PUT',
+	});
+}
+
+export function patch<T, D = any>(
+	url: string | RequestConfig<D>,
+	config?: RequestConfig<D>
+) {
+	return request<T, D>(url, {
+		...config,
+		method: 'PATCH',
+	});
+}
+
+export function request<T, D>(
 	url: string | RequestConfig<D>,
 	config?: RequestConfig<D>
 ) {
@@ -33,25 +79,5 @@ export function request<T = any, D = any>(
 
 	if (!options.url) return Promise.reject('url is required');
 
-	return instance(options) as AxiosPromise<RequestBody<T>>;
-}
-
-export function get<T = any, D = any>(
-	url: string | RequestConfig<D>,
-	config?: RequestConfig<D>
-) {
-	return request<T, D>(url, {
-		...config,
-		method: 'GET',
-	});
-}
-
-export function post<T = any, D = any>(
-	url: string | RequestConfig<D>,
-	config?: RequestConfig<D>
-) {
-	return request<T, D>(url, {
-		...config,
-		method: 'POST',
-	});
+	return instance(options) as AxiosPromise<ResponseBody<T>>;
 }

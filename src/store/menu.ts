@@ -4,12 +4,16 @@ import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 
 export const useMenuStore = defineStore('menu', function () {
-	const result = ref<MenuItem[]>();
-	const items = computed(() => result.value);
+	const menu = ref<MenuItem[]>();
 
-	queryMenu().then((res) => (result.value = res));
+	const updateMenu = async () => {
+		menu.value = await queryMenu();
+	};
+
+	updateMenu();
 
 	return {
-		items,
+		menu,
+		updateMenu,
 	};
 });
