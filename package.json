@@ -6,7 +6,7 @@
 		"serve": "vue-cli-service serve",
 		"build": "vue-cli-service build",
 		"lint": "vue-cli-service lint",
-		"dll": "npx webpack --config webpack.config.dll.js",
+		"dll": "webpack --config build/dll/index.js",
 		"prepare": "husky install"
 	},
 	"dependencies": {

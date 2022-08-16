@@ -3,28 +3,26 @@ const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 
-const include = [
-	path.join(__dirname, 'node_modules/element-plus'),
-	path.join(__dirname, 'node_modules/anta-element-ui-components-next'),
-	path.join(__dirname, 'node_modules/anta-element-ui-schema-form'),
-	path.join(__dirname, 'node_modules/anta-element-ui-schema-table'),
-	path.join(__dirname, 'node_modules/anta-element-ui-styles'),
-	path.join(__dirname, 'node_modules/element-plus'),
-];
+const check = require('./check');
+const include = [path.join(process.cwd(), 'node_modules')];
+
+const entry = {
+	element: [
+		'element-plus',
+		'anta-element-ui-components-next',
+		'anta-element-ui-components-next/src/scss/index.scss',
+		'anta-element-ui-schema-form',
+		'anta-element-ui-schema-table',
+	],
+};
+
+check(entry);
 
 const webpackConfig = {
 	mode: 'production',
-	entry: {
-		element: [
-			'element-plus',
-			'anta-element-ui-components-next',
-			'anta-element-ui-components-next/src/scss/index.scss',
-			'anta-element-ui-schema-form',
-			'anta-element-ui-schema-table',
-		],
-	},
+	entry,
 	output: {
-		path: path.join(__dirname, './.dll'),
+		path: path.join(process.cwd(), './.dll'),
 		filename: '[name].[fullhash].js',
 		library: '[name]_[fullhash]',
 	},
@@ -62,7 +60,7 @@ const webpackConfig = {
 				test: /.(eot|ttf|woff2?|png|jpe?g|gif|svg|mp4|webm|ogg|mp3|wav|flac|aac)$/,
 				type: 'asset/resource',
 				generator: {
-					filename: 'dll_assets/[name].[contenthash][ext]',
+					filename: 'dll/[name].[contenthash][ext]',
 				},
 			},
 
@@ -79,9 +77,9 @@ const webpackConfig = {
 			chunkFilename: '[name].[fullhash].css',
 		}),
 		new webpack.DllPlugin({
-			context: __dirname,
+			context: process.cwd(),
 			name: '[name].[fullhash]',
-			path: path.join(__dirname, './.dll', 'element-manifest.json'),
+			path: path.join(process.cwd(), './.dll', 'element-manifest.json'),
 		}),
 		new webpack.ProgressPlugin(),
 		new VueLoaderPlugin(),
