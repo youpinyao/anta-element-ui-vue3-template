@@ -82,13 +82,19 @@ const fetchMenu: AutocompleteFetchSuggestions = (searchKey, cb) => {
 			.map((item) => {
 				const matchs = item.fullTitle?.match(new RegExp(searchKey, 'ig'));
 				let { fullTitle } = item;
+				const keys: string[] = [];
 
-				matchs?.forEach((match) => {
+				matchs?.forEach((match, index) => {
+					keys.push(`${Date.now()}${index}`);
+					fullTitle = fullTitle?.replace(match, `---${keys[index]}---`);
+				});
+				matchs?.forEach((match, index) => {
 					fullTitle = fullTitle?.replace(
-						match,
+						`---${keys[index]}---`,
 						`<b style="color: #d40000;">${match}</b>`
 					);
 				});
+
 				return {
 					...item,
 					match: !!matchs,

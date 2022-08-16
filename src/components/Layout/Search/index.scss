@@ -21,6 +21,7 @@
 		visibility: hidden;
 		opacity: 0;
 		transition: all 300ms ease;
+		transform: translateX(10px);
 	}
 
 	:deep(.at-icon-search) {
@@ -37,11 +38,12 @@
 		:deep(.at-autocomplete--plus) {
 			visibility: visible;
 			opacity: 1;
+			transform: translateX(0);
 		}
 
 		.search__icon {
 			opacity: 0;
-			transform: translateX(-6px);
+			transform: translateX(-10px);
 		}
 	}
 }
