@@ -13,7 +13,7 @@ export function loginInterceptor(instance: AxiosInstance) {
 		function (error: AxiosError<ResponseBody>) {
 			if (
 				error?.response?.status === 401 ||
-				error.response?.data.code === 401
+				[401, 508].includes(error.response?.data.code ?? 0)
 			) {
 				clearTimeout(timer);
 				timer = setTimeout(() => {

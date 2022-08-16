@@ -1,18 +1,15 @@
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
-import { AdminApiUserInfoResult } from '@/models/adminApiUserInfo';
 import { adminApiUserInfo } from '@/apis/adminApiUserInfo';
+import { useRequest } from '@/utils/hooks/useRequest';
 
 export const useUserStore = defineStore('user', function () {
-	const user = ref<AdminApiUserInfoResult>();
+	const { data, run } = useRequest(adminApiUserInfo);
+	const user = computed(() => data.value?.data);
 
 	const updateUserInfo = async () => {
-		const result = await adminApiUserInfo();
-
-		user.value = result.data.data;
+		run();
 	};
-
-	updateUserInfo();
 
 	return {
 		user,
