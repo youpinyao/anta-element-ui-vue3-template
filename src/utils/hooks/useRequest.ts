@@ -18,6 +18,7 @@ export function useRequest<T = any, D = any, K = any>(
 		return promise(...args).then(
 			(res) => {
 				data.value = res.data;
+				error.value = undefined;
 				loading.value = false;
 				return res.data;
 			},
