@@ -69,7 +69,7 @@ import { adminApiTokens } from '@/apis/adminApiTokens';
 import { useMenuStore } from '@/store/menu';
 import { useTokenStore } from '@/store/token';
 import { useUserStore } from '@/store/user';
-import { getAxiosErrorMsg } from '@/utils/axios/error';
+import { getAxiosErrorMsg } from '@axios/error';
 import {
 	AtIconRender,
 	AtMessage,

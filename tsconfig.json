@@ -24,7 +24,7 @@
 			"@apis/*": ["src/apis/*"],
 			"@models/*": ["src/models/*"],
 			"@hooks/*": ["src/utils/hooks/*"],
-			"@axios": ["src/utils/axios/index"]
+			"@axios/*": ["src/utils/axios/*"]
 		},
 		"lib": ["esnext", "dom", "dom.iterable", "scripthost"]
 	},
