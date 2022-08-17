@@ -3,11 +3,10 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-		"serve": "vue-cli-service serve",
-		"build": "vue-cli-service build",
-		"lint": "vue-cli-service lint",
-		"dll": "webpack --config build/dll/index.js",
-		"prepare": "husky install"
+		"serve": "anta-cli vue-cli-service serve",
+		"build": "anta-cli vue-cli-service build",
+		"lint": "anta-cli vue-cli-service lint",
+		"dll": "webpack --config build/dll/index.js"
 	},
 	"dependencies": {
 		"@element-plus/icons-vue": "~2.0.6",
@@ -40,6 +39,7 @@
 		"@vue/compiler-sfc": "~3.2.31",
 		"@vue/eslint-config-typescript": "~9.1.0",
 		"add-asset-html-webpack-plugin": "~5.0.2",
+		"anta-cli": "~0.0.1",
 		"babel-loader": "~8.2.5",
 		"copy-webpack-plugin": "~11.0.0",
 		"eslint": "~7.32.0",
@@ -47,7 +47,6 @@
 		"eslint-plugin-prettier": "~4.0.0",
 		"eslint-plugin-vue": "~8.5.0",
 		"fs-extra": "~10.1.0",
-		"husky": "~8.0.1",
 		"lint-staged": "~13.0.3",
 		"mini-css-extract-plugin": "~2.6.1",
 		"postcss-html": "~1.5.0",
