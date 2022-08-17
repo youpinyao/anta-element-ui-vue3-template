@@ -15,7 +15,7 @@
 		"sourceMap": true,
 		"baseUrl": ".",
 		"typeRoots": ["node_modules/@types", "global.d.ts"],
-		"types": ["webpack-env"],
+		"types": [],
 		"paths": {
 			"@/*": ["src/*"],
 			"@store/*": ["src/store/*"],
