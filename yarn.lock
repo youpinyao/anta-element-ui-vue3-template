@@ -2381,10 +2381,10 @@ ansi-styles@^6.0.0:
   resolved "https://registry.npmmirror.com/ansi-styles/-/ansi-styles-6.1.0.tgz"
   integrity sha512-VbqNsoz55SYGczauuup0MFUyXNQviSpFTj1RQtFzmQLk18qbVSpTFFGMT293rmDaQuKCT6InmbuEyUne4mTuxQ==
 
-anta-cli@~0.0.2:
-  version "0.0.2"
-  resolved "https://registry.npmjs.org/anta-cli/-/anta-cli-0.0.2.tgz#c7d6b7c8be76d0529d4572e3f8e5eb1c57cd79fd"
-  integrity sha512-IEBLShERjxqoHbNreNXJZRRctuIW88k003DIWGASvPlqzIdLzSBvXKkI2aKx17mprpOcNOUZX8/tMnBeOKVajw==
+anta-cli@~0.0.4:
+  version "0.0.4"
+  resolved "https://registry.npmjs.org/anta-cli/-/anta-cli-0.0.4.tgz#c3f74ebd8d45ba0030bade4d43a3afbfbbf7e2f2"
+  integrity sha512-qsQ5nm0o/7cdLXcYvpehal1XU4aXEh5ElLtSMxeYsN0hY/4R8YpfG2mxZAoE0283PC2cIKNQr0Z8Y4m8x+Oz3w==
   dependencies:
     chalk "~4.1.2"
     commander "~9.4.0"
