@@ -67,7 +67,7 @@ export function patch<T, D = any>(
 	});
 }
 
-export function request<T, D>(
+export function request<T, D = any>(
 	url: string | RequestConfig<D>,
 	config?: RequestConfig<D>
 ) {

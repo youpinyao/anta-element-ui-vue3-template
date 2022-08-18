@@ -1,13 +1,19 @@
 const path = require('path');
-
-const { defineConfig } = require('@vue/cli-service');
-const { merge } = require('webpack-merge');
-const dllMerge = require('./build/dll/merge');
+const { defineConfig } = require('anta-cli');
 const StylelintPlugin = require('stylelint-webpack-plugin');
 
 module.exports = defineConfig({
 	filenameHashing: true,
 	runtimeCompiler: true,
+	dll: {
+		element: [
+			'element-plus',
+			'anta-element-ui-components-next',
+			'anta-element-ui-components-next/src/scss/index.scss',
+			'anta-element-ui-schema-form',
+			'anta-element-ui-schema-table',
+		],
+	},
 	devServer: {
 		proxy: {
 			'/admin/api': {
@@ -35,35 +41,32 @@ module.exports = defineConfig({
 			},
 		},
 	},
-	configureWebpack: merge(
-		{
-			resolve: {
-				alias: {
-					'@': path.resolve('./src'),
-					'@components': path.resolve('./src/components'),
-					'@store': path.resolve('./src/store'),
-					'@utils': path.resolve('./src/utils'),
-					'@apis': path.resolve('./src/apis'),
-					'@models': path.resolve('./src/models'),
-					'@axios': path.resolve('./src/utils/axios'),
-					'@hooks': path.resolve('./src/utils/hooks'),
-				},
-			},
-			plugins: [
-				new StylelintPlugin({
-					configFile: path.resolve(__dirname, '.stylelintrc.js'),
-					files: ['**/*.{html,vue,scss}'],
-					lintDirtyModulesOnly: false,
-					fix: false,
-					cache: false,
-					emitError: true,
-					emitWarning: true,
-				}),
-			],
-			module: {
-				rules: [],
+	configureWebpack: {
+		resolve: {
+			alias: {
+				'@': path.resolve('./src'),
+				'@components': path.resolve('./src/components'),
+				'@store': path.resolve('./src/store'),
+				'@utils': path.resolve('./src/utils'),
+				'@apis': path.resolve('./src/apis'),
+				'@models': path.resolve('./src/models'),
+				'@axios': path.resolve('./src/utils/axios'),
+				'@hooks': path.resolve('./src/utils/hooks'),
 			},
 		},
-		dllMerge
-	),
+		plugins: [
+			new StylelintPlugin({
+				configFile: path.resolve(__dirname, '.stylelintrc.js'),
+				files: ['**/*.{html,vue,scss}'],
+				lintDirtyModulesOnly: false,
+				fix: false,
+				cache: false,
+				emitError: true,
+				emitWarning: true,
+			}),
+		],
+		module: {
+			rules: [],
+		},
+	},
 });
