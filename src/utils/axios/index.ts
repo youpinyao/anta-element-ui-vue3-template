@@ -3,7 +3,7 @@ import { tokenInterceptor } from './interceptors/token';
 import { loadingInterceptor } from './interceptors/loading';
 import { toastInterceptor } from './interceptors/toast';
 import { loginInterceptor } from './interceptors/login';
-import { RequestConfig, ResponseBody } from './types';
+import { RequestConfig, Request } from './types';
 
 const defaultConfig: AxiosRequestConfig = {
 	timeout: 100000,
@@ -17,60 +17,7 @@ loadingInterceptor(instance);
 toastInterceptor(instance);
 loginInterceptor(instance);
 
-export function get<T, D = any>(
-	url: string | RequestConfig<D>,
-	config?: RequestConfig<D>
-) {
-	return request<T, D>(url, {
-		...config,
-		method: 'GET',
-	});
-}
-
-export function post<T, D = any>(
-	url: string | RequestConfig<D>,
-	config?: RequestConfig<D>
-) {
-	return request<T, D>(url, {
-		...config,
-		method: 'POST',
-	});
-}
-
-export function del<T, D = any>(
-	url: string | RequestConfig<D>,
-	config?: RequestConfig<D>
-) {
-	return request<T, D>(url, {
-		...config,
-		method: 'DELETE',
-	});
-}
-
-export function put<T, D = any>(
-	url: string | RequestConfig<D>,
-	config?: RequestConfig<D>
-) {
-	return request<T, D>(url, {
-		...config,
-		method: 'PUT',
-	});
-}
-
-export function patch<T, D = any>(
-	url: string | RequestConfig<D>,
-	config?: RequestConfig<D>
-) {
-	return request<T, D>(url, {
-		...config,
-		method: 'PATCH',
-	});
-}
-
-export function request<T, D = any>(
-	url: string | RequestConfig<D>,
-	config?: RequestConfig<D>
-) {
+export const request: Request = function (url, config) {
 	const options = {
 		url: typeof url === 'string' ? url : url.url,
 		...(typeof url === 'string' ? {} : url),
@@ -79,5 +26,40 @@ export function request<T, D = any>(
 
 	if (!options.url) return Promise.reject('url is required');
 
-	return instance(options) as AxiosPromise<ResponseBody<T>>;
-}
+	return instance(options);
+};
+
+export const get: Request = function (url, config) {
+	return request(url, {
+		...config,
+		method: 'GET',
+	});
+};
+
+export const post: Request = function (url, config) {
+	return request(url, {
+		...config,
+		method: 'POST',
+	});
+};
+
+export const del: Request = function (url, config) {
+	return request(url, {
+		...config,
+		method: 'DELETE',
+	});
+};
+
+export const put: Request = function (url, config) {
+	return request(url, {
+		...config,
+		method: 'PUT',
+	});
+};
+
+export const patch: Request = function (url, config) {
+	return request(url, {
+		...config,
+		method: 'PATCH',
+	});
+};
