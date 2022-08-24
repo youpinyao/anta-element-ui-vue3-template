@@ -26,7 +26,10 @@ export function toastInterceptor(instance: AxiosInstance) {
 			if ((error.response?.config as RequestConfig)?.toast !== false) {
 				ElNotification.error({
 					title: error.code,
-					message: error.message,
+					message:
+						error.response?.data.msg ||
+						errsMsgToString(error.response?.data.errsMsg) ||
+						error.message,
 				});
 			}
 			return Promise.reject(error);
