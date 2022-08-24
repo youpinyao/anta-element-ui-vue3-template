@@ -6,7 +6,7 @@ import { loginInterceptor } from './interceptors/login';
 import { RequestConfig, Request } from './types';
 
 const defaultConfig: AxiosRequestConfig = {
-	timeout: 100000,
+	timeout: 80000,
 	responseType: 'json',
 	withCredentials: true,
 };
