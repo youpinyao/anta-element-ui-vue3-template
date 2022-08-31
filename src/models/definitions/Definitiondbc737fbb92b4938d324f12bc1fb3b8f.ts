@@ -1,0 +1,31 @@
+// 当前登录人日志列表
+export type Definitiondbc737fbb92b4938d324f12bc1fb3b8f = {
+	// 访问浏览器
+	browser?: string;
+	// 创建时间
+	createTime?: string;
+	// 创建人
+	createdBy?: string;
+	// 姓名
+	fullName?: string;
+	// 主键
+	id?: number;
+	// 登录地址
+	loginAddress?: string;
+	// 登录IP
+	loginIp?: string;
+	// 备注
+	remark?: string;
+	// 状态
+	successFlag?: number;
+	// 系统信息
+	sysInfo?: string;
+	// 管理员ID
+	sysUserId?: number;
+	// 更新时间
+	updateTime?: string;
+	// 更新人
+	updatedBy?: string;
+	// 用户名
+	username?: string;
+};
