@@ -17,13 +17,25 @@ module.exports = {
 		},
 	],
 	rules: {
-		"selector-pseudo-class-no-unknown": [true, {
-			ignorePseudoClasses: ['global', 'deep']
-		}],
+		'selector-pseudo-class-no-unknown': [
+			true,
+			{
+				ignorePseudoClasses: ['global', 'deep'],
+			},
+		],
 		'selector-class-pattern': [
 			'^([a-z][a-z0-9]*)((--|-|__)[a-z0-9]+)*$',
 			{
 				resolveNestedSelectors: true,
+			},
+		],
+		camelcase: [
+			'error',
+			{
+				allow: ['^Definition_'],
+				ignoreDestructuring: true,
+				ignoreImports: true,
+				ignoreGlobals: true,
 			},
 		],
 	},
