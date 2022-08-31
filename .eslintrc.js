@@ -27,5 +27,14 @@ module.exports = {
 		// 'vue/no-deprecated-slot-attribute': [0],
 		// 'vue/no-deprecated-slot-scope-attribute': [0],
 		// 'vue/no-deprecated-v-bind-sync': [0],
+		camelcase: [
+			'error',
+			{
+				allow: ['^Definition_'],
+				ignoreDestructuring: true,
+				ignoreImports: true,
+				ignoreGlobals: true,
+			},
+		],
 	},
 };

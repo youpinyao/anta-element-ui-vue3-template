@@ -29,14 +29,5 @@ module.exports = {
 				resolveNestedSelectors: true,
 			},
 		],
-		camelcase: [
-			'error',
-			{
-				allow: ['^Definition_'],
-				ignoreDestructuring: true,
-				ignoreImports: true,
-				ignoreGlobals: true,
-			},
-		],
 	},
 };

@@ -1,0 +1,4 @@
+
+BASE_URL: "http://10.211.135.14:32000/" # swagger链接base url
+RESOURCE_URL: "/swagger-resources" # swagger资源地址url
+GENERATE_DIR: "src/models" # 生成的api目录

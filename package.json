@@ -5,7 +5,8 @@
 	"scripts": {
 		"serve": "anta-cli vue-cli-service serve",
 		"build": "anta-cli vue-cli-service build",
-		"lint": "anta-cli vue-cli-service lint"
+		"lint": "anta-cli vue-cli-service lint",
+		"swagger": "anta-cli swagger"
 	},
 	"dependencies": {
 		"@element-plus/icons-vue": "~2.0.6",
@@ -38,7 +39,7 @@
 		"@vue/compiler-sfc": "~3.2.37",
 		"@vue/eslint-config-typescript": "~9.1.0",
 		"add-asset-html-webpack-plugin": "~5.0.2",
-		"anta-cli": "~0.0.8",
+		"anta-cli": "~0.0.9",
 		"babel-loader": "~8.2.5",
 		"css-loader": "~6.7.1",
 		"eslint": "~7.32.0",
