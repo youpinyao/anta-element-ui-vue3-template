@@ -9,8 +9,8 @@ export const useTokenStore = defineStore('token', function () {
 		return localStorage.getItem(key) || '';
 	}
 
-	function setToken(value: string) {
-		localStorage.setItem(key, value);
+	function setToken(value?: string) {
+		localStorage.setItem(key, value ?? '');
 		token.value = getToken();
 	}
 

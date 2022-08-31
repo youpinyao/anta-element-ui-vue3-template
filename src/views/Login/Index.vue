@@ -25,7 +25,7 @@
 							<AtCol style="margin-bottom: 20px">
 								<AtInput
 									:prefix-icon="atIconUser"
-									v-model="user.email"
+									v-model="user.username"
 									size="large"
 									block
 									placeholder="输入账号"
@@ -65,7 +65,7 @@
 	</div>
 </template>
 <script lang="ts" setup>
-import { adminApiTokens } from '@/apis/adminApiTokens';
+import { adminApiLogin } from '@/apis/adminApiLogin';
 import { useMenuStore } from '@/store/menu';
 import { useTokenStore } from '@/store/token';
 import { useUserStore } from '@/store/user';
@@ -94,7 +94,7 @@ const loading = ref(false);
 const errorMessage = ref('');
 
 const user = reactive({
-	email: '',
+	username: '',
 	password: '',
 });
 
@@ -102,20 +102,20 @@ const forgot = () => {
 	AtMessage.warning('别点我，点了也没用！');
 };
 const login = async () => {
-	const { email, password } = user;
-	if (!email || !password) {
+	const { username, password } = user;
+	if (!username || !password) {
 		errorMessage.value = '账号或密码错误,请重新输入';
 		return;
 	}
 	loading.value = true;
 
 	try {
-		const result = await adminApiTokens({
-			email,
+		const result = await adminApiLogin({
+			username,
 			password,
 		});
 		AtMessage.success('登录成功');
-		useTokenStore().setToken(result.data.data.token);
+		useTokenStore().setToken(result.data.data?.token);
 		useUserStore().updateUserInfo();
 		useMenuStore().updateMenu();
 		router.push('/');

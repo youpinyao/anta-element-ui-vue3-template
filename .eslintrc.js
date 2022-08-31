@@ -30,7 +30,7 @@ module.exports = {
 		camelcase: [
 			'error',
 			{
-				allow: ['^Definition_'],
+				// allow: ['^Definition_'],
 				ignoreDestructuring: true,
 				ignoreImports: true,
 				ignoreGlobals: true,

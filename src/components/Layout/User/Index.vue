@@ -26,7 +26,7 @@ import { useRouter } from 'vue-router';
 
 const router = useRouter();
 const userStore = useUserStore();
-const fullName = computed(() => userStore.user?.fullName || '-');
+const fullName = computed(() => userStore.user?.name || '-');
 
 const handleDropdown = (command: string) => {
 	if (command === 'logout') {

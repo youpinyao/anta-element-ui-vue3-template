@@ -1,8 +1,8 @@
-import { AdminApiUserInfoResult } from '@/models/adminApiUserInfo';
+import { AdminApiUsersInfoGetResult } from '@/models/userApi/AdminApiUsersInfoGetResult';
 import { get } from '@/utils/axios';
 
 export function adminApiUserInfo() {
-	return get<AdminApiUserInfoResult>({
+	return get<AdminApiUsersInfoGetResult['data']>({
 		url: '/admin/api/users/info',
 	});
 }
