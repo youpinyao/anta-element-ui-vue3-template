@@ -56,7 +56,7 @@ module.exports = defineConfig({
 		},
 		plugins: [
 			new StylelintPlugin({
-				configFile: path.resolve(__dirname, '.stylelintrc.js'),
+				// configFile: path.resolve(__dirname, '.stylelintrc.js'),
 				files: ['**/*.{html,vue,scss}'],
 				lintDirtyModulesOnly: false,
 				fix: false,
