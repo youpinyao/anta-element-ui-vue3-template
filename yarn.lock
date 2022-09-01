@@ -2490,10 +2490,10 @@ ansi-styles@^6.0.0:
   resolved "https://registry.npmmirror.com/ansi-styles/-/ansi-styles-6.1.0.tgz"
   integrity sha512-VbqNsoz55SYGczauuup0MFUyXNQviSpFTj1RQtFzmQLk18qbVSpTFFGMT293rmDaQuKCT6InmbuEyUne4mTuxQ==
 
-anta-cli@~0.0.13:
-  version "0.0.13"
-  resolved "https://registry.npmmirror.com/anta-cli/-/anta-cli-0.0.13.tgz#8d0e39fa4cfcbfc2d27385c0b3c3a3c2f9ee7acf"
-  integrity sha512-4wBxE/9PBxhaRyVQb2Ttgi1RbZo9D4HEhT6E+VWVXb2l/NsPpZm1ISeVG1fqOM+o4oMwiMuMajF0SAl/dHfOxw==
+anta-cli@~0.0.14:
+  version "0.0.14"
+  resolved "https://registry.npmmirror.com/anta-cli/-/anta-cli-0.0.14.tgz#8bf770bbaad0862e97886999693299dadae84570"
+  integrity sha512-BhVztg5ThLY52xPlKAq5MzLOh7suVpPQWPERLnJiPGHInoOZeQhxoa7DIR49VFgWgPMIzCQnI6+vtNw7EOGpxg==
   dependencies:
     "@babel/generator" "~7.18.13"
     "@babel/parser" "~7.18.13"
@@ -2516,6 +2516,7 @@ anta-cli@~0.0.13:
     node-fetch "~2.6.6"
     open "~8.4.0"
     ora "~5.0.0"
+    os "~0.1.2"
     qs "~6.11.0"
     webpack "~5.74.0"
     webpack-cli "~4.10.0"
@@ -6122,6 +6123,11 @@ os-tmpdir@~1.0.2:
   version "1.0.2"
   resolved "https://registry.npmmirror.com/os-tmpdir/-/os-tmpdir-1.0.2.tgz#bbe67406c79aa85c5cfec766fe5734555dfa1274"
   integrity sha512-D2FR03Vir7FIu45XBY20mTb+/ZSWB00sjU9jdQXt83gDrI4Ztz5Fs7/yy74g2N5SVQY4xY1qDr4rNddwYRVX0g==
+
+os@~0.1.2:
+  version "0.1.2"
+  resolved "https://registry.npmmirror.com/os/-/os-0.1.2.tgz#f29a50c62908516ba42652de42f7038600cadbc2"
+  integrity sha512-ZoXJkvAnljwvc56MbvhtKVWmSkzV712k42Is2mA0+0KTSRakq5XXuXpjZjgAt9ctzl51ojhQWakQQpmOvXWfjQ==
 
 p-finally@^1.0.0:
   version "1.0.0"
