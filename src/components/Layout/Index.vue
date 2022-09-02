@@ -55,9 +55,11 @@ import Search from '@/components/Layout/Search/Index.vue';
 import User from '@/components/Layout/User/Index.vue';
 import { useMenuStore } from '@/store/menu';
 import { useRouterStore } from '@/store/router';
+import { useUserStore } from '@/store/user';
 
 const tabStore = useTabStore();
 const menuStore = useMenuStore();
+const userStore = useUserStore();
 const menuItems = computed(() => menuStore.menu);
 const routerStore = useRouterStore();
 const include = computed(() => tabStore.items.map((item) => item.name));
@@ -72,6 +74,8 @@ const toggleMenu = () => {
 	collapse.value = !collapse.value;
 	window.localStorage.setItem('anta-aside-menu-collapse', `${collapse.value}`);
 };
+
+userStore.updateUserInfo();
 </script>
 
 <style lang="scss" scoped>
