@@ -12,7 +12,6 @@ prepare:
   only:
     - master
   script:
-    # - npm i yarn -g
     - yarn
 
 build:
@@ -26,7 +25,7 @@ build:
     paths:
       - .dll
   script:
-    - npm run build
+    - npx anta-cli vue-cli-service build
   artifacts:
     paths:
       - dist
