@@ -12,7 +12,7 @@ prepare:
   only:
     - master
   script:
-    - npm i yarn -g
+    # - npm i yarn -g
     - yarn
 
 build:
