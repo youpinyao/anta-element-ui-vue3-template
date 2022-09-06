@@ -35,7 +35,7 @@ build:
 deploy:
   stage: deploy
   tags:
-    -	nodejs
+    - nodejs
   only:
     - master
   script:
