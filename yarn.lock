@@ -2660,10 +2660,10 @@ anta-cli@~0.0.14:
     webpack-cli "~4.10.0"
     yaml "~2.1.1"
 
-anta-element-ui-components-next@^0.2.11, anta-element-ui-components-next@~0.2.11:
-  version "0.2.11"
-  resolved "https://registry.npmmirror.com/anta-element-ui-components-next/-/anta-element-ui-components-next-0.2.11.tgz#03221f2cf9645e4cdaa6ae3f70c71f7b7c5b40b2"
-  integrity sha512-WYlyUIFH6vJLWUoB7fi+AnnOeaOlcGdTlggA3kNx76N+bW3Rff0IHGBU6HUMIszppItRKhma+AWRoPY+Vyi/4A==
+anta-element-ui-components-next@^0.2.13, anta-element-ui-components-next@~0.2.13:
+  version "0.2.13"
+  resolved "https://registry.npmmirror.com/anta-element-ui-components-next/-/anta-element-ui-components-next-0.2.13.tgz#495c0efb885e1f8bcffb91872833249dffbff8ea"
+  integrity sha512-YmtPnxjV9KpTS6pHokNs1ap5Wl4B7NrfF80DCncd3Itp2pmlhdTdqxaB6aOZGOZLZMyBEuWFeshyZlIU/hX14w==
   dependencies:
     "@popperjs/core" "~2.11.4"
     "@types/sortablejs" "~1.10.7"
@@ -2676,21 +2676,21 @@ anta-element-ui-components-next@^0.2.11, anta-element-ui-components-next@~0.2.11
     sortablejs "~1.14.0"
     vue-class-component "~8.0.0-0"
 
-anta-element-ui-schema-form@~0.0.12:
-  version "0.0.12"
-  resolved "https://registry.npmmirror.com/anta-element-ui-schema-form/-/anta-element-ui-schema-form-0.0.12.tgz#e28a80391cdd8de124dec5a4995b19fe2e636389"
-  integrity sha512-JrjoDETHNhp0mN2H7VrWrV4R9h/+F6t2i9yKWYQGekrBF63ZuyjnZhDZO7eIZjeVE7lpJ9CRhaGYlZrZwI4D1g==
+anta-element-ui-schema-form@~0.0.14:
+  version "0.0.14"
+  resolved "https://registry.npmmirror.com/anta-element-ui-schema-form/-/anta-element-ui-schema-form-0.0.14.tgz#d56871b0fbfd8f78750c80d22a3b60cb32bafb6b"
+  integrity sha512-GnJnSP0uxLMf1d5bIbqV3ghbFGK8jsx9mtKvaBmx3VWz0ETKr39CWCiFM4he9+1us9Be0QnMYL6L2rQjmARr+A==
   dependencies:
     "@element-plus/icons-vue" "~2.0.9"
-    anta-element-ui-components-next "^0.2.11"
+    anta-element-ui-components-next "^0.2.13"
     anta-element-ui-styles "^0.0.42"
 
-anta-element-ui-schema-table@~0.0.11:
-  version "0.0.11"
-  resolved "https://registry.npmmirror.com/anta-element-ui-schema-table/-/anta-element-ui-schema-table-0.0.11.tgz#dd0331bd5c6714ffcd1afbb0df20fb01562b17fa"
-  integrity sha512-32/RGX9VEZj1MpCVgwFgZapxsLcQnuzziP2pJl/7K0l8OuCtf3zt7A6vT8hXD7hfX2+6ECOVWuJ5i5y5sGiBvQ==
+anta-element-ui-schema-table@~0.0.13:
+  version "0.0.13"
+  resolved "https://registry.npmmirror.com/anta-element-ui-schema-table/-/anta-element-ui-schema-table-0.0.13.tgz#e560e3a87f2e5b1eddefb28beb20788dc8b37a1f"
+  integrity sha512-xiN1qNO5ExJr6gU100t0pMKAXwA0LBRVZNqJKhZ2hzFJXiEr5/6GhbVxJRp9XrzjzcBes3Bv8gBzkX/VqY6AFg==
   dependencies:
-    anta-element-ui-components-next "^0.2.11"
+    anta-element-ui-components-next "^0.2.13"
     anta-element-ui-styles "^0.0.42"
 
 anta-element-ui-styles@^0.0.42, anta-element-ui-styles@~0.0.42:

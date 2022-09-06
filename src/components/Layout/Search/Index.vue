@@ -26,8 +26,8 @@
 
 <script lang="ts" setup>
 import { AdminApiMenusGetResult } from '@/models/menuApi/AdminApiMenusGetResult';
+import { ArrayType } from 'anta-element-ui-components-next/src/utils/arrayType';
 import { useMenuStore } from '@/store/menu';
-import { ArrayType } from '@/utils/ArrayType';
 import {
 	AtAutocomplete,
 	AutocompleteFetchSuggestions,
