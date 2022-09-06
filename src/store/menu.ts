@@ -1,19 +1,22 @@
-import { MenuItem } from '@/models/menu';
-import { queryMenu } from '@/apis/menu';
+import { adminApiMenu } from '@/apis/adminApiMenu';
+import { useRequest } from '@/utils/hooks/useRequest';
 import { defineStore } from 'pinia';
+import { debounce } from 'throttle-debounce';
 import { computed, ref } from 'vue';
 
 export const useMenuStore = defineStore('menu', function () {
-	const menu = ref<MenuItem[]>();
+	const { data, run, loading } = useRequest(adminApiMenu, {
+		immediate: false,
+	});
+	const menu = computed(() => data.value?.data);
 
-	const updateMenu = async () => {
-		menu.value = await queryMenu();
-	};
-
-	updateMenu();
+	const updateMenu = debounce(100, async () => {
+		run();
+	});
 
 	return {
 		menu,
 		updateMenu,
+		loading,
 	};
 });

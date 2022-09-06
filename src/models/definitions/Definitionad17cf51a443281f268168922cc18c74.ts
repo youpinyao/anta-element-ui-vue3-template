@@ -26,4 +26,6 @@ export type Definitionad17cf51a443281f268168922cc18c74 = {
 	updateTime?: string;
 	// 更新人
 	updatedBy?: string;
+	path?: string;
+	icon?: string;
 };

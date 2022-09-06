@@ -16,9 +16,9 @@
 <script lang="ts" setup>
 import { AtMenu } from 'anta-element-ui-components-next';
 import { computed, PropType } from 'vue';
-import { MenuItem } from '@/models/menu';
 import AsideMenuChild from './Child/Index.vue';
 import { useRoute } from 'vue-router';
+import { AdminApiMenusGetResult } from '@/models/menuApi/AdminApiMenusGetResult';
 
 const props = defineProps({
 	collapse: {
@@ -26,7 +26,7 @@ const props = defineProps({
 		default: false,
 	},
 	items: {
-		type: Array as PropType<MenuItem[]>,
+		type: Array as PropType<AdminApiMenusGetResult['data']>,
 		default: () => [],
 	},
 });
@@ -34,9 +34,9 @@ const props = defineProps({
 const defaultActive = computed(() => {
 	const { fullPath } = useRoute();
 	let active = '';
-	const eachMenu = (items: MenuItem[]) => {
-		items.forEach((item) => {
-			const key = item.path || item.key;
+	const eachMenu = (items: AdminApiMenusGetResult['data']) => {
+		items?.forEach((item) => {
+			const key = item.path || item.id;
 			if (key === fullPath) {
 				active = key;
 			} else if (item.children) {

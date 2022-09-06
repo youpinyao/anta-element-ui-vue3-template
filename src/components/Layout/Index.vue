@@ -8,6 +8,13 @@
 				</div>
 			</div>
 			<Menu :items="menuItems" :collapse="collapse" />
+			<AtLoading
+				text="菜单加载中..."
+				:size="20"
+				background="transparent"
+				static
+				:visible="menuStore.loading"
+			/>
 		</ElAside>
 		<ElContainer>
 			<ElHeader class="header">
@@ -76,6 +83,7 @@ const toggleMenu = () => {
 };
 
 userStore.updateUserInfo();
+menuStore.updateMenu();
 </script>
 
 <style lang="scss" scoped>
