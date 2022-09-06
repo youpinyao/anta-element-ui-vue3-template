@@ -25,8 +25,9 @@
 </template>
 
 <script lang="ts" setup>
-import { MenuItem } from '@/models/menu';
+import { AdminApiMenusGetResult } from '@/models/menuApi/AdminApiMenusGetResult';
 import { useMenuStore } from '@/store/menu';
+import { ArrayType } from '@/utils/ArrayType';
 import {
 	AtAutocomplete,
 	AutocompleteFetchSuggestions,
@@ -37,19 +38,25 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 const menuStore = useMenuStore();
 const menuItems = computed(() => {
-	const newItems: (MenuItem & {
+	const newItems: (ArrayType<AdminApiMenusGetResult['data']> & {
 		fullTitle?: string;
 		match?: boolean;
 		value?: string;
 	})[] = [];
-	const flatMenu = (items: MenuItem[], parents: MenuItem[]) => {
-		items.forEach((item) => {
+
+	const flatMenu = (
+		items: AdminApiMenusGetResult['data'],
+		parents: AdminApiMenusGetResult['data']
+	) => {
+		items?.forEach((item) => {
 			if (item.children && item.children.length) {
-				flatMenu(item.children, [...parents, item]);
+				flatMenu(item.children, [...(parents ?? []), item]);
 			} else {
 				newItems.push({
 					...item,
-					fullTitle: [...parents, item].map((item) => item.title).join(' - '),
+					fullTitle: [...(parents ?? []), item]
+						.map((item) => item.title)
+						.join(' - '),
 					value: '',
 				});
 			}
@@ -80,7 +87,9 @@ const fetchMenu: AutocompleteFetchSuggestions = (searchKey, cb) => {
 	cb(
 		menuItems.value
 			.map((item) => {
-				const matchs = item.fullTitle?.match(new RegExp(searchKey, 'ig'));
+				const matchs: string[] | undefined | null = item.fullTitle?.match(
+					new RegExp(searchKey, 'ig')
+				);
 				let { fullTitle } = item;
 				const keys: string[] = [];
 
