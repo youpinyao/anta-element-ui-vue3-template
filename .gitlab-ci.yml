@@ -1,9 +1,7 @@
 image: reg.anta.cn/front/node:16.16-alpine3.15-git
 
 stages:
-  - prepare
   - build
-  - deploy
 
 prepare:
   stage: prepare
@@ -23,19 +21,14 @@ build:
   cache:
     key: $CI_JOB_NAME
     paths:
-      - .dll
+      - .dll/
+  before_script:
+    - yarn  
   script:
-    - npx anta-cli vue-cli-service build
+    - npm run build
+  after_script:
+    - echo "deploy"
   artifacts:
     paths:
       - dist
     expire_in: 1 week
-
-deploy:
-  stage: deploy
-  tags:
-    - nodejs
-  only:
-    - master
-  script:
-    - echo "deploy"
