@@ -3,15 +3,6 @@ image: reg.anta.cn/front/node:16.16-alpine3.15-git
 stages:
   - build
 
-prepare:
-  stage: prepare
-  tags:
-    - nodejs
-  only:
-    - master
-  script:
-    - yarn
-
 build:
   stage: build
   tags:
