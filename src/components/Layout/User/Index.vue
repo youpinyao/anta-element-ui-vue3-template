@@ -1,7 +1,12 @@
 <template>
 	<AtDropdown trigger="click" @command="handleDropdown">
 		<div class="user">
-			<AtCustomerImage :size="28" />
+			<AtImage
+				v-if="userStore.user?.avatar"
+				:size="28"
+				:src="userStore.user?.avatar"
+			/>
+			<AtCustomerImage v-else :size="28" />
 			<span>Hi, {{ fullName }}</span>
 			<AtIcon name="down"></AtIcon>
 		</div>
@@ -22,6 +27,7 @@ import {
 	AtDropdownMenu,
 	AtDropdownItem,
 	AtIcon,
+	AtImage,
 } from 'anta-element-ui-components-next';
 import { computed } from 'vue';
 import { useRouter } from 'vue-router';

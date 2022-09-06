@@ -5,6 +5,16 @@ import Layout from '@/components/Layout/Index.vue';
 import NotFound from '@/views/NotFound.vue';
 import Login from '@/views/Login/Index.vue';
 
+// @ts-ignore
+const files = require.context('./routes', true, /\.ts$/);
+const extraRoutes: RouteRecordRaw[] = [];
+
+files.keys().forEach((key: string) => {
+	extraRoutes.push(
+		require(`./routes/${key.replace(/^(\.\/)/g, '')}`).default()
+	);
+});
+
 const routes: RouteRecordRaw[] = [
 	{
 		path: '/login',
@@ -28,6 +38,7 @@ const routes: RouteRecordRaw[] = [
 				},
 				component: () => import('@/views/Home.vue'),
 			},
+			...extraRoutes,
 			{
 				path: '/:pathMatch(.*)',
 				name: 'NotFound',

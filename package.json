@@ -3,6 +3,7 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
+		"dev": "npm run serve",
 		"serve": "anta-cli vue-cli-service serve",
 		"build": "anta-cli vue-cli-service build",
 		"lint": "anta-cli vue-cli-service lint",
