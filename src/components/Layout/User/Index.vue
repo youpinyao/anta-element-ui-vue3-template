@@ -3,6 +3,7 @@
 		<div class="user">
 			<AtCustomerImage :size="28" />
 			<span>Hi, {{ fullName }}</span>
+			<AtIcon name="down"></AtIcon>
 		</div>
 		<template #dropdown>
 			<AtDropdownMenu>
@@ -20,6 +21,7 @@ import {
 	AtDropdown,
 	AtDropdownMenu,
 	AtDropdownItem,
+	AtIcon,
 } from 'anta-element-ui-components-next';
 import { computed } from 'vue';
 import { useRouter } from 'vue-router';
