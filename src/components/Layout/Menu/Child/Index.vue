@@ -2,6 +2,7 @@
 	<div>
 		<template v-for="(item, index) in items">
 			<AtSubMenu
+				:class="{ 'has-icon': item.icon }"
 				v-if="item.children && item.children.length"
 				popper-class="aside-menu-popper"
 				:index="item.path || item.id + '' || index + ''"
@@ -16,6 +17,7 @@
 			</AtSubMenu>
 			<AtMenuItem
 				v-else
+				:class="{ 'has-icon': item.icon }"
 				:index="item.path || item.id + ''"
 				:key="item.path || item.id"
 				:route="item.path"
