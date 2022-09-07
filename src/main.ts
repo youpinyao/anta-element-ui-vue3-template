@@ -22,3 +22,10 @@ app.use(AntaElementUIPlus);
 app.directive('ClickOutside', ClickOutside);
 
 app.mount('#app');
+
+document.querySelector('#blank-loading')?.classList.add('hide');
+setTimeout(
+	() =>
+		document.body.removeChild(document.querySelector('#blank-loading') as any),
+	600
+);
