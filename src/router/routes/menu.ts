@@ -5,6 +5,6 @@ export default function () {
 		meta: {
 			title: '菜单管理',
 		},
-		component: () => import('@/views/Menu/Index.vue'),
+		component: () => import('@/views/Menu/Index'),
 	};
 }

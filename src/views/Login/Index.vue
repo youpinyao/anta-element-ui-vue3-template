@@ -65,7 +65,7 @@
 	</div>
 </template>
 <script lang="ts" setup>
-import { adminApiLogin } from '@/apis/adminApiLogin';
+import { adminApiLoginPost } from '@/apis/adminApiLogin';
 import { useMenuStore } from '@/store/menu';
 import { useTokenStore } from '@/store/token';
 import { useUserStore } from '@/store/user';
@@ -110,7 +110,7 @@ const login = async () => {
 	loading.value = true;
 
 	try {
-		const result = await adminApiLogin({
+		const result = await adminApiLoginPost({
 			username,
 			password,
 		});

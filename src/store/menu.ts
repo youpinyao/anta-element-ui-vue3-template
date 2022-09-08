@@ -1,11 +1,11 @@
-import { adminApiMenu } from '@/apis/adminApiMenu';
+import { adminApiMenuGet } from '@/apis/adminApiMenu';
 import { useRequest } from '@/utils/hooks/useRequest';
 import { defineStore } from 'pinia';
 import { debounce } from 'throttle-debounce';
 import { computed, ref } from 'vue';
 
 export const useMenuStore = defineStore('menu', function () {
-	const { data, run, loading } = useRequest(adminApiMenu, {
+	const { data, run, loading } = useRequest(adminApiMenuGet, {
 		immediate: false,
 	});
 	const menu = computed(() => data.value?.data);

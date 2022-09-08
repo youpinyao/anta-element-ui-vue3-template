@@ -2,7 +2,7 @@ import { AdminApiLoginPostParams } from '@/models/tokenApi/AdminApiLoginPostPara
 import { AdminApiLoginPostResult } from '@/models/tokenApi/AdminApiLoginPostResult';
 import { post } from '@/utils/axios';
 
-export function adminApiLogin(data: AdminApiLoginPostParams['req']) {
+export function adminApiLoginPost(data: AdminApiLoginPostParams['req']) {
 	return post<AdminApiLoginPostResult['data'], AdminApiLoginPostParams['req']>({
 		url: '/admin/api/login',
 		data,

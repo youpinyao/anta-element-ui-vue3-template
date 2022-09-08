@@ -6,6 +6,8 @@ import AntaElementUIPlus, {
 	ClickOutside,
 } from 'anta-element-ui-components-next';
 
+import 'anta-element-ui-components-next/src/scss/index.scss';
+
 import router from './router';
 import App from './App.vue';
 
