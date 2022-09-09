@@ -24,6 +24,10 @@ export const request: Request = function (url, config) {
 		...config,
 	};
 
+	if (options.method === 'GET' && !options.params && options.data) {
+		options.params = options.data;
+	}
+
 	if (!options.url) return Promise.reject('url is required');
 
 	return instance(options);

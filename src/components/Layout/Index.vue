@@ -1,13 +1,13 @@
 <template>
 	<ElContainer class="container">
-		<ElAside class="aside" :class="{ 'aside--collapse': collapse }">
+		<ElAside class="aside" :class="{ 'aside--collapse': menuStore.collapse }">
 			<div class="aside__title">
 				<div>ANTA BMS</div>
 				<div class="aside__toggle" @click="toggleMenu">
 					<AtIcon name="folding" />
 				</div>
 			</div>
-			<Menu :items="menuItems" :collapse="collapse" />
+			<Menu :items="menuItems" :collapse="menuStore.collapse" />
 			<AtLoading
 				text="菜单加载中..."
 				:size="20"
@@ -56,7 +56,7 @@ import {
 } from 'anta-element-ui-components-next';
 import { useTabStore } from '@/store/tab';
 import { RouterView } from 'vue-router';
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 import Menu from '@/components/Layout/Menu/Index.vue';
 import Search from '@/components/Layout/Search/Index.vue';
 import User from '@/components/Layout/User/Index.vue';
@@ -70,16 +70,16 @@ const userStore = useUserStore();
 const menuItems = computed(() => menuStore.menu);
 const routerStore = useRouterStore();
 const include = computed(() => tabStore.items.map((item) => item.name));
-const collapse = ref(
-	window.localStorage.getItem('anta-aside-menu-collapse') === 'true'
-);
 const loading = computed(() =>
 	Object.values(routerStore.routes).some((item) => item === true)
 );
 
 const toggleMenu = () => {
-	collapse.value = !collapse.value;
-	window.localStorage.setItem('anta-aside-menu-collapse', `${collapse.value}`);
+	menuStore.setCollapse(!menuStore.collapse);
+	window.localStorage.setItem(
+		'anta-aside-menu-collapse',
+		`${menuStore.collapse}`
+	);
 };
 
 userStore.updateUserInfo();

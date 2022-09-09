@@ -10,12 +10,13 @@ import { useRequest } from '@/utils/hooks/useRequest';
 import { adminApiMenuDel, adminApiMenuGet } from '@/apis/adminApiMenu';
 import tableSchema from './tableSchema';
 import searchSchema from './searchSchema';
-import { AtButton, AtTitle } from 'anta-element-ui-components-next';
+import { AtButton, AtMessage, AtTitle } from 'anta-element-ui-components-next';
 import Dialog from './Dialog/Index';
 import { ArrayType } from 'anta-element-ui-components-next/src/utils/arrayType';
 import { AdminApiMenusGetResult } from '@/models/menuApi/AdminApiMenusGetResult';
 
 export default defineComponent({
+	name: 'Menu',
 	setup() {
 		const handleAdd = () => {
 			dialog.value?.show();
@@ -33,22 +34,30 @@ export default defineComponent({
 			await adminApiMenuDel({
 				menuId: row?.id as any,
 			});
-			run();
+			AtMessage.success('操作成功');
+			run({});
 		};
+
+		const { run, data, loading } = useRequest(adminApiMenuGet);
 
 		const searchSchemaRef = ref(searchSchema());
 		const searchModelRef = ref<AtSchemaFormTypes.Model>({});
-		const tableSchemaRef = ref(
-			tableSchema({
+		const tableSchemaRef = computed(() => {
+			const scheme = tableSchema({
 				handleEdit,
 				handleDel,
-			})
-		);
+			});
+			return {
+				...scheme,
+				props: {
+					...scheme.props,
+					loading: loading.value,
+				},
+			};
+		});
 		const showSearchForm = computed(
 			() => !!Object.keys(searchSchemaRef.value.properties).length
 		);
-
-		const { run, data } = useRequest(adminApiMenuGet);
 
 		const tableDataSource: ComputedRef<AtSchemaTableTypes.DataSource> =
 			computed(() => data.value?.data ?? []);
@@ -83,7 +92,7 @@ export default defineComponent({
 					<Dialog
 						ref={dialog}
 						onReload={() => {
-							run();
+							run({});
 						}}
 					/>
 				</Container>

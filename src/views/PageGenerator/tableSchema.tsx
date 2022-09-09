@@ -23,75 +23,16 @@ export default function tableSchema({
 	const schema: AtSchemaTableTypes.JSONSchema<
 		NonNullable<ArrayType<AdminApiMenusGetResult['data']>>
 	> = {
-		props: {
-			rowKey: 'id',
-			treeProps: {
-				children: 'children',
-				hasChildren: 'hasChildren',
-			},
-		},
 		columns: [
 			{
-				label: '主键',
+				label: 'ID',
 				prop: 'id',
-				width: 160,
-			},
-			{
-				label: '父ID',
-				prop: 'pid',
-				width: 100,
-			},
-			{
-				label: '排序',
-				prop: 'orders',
-				width: 100,
-			},
-			{
-				label: '标题',
-				prop: 'title',
 				width: 200,
 			},
 			{
-				label: '权限码',
-				prop: 'permCode',
-				minWidth: 200,
-				showOverflowTooltip: true,
+				label: '名称',
+				prop: 'title',
 			},
-			{
-				label: '类型',
-				prop: 'typeFlag',
-				width: 80,
-			},
-			{
-				label: '绑定菜单数量',
-				prop: 'bindingQuantity',
-				width: 120,
-			},
-			// {
-			// 	label: '备注',
-			// 	prop: 'remark',
-			// 	minWidth: 200,
-			// },
-			// {
-			// 	label: '更新时间',
-			// 	prop: 'updateTime',
-			// 	width: 100,
-			// },
-			// {
-			// 	label: '更新人',
-			// 	prop: 'updatedBy',
-			// 	width: 200,
-			// },
-			// {
-			// 	label: '创建时间',
-			// 	prop: 'createTime',
-			// 	width: 100,
-			// },
-			// {
-			// 	label: '创建人',
-			// 	prop: 'createdBy',
-			// 	width: 200,
-			// },
 			{
 				label: '操作',
 				prop: 'id',

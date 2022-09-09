@@ -2,11 +2,13 @@ import { AxiosError, AxiosPromise } from 'axios';
 import { ref } from 'vue';
 import { ResponseBody } from '@axios/types';
 
-export function useRequest<T = any, D = any, K = any>(
-	promise: (...args: K[]) => AxiosPromise<ResponseBody<T>>,
-	options?: {
-		immediate?: boolean;
-	}
+type Options = {
+	immediate?: boolean;
+};
+
+export function useRequest<T = any, D = any, K extends any[] = any>(
+	promise: (...args: K) => AxiosPromise<ResponseBody<T>>,
+	options?: Options
 ) {
 	const data = ref<ResponseBody<T>>();
 	const loading = ref(false);
@@ -20,18 +22,18 @@ export function useRequest<T = any, D = any, K = any>(
 				data.value = res.data;
 				error.value = undefined;
 				loading.value = false;
-				return res.data;
+				return res;
 			},
 			(err) => {
 				error.value = err;
 				loading.value = false;
 				return err;
 			}
-		) as unknown as ReturnType<typeof promise>;
+		);
 	};
 
 	if (options?.immediate !== false) {
-		run();
+		run(...([] as unknown as K));
 	}
 
 	return {

@@ -11,7 +11,6 @@ import { del, get, post, put } from '@/utils/axios';
 export function adminApiMenuGet(data: AdminApiMenusGetParams) {
 	return get<AdminApiMenusGetResult['data'], AdminApiMenusGetParams>({
 		url: '/admin/api/menus',
-		data,
 	});
 }
 

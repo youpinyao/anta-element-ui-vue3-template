@@ -1,6 +1,6 @@
 import { adminApiMenuPost, adminApiMenuPut } from '@/apis/adminApiMenu';
 import { AdminApiMenusGetResult } from '@/models/menuApi/AdminApiMenusGetResult';
-import { AtButton, AtDialog } from 'anta-element-ui-components-next';
+import { AtButton, AtDialog, AtMessage } from 'anta-element-ui-components-next';
 import { ArrayType } from 'anta-element-ui-components-next/src/utils/arrayType';
 import { AtSchemaForm } from 'anta-element-ui-schema-form';
 import { defineComponent, ref, toRaw, unref } from 'vue';
@@ -70,6 +70,7 @@ const dialog = defineComponent({
 							await adminApiMenuPost(toRaw(unref(formModelRef)));
 						}
 						visible.value = false;
+						AtMessage.success('操作成功');
 						context.emit('reload');
 					} catch (error) {
 						console.error(error);

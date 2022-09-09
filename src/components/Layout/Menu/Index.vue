@@ -36,8 +36,9 @@ const defaultActive = computed(() => {
 	let active = '';
 	const eachMenu = (items: AdminApiMenusGetResult['data']) => {
 		items?.forEach((item) => {
-			const key = item.path || item.id;
-			if (key === fullPath) {
+			const key = `${item.path || item.id}`;
+
+			if (key === fullPath || fullPath.startsWith(`${key}/`)) {
 				active = key;
 			} else if (item.children) {
 				eachMenu(item.children);

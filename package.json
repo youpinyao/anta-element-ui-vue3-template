@@ -11,9 +11,9 @@
 	},
 	"dependencies": {
 		"@element-plus/icons-vue": "~2.0.6",
-		"anta-element-ui-components-next": "~0.2.14",
-		"anta-element-ui-schema-form": "~0.0.18",
-		"anta-element-ui-schema-table": "~0.0.16",
+		"anta-element-ui-components-next": "~0.2.16",
+		"anta-element-ui-schema-form": "~0.0.22",
+		"anta-element-ui-schema-table": "~0.0.18",
 		"anta-element-ui-styles": "~0.0.43",
 		"axios": "~0.27.2",
 		"chalk": "~5.0.1",

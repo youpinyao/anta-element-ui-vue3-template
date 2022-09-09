@@ -1,6 +1,8 @@
 // empty
 
 :root {
+	--global-aside-width: 208px;
+	--global-aside-width-collapse: 50px;
 	--global-aside-bg-color: #01285a;
 	--global-aside-header-title-color: #03234c;
 	--global-bg-color: #eff2f9;
@@ -24,4 +26,9 @@
 	.at-button + .at-button {
 		margin-left: 12px;
 	}
+}
+
+.at-search-button {
+	display: flex;
+	justify-content: right;
 }

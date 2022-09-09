@@ -1,0 +1,46 @@
+@import 'anta-element-ui-styles/src/variables';
+
+.header {
+	position: fixed;
+	top: var(--global-header-height);
+	right: 0;
+	left: var(--global-aside-width);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px 16px;
+	margin: auto;
+	background-color: $--color-white;
+	border-top: 1px solid $--border-color-base;
+	border-bottom: 1px solid $--border-color-base;
+	transition: left 300ms ease;
+
+	&--collapse {
+		left: var(--global-aside-width-collapse);
+	}
+
+	.title {
+		display: flex;
+		align-items: center;
+		font-size: 14px;
+
+		.edit {
+			margin-left: 5px;
+			cursor: pointer;
+		}
+
+		.buttons {
+			display: flex;
+			align-items: center;
+			margin-left: 10px;
+		}
+
+		.gray {
+			color: $--color-text-placeholder;
+		}
+	}
+}
+
+.header-space {
+	height: 32px + 20px;
+}

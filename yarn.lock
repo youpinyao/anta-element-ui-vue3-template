@@ -1228,7 +1228,7 @@
   resolved "https://registry.npmmirror.com/@discoveryjs/json-ext/-/json-ext-0.5.7.tgz#1d572bfbbe14b7704e0ba0f39b74815b84870d70"
   integrity sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==
 
-"@element-plus/icons-vue@*", "@element-plus/icons-vue@^2.0.6", "@element-plus/icons-vue@~2.0.6":
+"@element-plus/icons-vue@^2.0.6", "@element-plus/icons-vue@~2.0.6", "@element-plus/icons-vue@~2.0.9":
   version "2.0.9"
   resolved "https://registry.npmmirror.com/@element-plus/icons-vue/-/icons-vue-2.0.9.tgz"
   integrity sha512-okdrwiVeKBmW41Hkl0eMrXDjzJwhQMuKiBOu17rOszqM+LS/yBYpNQNV5Jvoh06Wc+89fMmb/uhzf8NZuDuUaQ==
@@ -2660,10 +2660,10 @@ anta-cli@~0.0.14:
     webpack-cli "~4.10.0"
     yaml "~2.1.1"
 
-anta-element-ui-components-next@^0.2.14, anta-element-ui-components-next@~0.2.14:
-  version "0.2.14"
-  resolved "https://registry.npmmirror.com/anta-element-ui-components-next/-/anta-element-ui-components-next-0.2.14.tgz#19cf202d4c6eccb036102d812664fb01f794f2d9"
-  integrity sha512-T8EQLBRvdpyMxU8Vz9Y10i+5v6gp5ixBXQGErrLHcZVzg6TsZriNCdx1vBmXHLKSqyBJSYnFRcMX7Xp8UGzeew==
+anta-element-ui-components-next@^0.2.16, anta-element-ui-components-next@~0.2.16:
+  version "0.2.16"
+  resolved "https://registry.npmjs.org/anta-element-ui-components-next/-/anta-element-ui-components-next-0.2.16.tgz#80e014fb93613c788485454bedfd1bdf580005d9"
+  integrity sha512-1hrrBXqQYRT41JRouIH0R8WmMCG9wFcIqgI1kTP/M+f+AFORPfMzr7QRLR3c34evLWAH0/ODioXP7BAy0s2Vvg==
   dependencies:
     "@popperjs/core" "~2.11.4"
     "@types/sortablejs" "~1.10.7"
@@ -2676,21 +2676,21 @@ anta-element-ui-components-next@^0.2.14, anta-element-ui-components-next@~0.2.14
     sortablejs "~1.14.0"
     vue-class-component "~8.0.0-0"
 
-anta-element-ui-schema-form@~0.0.18:
-  version "0.0.18"
-  resolved "https://registry.npmmirror.com/anta-element-ui-schema-form/-/anta-element-ui-schema-form-0.0.18.tgz#eb08bf6bfb1d6e80035d23f9a92262fd6df74b95"
-  integrity sha512-mdHwbiUQJ695nnZpUM9AQ261c5Tw+vBGe7pdmDTykFsMRHefklEHKz775dFcWTghul4rak5x2pNSP1YGbILV9g==
+anta-element-ui-schema-form@~0.0.22:
+  version "0.0.22"
+  resolved "https://registry.npmjs.org/anta-element-ui-schema-form/-/anta-element-ui-schema-form-0.0.22.tgz#f10bad1f817882a4a0d0853143133e459afd4a9f"
+  integrity sha512-ybW13PppvHbeiVGY0lq+LFGqqkEvLCK9trErYdw95bEHn0AoHvYB8CCTQABkGOY8rRbJIDfN3eZTKt8+22YSCQ==
   dependencies:
     "@element-plus/icons-vue" "~2.0.9"
-    anta-element-ui-components-next "^0.2.14"
+    anta-element-ui-components-next "^0.2.16"
     anta-element-ui-styles "^0.0.43"
 
-anta-element-ui-schema-table@~0.0.16:
-  version "0.0.16"
-  resolved "https://registry.npmmirror.com/anta-element-ui-schema-table/-/anta-element-ui-schema-table-0.0.16.tgz#411bca62d6fb6e9d8278b1059fe85f7c1b0e7e53"
-  integrity sha512-EkLZbqTWCtUBU8wLrarILSBHM1vwBDFv3UirtKmZ3DeywP7Dj2qflGK4lXcn2dtttZnqBsXUbNoFRqGd3QmQcw==
+anta-element-ui-schema-table@~0.0.18:
+  version "0.0.18"
+  resolved "https://registry.npmjs.org/anta-element-ui-schema-table/-/anta-element-ui-schema-table-0.0.18.tgz#2934ab408b00f20e35b0c8ca4a48cfe569f2cd7a"
+  integrity sha512-V2RGFy3obfQqa8giQhnluiSDLpE2EwfjvOCkPiLIIsCAg79vaM1glSuk3dDyiCNNha2H1N1LUmwWz5XMeuqysg==
   dependencies:
-    anta-element-ui-components-next "^0.2.14"
+    anta-element-ui-components-next "^0.2.16"
     anta-element-ui-styles "^0.0.43"
 
 anta-element-ui-styles@^0.0.43, anta-element-ui-styles@~0.0.43:

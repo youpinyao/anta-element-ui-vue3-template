@@ -7,11 +7,11 @@ import Login from '@/views/Login/Index.vue';
 
 // @ts-ignore
 const files = require.context('./routes', true, /\.ts$/);
-const extraRoutes: RouteRecordRaw[] = [];
+let extraRoutes: RouteRecordRaw[] = [];
 
 files.keys().forEach((key: string) => {
-	extraRoutes.push(
-		require(`./routes/${key.replace(/^(\.\/)/g, '')}`).default()
+	extraRoutes = extraRoutes.concat(
+		[require(`./routes/${key.replace(/^(\.\/)/g, '')}`).default()].flat()
 	);
 });
 
