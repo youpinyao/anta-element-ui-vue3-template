@@ -8,6 +8,8 @@ export type Definitionad17cf51a443281f268168922cc18c74 = {
 	createTime?: string;
 	// 创建人
 	createdBy?: string;
+	// 删除时间
+	deleteTime?: number;
 	// 主键
 	id?: number;
 	// 排序
@@ -26,6 +28,4 @@ export type Definitionad17cf51a443281f268168922cc18c74 = {
 	updateTime?: string;
 	// 更新人
 	updatedBy?: string;
-	path?: string;
-	icon?: string;
 };

@@ -4,6 +4,8 @@ export type Definition307857f767a1aeed0869a3806f192b14 = {
 	createTime?: string;
 	// 创建人
 	createdBy?: string;
+	// 删除时间
+	deleteTime?: number;
 	// 明细标题
 	detailTitle?: string;
 	// 明细值

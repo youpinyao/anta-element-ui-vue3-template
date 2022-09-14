@@ -5,6 +5,8 @@ export type Definitiond4c01f76047c85412883a2eb0a21aa3e = {
 	createTime?: string;
 	// 创建人
 	createdBy?: string;
+	// 删除时间
+	deleteTime?: number;
 	// 部门信息
 	depart?: Definition024c169fd6317300a93e6c6ae52a0cb6;
 	// 部门ID

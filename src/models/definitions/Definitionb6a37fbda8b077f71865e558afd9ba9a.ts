@@ -8,8 +8,6 @@ export type Definitionb6a37fbda8b077f71865e558afd9ba9a = {
 	accessResult?: any;
 	// 访问uri
 	accessUri?: any;
-	// 品牌ID
-	brandId?: number;
 	// 浏览器信息
 	deviceInfo?: any;
 	// 姓名

@@ -1,7 +1,5 @@
 // 服务资源更新
 export type Definitioncd8a4fc9b55116c7af89fb9ed81b6658 = {
-	// 品牌ID
-	brandId?: number;
 	// 数据权限,0-否,1-是
 	dataFlag?: any;
 	// 数据脱敏:0-否,1-是

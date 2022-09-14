@@ -1,7 +1,5 @@
 // 菜单更新
 export type Definition3d0a2df9ec50c48081e0543b697552b0 = {
-	// 品牌ID
-	brandId?: number;
 	// 主键
 	id?: any;
 	// 排序

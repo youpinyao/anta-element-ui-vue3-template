@@ -6,6 +6,8 @@ export type Definitiondbc737fbb92b4938d324f12bc1fb3b8f = {
 	createTime?: string;
 	// 创建人
 	createdBy?: string;
+	// 删除时间
+	deleteTime?: number;
 	// 姓名
 	fullName?: string;
 	// 主键

@@ -8,6 +8,8 @@ export type Definition4e33374ce93d21f677d7fda7b743512c = {
 	createdBy?: string;
 	// 数据权限:0-否,1-是
 	dataFlag?: number;
+	// 删除时间
+	deleteTime?: number;
 	// 数据脱敏:0-否,1-是
 	desenFlag?: number;
 	// 脱敏信息:{field: {start:1,end:100} }

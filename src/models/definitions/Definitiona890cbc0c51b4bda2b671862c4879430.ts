@@ -4,8 +4,6 @@ export type Definitiona890cbc0c51b4bda2b671862c4879430 = {
 	accessAddress?: any;
 	// 访问来源地址明细
 	accessIp?: any;
-	// 品牌ID
-	brandId?: number;
 	// 访问浏览器
 	browser?: any;
 	// 用户姓名

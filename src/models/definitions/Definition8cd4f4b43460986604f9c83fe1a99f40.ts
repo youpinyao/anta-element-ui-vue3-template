@@ -1,7 +1,5 @@
 // 部门更新
 export type Definition8cd4f4b43460986604f9c83fe1a99f40 = {
-	// 品牌ID
-	brandId?: number;
 	// 编码
 	code?: any;
 	// 主键

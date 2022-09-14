@@ -7,6 +7,8 @@ export type Definition024c169fd6317300a93e6c6ae52a0cb6 = {
 	createTime?: string;
 	// 创建人
 	createdBy?: string;
+	// 删除时间
+	deleteTime?: number;
 	// 主键
 	id?: number;
 	// 是否叶子:0-否,1-是

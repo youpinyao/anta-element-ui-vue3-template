@@ -1,7 +1,5 @@
 // 字典明细更新
 export type Definition7da311360b929b3b4e260d1c31af7aae = {
-	// 品牌ID
-	brandId?: number;
 	// 明细标题
 	detailTitle?: any;
 	// 明细值

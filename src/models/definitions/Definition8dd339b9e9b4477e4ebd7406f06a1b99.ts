@@ -8,6 +8,8 @@ export type Definition8dd339b9e9b4477e4ebd7406f06a1b99 = {
 	createTime?: string;
 	// 创建人
 	createdBy?: string;
+	// 删除时间
+	deleteTime?: number;
 	// 主键
 	id?: number;
 	// 模版类型,使用数字字典

@@ -6,6 +6,8 @@ export type Definition18d620077258e847dd257439cc3409e8 = {
 	createTime?: string;
 	// 创建人
 	createdBy?: string;
+	// 删除时间
+	deleteTime?: number;
 	// 主键
 	id?: number;
 	// 项目名称

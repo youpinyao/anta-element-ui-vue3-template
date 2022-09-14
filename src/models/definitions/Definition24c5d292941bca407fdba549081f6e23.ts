@@ -18,6 +18,8 @@ export type Definition24c5d292941bca407fdba549081f6e23 = {
 	createTime?: string;
 	// 创建人
 	createdBy?: string;
+	// 删除时间
+	deleteTime?: number;
 	// 姓名
 	fullName?: string;
 	// 主键

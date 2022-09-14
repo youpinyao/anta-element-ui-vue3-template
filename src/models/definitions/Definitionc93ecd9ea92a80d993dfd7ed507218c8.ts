@@ -10,6 +10,8 @@ export type Definitionc93ecd9ea92a80d993dfd7ed507218c8 = {
 	createTime?: string;
 	// 创建人
 	createdBy?: string;
+	// 删除时间
+	deleteTime?: number;
 	// 用户姓名
 	fullName?: string;
 	// 主键

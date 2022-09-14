@@ -1,17 +1,11 @@
-import { Definitiondbc737fbb92b4938d324f12bc1fb3b8f } from '../definitions/Definitiondbc737fbb92b4938d324f12bc1fb3b8f';
+import { Definition7a3d23beb72b39f0b1272599ea8a60a0 } from '../definitions/Definition7a3d23beb72b39f0b1272599ea8a60a0';
 // 登录日志列表
 export type Definition9d7b23f13b415d9fd9e3c6eba113b917 = {
 	// 错误码
 	code?: number;
-	// 当前页
-	curPage?: number;
 	// 返回数据
-	data?: Array<Definitiondbc737fbb92b4938d324f12bc1fb3b8f>;
+	data?: Definition7a3d23beb72b39f0b1272599ea8a60a0;
 	// 错误信息
 	msg?: string;
-	// 每页数量
-	pageSize?: number;
 	success?: boolean;
-	// 总记录数
-	totalItem?: number;
 };

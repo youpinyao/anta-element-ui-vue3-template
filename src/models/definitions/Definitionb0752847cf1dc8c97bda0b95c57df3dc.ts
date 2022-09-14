@@ -4,6 +4,8 @@ export type Definitionb0752847cf1dc8c97bda0b95c57df3dc = {
 	createTime?: string;
 	// 创建人
 	createdBy?: string;
+	// 删除时间
+	deleteTime?: number;
 	// 主键
 	id?: number;
 	// 名称

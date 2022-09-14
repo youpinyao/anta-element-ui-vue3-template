@@ -6,6 +6,8 @@ export type Definition434a27aafc4a22293110c322a4f3de84 = {
 	createTime?: string;
 	// 创建人
 	createdBy?: string;
+	// 删除时间
+	deleteTime?: number;
 	// 主键
 	id?: number;
 	// 字典模块标识

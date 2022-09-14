@@ -1,7 +1,5 @@
 // 邮件模版更新
 export type Definition1e2e29283aaa08b9d137325a54545814 = {
-	// 品牌ID
-	brandId?: number;
 	// 编码,不能修改
 	code?: any;
 	// 模版内容

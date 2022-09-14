@@ -4,15 +4,12 @@ export type AdminApiService$LogsGetParams = {
 	accessBeginTime?: string;
 	// 访问结束时间
 	accessEndTime?: string;
-	// 品牌ID
-	brandId?: number;
-	// 当前页
-	curPage?: number;
 	// 姓名
 	fullName?: string;
+	// 当前页
+	page?: number;
 	// 每页数量
 	pageSize?: number;
-	startRow?: number;
 	// 账户名
 	username?: string;
 };

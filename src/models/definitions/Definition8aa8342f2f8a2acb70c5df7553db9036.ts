@@ -6,6 +6,8 @@ export type Definition8aa8342f2f8a2acb70c5df7553db9036 = {
 	createTime?: string;
 	// 创建人
 	createdBy?: string;
+	// 删除时间
+	deleteTime?: number;
 	// 主键
 	id?: number;
 	// 模块类型

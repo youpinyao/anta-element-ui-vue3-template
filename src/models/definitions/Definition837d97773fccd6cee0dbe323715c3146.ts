@@ -1,7 +1,5 @@
 // 用户更新
 export type Definition837d97773fccd6cee0dbe323715c3146 = {
-	// 品牌ID
-	brandId?: number;
 	// 部门ID
 	departmentId?: any;
 	// 邮箱地址
