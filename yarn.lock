@@ -1228,7 +1228,7 @@
   resolved "https://registry.npmmirror.com/@discoveryjs/json-ext/-/json-ext-0.5.7.tgz#1d572bfbbe14b7704e0ba0f39b74815b84870d70"
   integrity sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==
 
-"@element-plus/icons-vue@^2.0.6", "@element-plus/icons-vue@~2.0.6", "@element-plus/icons-vue@~2.0.9":
+"@element-plus/icons-vue@*", "@element-plus/icons-vue@^2.0.6", "@element-plus/icons-vue@~2.0.6":
   version "2.0.9"
   resolved "https://registry.npmmirror.com/@element-plus/icons-vue/-/icons-vue-2.0.9.tgz"
   integrity sha512-okdrwiVeKBmW41Hkl0eMrXDjzJwhQMuKiBOu17rOszqM+LS/yBYpNQNV5Jvoh06Wc+89fMmb/uhzf8NZuDuUaQ==
@@ -2628,10 +2628,10 @@ ansi-styles@^6.0.0:
   resolved "https://registry.npmmirror.com/ansi-styles/-/ansi-styles-6.1.0.tgz"
   integrity sha512-VbqNsoz55SYGczauuup0MFUyXNQviSpFTj1RQtFzmQLk18qbVSpTFFGMT293rmDaQuKCT6InmbuEyUne4mTuxQ==
 
-anta-cli@~0.0.14:
-  version "0.0.14"
-  resolved "https://registry.npmmirror.com/anta-cli/-/anta-cli-0.0.14.tgz#8bf770bbaad0862e97886999693299dadae84570"
-  integrity sha512-BhVztg5ThLY52xPlKAq5MzLOh7suVpPQWPERLnJiPGHInoOZeQhxoa7DIR49VFgWgPMIzCQnI6+vtNw7EOGpxg==
+anta-cli@~0.0.15:
+  version "0.0.15"
+  resolved "https://registry.npmjs.org/anta-cli/-/anta-cli-0.0.15.tgz#fcf1689c049caafb6a769bb8075a8d883b3a4eaa"
+  integrity sha512-q5TKZZzmhUvOBR+pomF4wfUaR9DCI97QYuikTYLNRi9Yc6KgEpI2607nBzykq3+8FW7d/FXwIldGg+rqBke2Iw==
   dependencies:
     "@babel/generator" "~7.18.13"
     "@babel/parser" "~7.18.13"
@@ -2660,10 +2660,10 @@ anta-cli@~0.0.14:
     webpack-cli "~4.10.0"
     yaml "~2.1.1"
 
-anta-element-ui-components-next@^0.2.16, anta-element-ui-components-next@~0.2.16:
-  version "0.2.16"
-  resolved "https://registry.npmjs.org/anta-element-ui-components-next/-/anta-element-ui-components-next-0.2.16.tgz#80e014fb93613c788485454bedfd1bdf580005d9"
-  integrity sha512-1hrrBXqQYRT41JRouIH0R8WmMCG9wFcIqgI1kTP/M+f+AFORPfMzr7QRLR3c34evLWAH0/ODioXP7BAy0s2Vvg==
+anta-element-ui-components-next@^0.2.18, anta-element-ui-components-next@~0.2.18:
+  version "0.2.18"
+  resolved "https://registry.npmjs.org/anta-element-ui-components-next/-/anta-element-ui-components-next-0.2.18.tgz#f846ef80e9056d72da5026c1f6c2f9dc163a9faf"
+  integrity sha512-ELdLzP5nsYnTayUypVpCZOkc5dBM3DrGvevF7igaVB+/Jo2GpegbzXmsV63Wts9TZS7mgIAuA2zDQfZfITekDQ==
   dependencies:
     "@popperjs/core" "~2.11.4"
     "@types/sortablejs" "~1.10.7"
@@ -2676,21 +2676,21 @@ anta-element-ui-components-next@^0.2.16, anta-element-ui-components-next@~0.2.16
     sortablejs "~1.14.0"
     vue-class-component "~8.0.0-0"
 
-anta-element-ui-schema-form@~0.0.22:
-  version "0.0.22"
-  resolved "https://registry.npmjs.org/anta-element-ui-schema-form/-/anta-element-ui-schema-form-0.0.22.tgz#f10bad1f817882a4a0d0853143133e459afd4a9f"
-  integrity sha512-ybW13PppvHbeiVGY0lq+LFGqqkEvLCK9trErYdw95bEHn0AoHvYB8CCTQABkGOY8rRbJIDfN3eZTKt8+22YSCQ==
+anta-element-ui-schema-form@~0.0.29:
+  version "0.0.29"
+  resolved "https://registry.npmjs.org/anta-element-ui-schema-form/-/anta-element-ui-schema-form-0.0.29.tgz#cee1fc0f57bfa79b64e6dfca1088af771beadce6"
+  integrity sha512-RRjMzwI9xk6h+EMW5l/Lmw5IFKJIwTB91psk7NfIxrYhdcj2AY8Wert42fJia3CrJmqQhiy1yZswVzXliehY2w==
   dependencies:
     "@element-plus/icons-vue" "~2.0.9"
-    anta-element-ui-components-next "^0.2.16"
+    anta-element-ui-components-next "^0.2.18"
     anta-element-ui-styles "^0.0.43"
 
-anta-element-ui-schema-table@~0.0.18:
-  version "0.0.18"
-  resolved "https://registry.npmjs.org/anta-element-ui-schema-table/-/anta-element-ui-schema-table-0.0.18.tgz#2934ab408b00f20e35b0c8ca4a48cfe569f2cd7a"
-  integrity sha512-V2RGFy3obfQqa8giQhnluiSDLpE2EwfjvOCkPiLIIsCAg79vaM1glSuk3dDyiCNNha2H1N1LUmwWz5XMeuqysg==
+anta-element-ui-schema-table@~0.0.20:
+  version "0.0.20"
+  resolved "https://registry.npmjs.org/anta-element-ui-schema-table/-/anta-element-ui-schema-table-0.0.20.tgz#2ab908c05b45061b26ae54100448fb7db0d8c551"
+  integrity sha512-BqbhnKRVxmQdHLF9xhVENV8DF/tHMtdVxHgVJT6N7PnJhRWKmbBpm9XPmQhGZkI2BVBR1UJPYuRNgCosdsqosA==
   dependencies:
-    anta-element-ui-components-next "^0.2.16"
+    anta-element-ui-components-next "^0.2.18"
     anta-element-ui-styles "^0.0.43"
 
 anta-element-ui-styles@^0.0.43, anta-element-ui-styles@~0.0.43:

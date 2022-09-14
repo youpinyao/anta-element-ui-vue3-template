@@ -25,9 +25,9 @@ import {
 	AtTitle,
 } from 'anta-element-ui-components-next';
 import {
-	adminApiPageGeneratorDel,
-	adminApiPageGeneratorGet,
-} from '@/apis/adminApiPageGenerator';
+	adminApiPageTemplatesDel,
+	adminApiPageTemplatesGet,
+} from '@/apis/adminApiPageTemplates';
 import { debounce } from 'throttle-debounce';
 import { useRoute, useRouter } from 'vue-router';
 
@@ -35,7 +35,7 @@ export default defineComponent({
 	name: 'PageGenerator',
 	setup() {
 		const router = useRouter();
-		const { run, data, loading } = useRequest(adminApiPageGeneratorGet, {
+		const { run, data, loading } = useRequest(adminApiPageTemplatesGet, {
 			immediate: false,
 		});
 
@@ -64,9 +64,9 @@ export default defineComponent({
 			() => data.value?.data?.list ?? []
 		);
 
-		const total = computed(() => data.value?.data.total);
-		const pageSize = computed(() => data.value?.data.pageSize);
-		const page = computed(() => data.value?.data.page);
+		const total = computed(() => data.value?.data?.total);
+		const pageSize = computed(() => data.value?.data?.pageSize);
+		const page = computed(() => data.value?.data?.page);
 
 		const skipSearch = ref(false);
 		const handleSearch = () => {
@@ -104,8 +104,8 @@ export default defineComponent({
 		};
 
 		const handleDel = async (e: Event, row: any) => {
-			await adminApiPageGeneratorDel({
-				id: row?.id,
+			await adminApiPageTemplatesDel({
+				pageTemplateId: row?.id,
 			});
 			AtMessage.success('操作成功');
 			handleSearch();

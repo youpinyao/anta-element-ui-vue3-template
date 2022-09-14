@@ -27,8 +27,8 @@ export function toastInterceptor(instance: AxiosInstance) {
 				ElNotification.error({
 					title: error.code,
 					message:
-						error.response?.data.msg ||
-						errsMsgToString(error.response?.data.errsMsg) ||
+						error.response?.data?.msg ||
+						errsMsgToString(error.response?.data?.errsMsg) ||
 						error.message,
 				});
 			}

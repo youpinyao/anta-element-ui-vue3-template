@@ -5,6 +5,7 @@
 	top: var(--global-header-height);
 	right: 0;
 	left: var(--global-aside-width);
+	z-index: 100;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -38,6 +39,11 @@
 		.gray {
 			color: $--color-text-placeholder;
 		}
+	}
+
+	&__buttons {
+		display: flex;
+		align-items: center;
 	}
 }
 

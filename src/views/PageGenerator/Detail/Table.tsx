@@ -25,7 +25,9 @@ export default defineComponent({
 			const schema: typeof _schema = {
 				...(_schema as unknown as any),
 				columns: (
-					_schema as PageGenerator.JSONSchema['table']['schema']
+					_schema as NonNullable<
+						NonNullable<PageGenerator.JSONSchema['table']>['schema']
+					>
 				).columns.map((item) => {
 					if (item.buttons) {
 						return {
@@ -33,7 +35,7 @@ export default defineComponent({
 							render(row) {
 								return (
 									<div>
-										{item.buttons.map((button) => {
+										{item.buttons?.map((button) => {
 											return (
 												<AtButton size="small" type={button.type}>
 													{button.title}
@@ -49,8 +51,6 @@ export default defineComponent({
 					}
 				}),
 			};
-
-			console.log(schema);
 
 			return <AtSchemaTable schema={schema} dataSource={dataSource} />;
 		};

@@ -1,4 +1,4 @@
 
-BASE_URL: "http://10.211.135.14:32080" # swagger链接base url
+BASE_URL: "https://admin-api-dev.atxapi.com" # swagger链接base url
 RESOURCE_URL: "/swagger-resources" # swagger资源地址url
 GENERATE_DIR: "src/models" # 生成的api目录

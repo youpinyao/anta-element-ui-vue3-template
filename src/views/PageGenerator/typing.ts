@@ -28,8 +28,8 @@ export namespace PageGenerator {
 			};
 			schema: AtSchemaFormTypes.JSONSchema;
 		};
-		cancelText: string;
-		okText: string;
+		cancelText?: string;
+		okText?: string;
 		dialogProps: PropsType<typeof AtDialog>;
 	}
 	export interface FunctionButtonTriggerPopconfirm
@@ -47,27 +47,33 @@ export namespace PageGenerator {
 			| FunctionButtonTriggerDialog
 			| FunctionButtonTriggerPopconfirm;
 	}
+
+	type RecordType<T> = T extends Record<any, infer U> ? U : T;
 	export interface JSONSchema {
-		title: string;
-		search: {
-			form: AtSchemaFormTypes.JSONSchema & {
-				properties: {
-					defaultValue: any;
-				};
+		title?: string;
+		search?: {
+			form?: Omit<AtSchemaFormTypes.JSONSchema, 'properties'> & {
+				properties: Record<
+					string,
+					RecordType<AtSchemaFormTypes.JSONSchema['properties']> & {
+						defaultValue?: any;
+					}
+				>;
 			};
-			resetButton: boolean;
-			searchButton: boolean;
+			resetButton?: boolean;
+			searchButton?: boolean;
 		};
-		buttons: FunctionButton[];
-		table: {
-			url: string;
-			method: Methods;
-			schema: Omit<AtSchemaTableTypes.JSONSchema, 'columns'> & {
+		buttons?: FunctionButton[];
+		table?: {
+			url?: string;
+			method?: Methods;
+			selection?: boolean;
+			schema?: Omit<AtSchemaTableTypes.JSONSchema, 'columns'> & {
 				columns: (ArrayType<AtSchemaTableTypes.JSONSchema['columns']> & {
-					buttons: FunctionButton[];
+					buttons?: FunctionButton[];
 				})[];
 			};
 		};
-		pagination: boolean;
+		pagination?: boolean;
 	}
 }
