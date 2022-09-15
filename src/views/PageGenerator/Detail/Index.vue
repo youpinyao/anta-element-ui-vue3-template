@@ -36,11 +36,6 @@
 			@click="handleSearchEdit"
 			placeholder="添加搜索条件"
 		/>
-		<Placeholder
-			v-if="!hasTable && !loading"
-			@click="handleTableEdit"
-			placeholder="添加表格"
-		/>
 
 		<Block v-show="hasSearch">
 			<EditArea @edit="handleSearchEdit">
@@ -52,6 +47,12 @@
 				/>
 			</EditArea>
 		</Block>
+
+		<Placeholder
+			v-if="!hasTable && !loading"
+			@click="handleTableEdit"
+			placeholder="添加表格"
+		/>
 
 		<Block v-show="hasTable">
 			<EditArea @click="handleTableHeaderEdit">
@@ -113,7 +114,14 @@ const router = useRouter();
 const menuStore = useMenuStore();
 const route = useRoute();
 
-const pageConfig = reactive<AdminApiPageGeneratorDetailGetResult>({});
+const pageConfig = reactive<AdminApiPageGeneratorDetailGetResult>({
+	schema: {
+		search: {
+			resetButton: true,
+			searchButton: true,
+		},
+	},
+});
 const { run, loading } = useRequest(adminApiPageGeneratorDetailGet, {
 	immediate: false,
 });

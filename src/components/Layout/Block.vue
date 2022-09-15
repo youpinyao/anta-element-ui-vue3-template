@@ -16,10 +16,11 @@ export default defineComponent({
 
 .layout-block {
 	padding: 24px;
+	margin-bottom: 20px;
 	background-color: $--color-white;
 
-	& + .layout-block {
-		margin-top: 16px;
+	&:last-child {
+		margin-bottom: 0;
 	}
 }
 </style>
