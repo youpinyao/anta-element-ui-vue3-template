@@ -23,6 +23,7 @@ const dialog = defineComponent({
 			<AtDialog
 				title={`${isEdit ? '编辑' : '新增'}菜单`}
 				modelValue={visible}
+				closeOnClickModal={false}
 				destroyOnClose={true}
 				onClose={() => {
 					handleCancel();

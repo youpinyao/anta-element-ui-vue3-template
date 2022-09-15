@@ -73,6 +73,8 @@
 	<SearchEditor
 		:visible="showSearchEditor"
 		:schema="pageConfig.schema?.search"
+		@close="handleCloseSearchEdit"
+		@change="handleSaveSearchEdit"
 	/>
 </template>
 
@@ -105,6 +107,7 @@ import { ReadSwaggerPageResult } from './SwaggerButton/readSwaggerPage';
 import EditArea from './EditArea/Index.vue';
 import { generateDataSource } from './generateDataSource';
 import SearchEditor from './SearchEditor/Index';
+import { PageGenerator } from '../typing';
 
 const router = useRouter();
 const menuStore = useMenuStore();
@@ -166,6 +169,15 @@ const handleSave = () => {
 };
 const handleSearchEdit = () => {
 	showSearchEditor.value = true;
+};
+const handleCloseSearchEdit = () => {
+	showSearchEditor.value = false;
+};
+const handleSaveSearchEdit = (model: PageGenerator.JSONSchema['search']) => {
+	if (!pageConfig.schema) {
+		pageConfig.schema = {};
+	}
+	pageConfig.schema.search = model;
 };
 const handleTableEdit = () => {
 	showTableEditor.value = true;

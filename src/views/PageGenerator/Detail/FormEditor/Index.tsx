@@ -1,49 +1,257 @@
-import { AtSchemaForm, AtSchemaFormTypes } from 'anta-element-ui-schema-form';
-import { defineComponent, PropType, reactive } from 'vue';
-import { PageGenerator } from '../../typing';
+import {
+	AtSchemaForm,
+	AtSchemaFormTypes,
+	components,
+} from 'anta-element-ui-schema-form';
+import { defineComponent, PropType, reactive, toRaw, ref } from 'vue';
+import clone from 'rfdc';
+import JsonDialog from '../JsonDialog';
+
+export type FormEditorModelItem = Pick<
+	AtSchemaFormTypes.Property,
+	'label' | 'component' | 'span' | 'disabled' | 'display'
+> & {
+	field?: string;
+	labelWidth: NonNullable<
+		AtSchemaFormTypes.Property['formItemProps']
+	>['labelWidth'];
+	property?: AtSchemaFormTypes.Property;
+};
+
+export function transformPropertiesToFormEditorModel(
+	properties?: AtSchemaFormTypes.JSONSchema['properties']
+) {
+	const items: FormEditorModelItem[] = [];
+
+	Object.entries(toRaw(properties) ?? {}).forEach(([field, item]) => {
+		items.push({
+			field,
+			label: item.label,
+			component: item.component,
+			span: item.span,
+			display: item.display,
+			disabled: item.disabled,
+			labelWidth: item.formItemProps?.labelWidth as number,
+			property: item,
+		});
+	});
+
+	return clone()(items);
+}
+
+export function transformFormEditorModelToProperties(
+	items?: FormEditorModelItem[]
+) {
+	const properties: AtSchemaFormTypes.JSONSchema['properties'] = {};
+	const fields: string[] = [];
+
+	items?.forEach((item, index) => {
+		let field = item.field;
+
+		if (!field) {
+			field = `field_${index}`;
+		}
+		if (fields.includes(field)) {
+			field = `${field}_${index}`;
+		}
+		fields.push(field);
+
+		properties[field] = {
+			...item.property,
+			label: item.label,
+			component: item.component,
+			span: item.span,
+			display: item.display,
+			disabled: item.disabled,
+			formItemProps: {
+				...item.property?.formItemProps,
+				labelWidth: item.labelWidth,
+			},
+		} as AtSchemaFormTypes.Property;
+	});
+
+	return clone()(toRaw(properties));
+}
 
 export default defineComponent({
 	props: {
-		schema: {
-			type: Object as PropType<
-				NonNullable<PageGenerator.JSONSchema['search']>['form']
-			>,
+		modelValue: {
+			type: Object as PropType<FormEditorModelItem[]>,
 		},
 	},
+	emits: {
+		'update:modelValue': (items: FormEditorModelItem[]) => true,
+	},
+	render() {
+		const props = this.$props;
+		const emit = this.$emit;
+		const { formSchema, codeEditorIndex, closeJsonEditor } = this;
+		return [
+			<AtSchemaForm
+				ref="form"
+				schema={formSchema}
+				model={{ items: props.modelValue }}
+				onChange={(model) => {
+					emit('update:modelValue', model.items);
+				}}
+			/>,
+			<JsonDialog
+				visible={codeEditorIndex !== undefined}
+				onClose={closeJsonEditor}
+				modeValue={
+					codeEditorIndex !== undefined
+						? clone()(toRaw(props.modelValue?.[codeEditorIndex].property))
+						: undefined
+				}
+				onUpdate:modelValue={(json) => {
+					if (codeEditorIndex !== undefined && props.modelValue) {
+						props.modelValue[codeEditorIndex].property =
+							json as AtSchemaFormTypes.Property;
+
+						emit(
+							'update:modelValue',
+							props.modelValue.map((item) => {
+								return {
+									...item,
+									label: item?.property?.label,
+									component: item?.property?.component,
+									span: item?.property?.span,
+									display: item?.property?.display,
+									disabled: item?.property?.disabled,
+									labelWidth: item?.property?.formItemProps
+										?.labelWidth as number,
+								} as FormEditorModelItem;
+							})
+						);
+					}
+				}}
+			/>,
+		];
+	},
 	setup(props, ctx) {
-		const model = reactive<AtSchemaFormTypes.Model>({
-			items: [],
-		});
+		const form = ref<InstanceType<typeof AtSchemaForm>>();
+		const codeEditorIndex = ref<number>();
+		const closeJsonEditor = () => {
+			codeEditorIndex.value = undefined;
+		};
+		const openJsonEditor = (index?: number) => {
+			codeEditorIndex.value = index;
+		};
 		const formSchema: AtSchemaFormTypes.JSONSchema = {
 			properties: {
 				items: {
 					component: 'array',
-					type: {
-						field: String,
-						label: String,
-						component: String,
-						labelWidth: Number,
-						span: String,
-					},
 					children: {
 						field: {
 							component: 'input',
 							type: String,
+							formItemProps: {
+								required: true,
+							},
 							props: {
 								placeholder: '字段名',
+							},
+						},
+						label: {
+							component: 'input',
+							type: String,
+							formItemProps: {
+								required: true,
+							},
+							props: {
+								placeholder: '名称',
+							},
+						},
+						component: {
+							component: 'select',
+							type: String,
+							formItemProps: {
+								required: true,
+							},
+							props: {
+								filterable: true,
+								placeholder: '组件',
+							},
+							options: components.map((item) => {
+								return {
+									label: item,
+									value: item,
+								};
+							}),
+						},
+						labelWidth: {
+							component: 'input-number',
+							type: Number,
+							props: {
+								placeholder: '名称宽度',
+								min: 0,
+								style: {
+									width: '110px',
+								},
+							},
+						},
+						span: {
+							component: 'input-number',
+							type: Number,
+							props: {
+								placeholder: '布局跨度',
+								min: 0,
+								max: 24,
+								style: {
+									width: '110px',
+								},
+							},
+						},
+						display: {
+							component: 'select',
+							type: String,
+							props: {
+								filterable: true,
+								placeholder: '是否显示',
+							},
+							style: {
+								width: '100px',
+							},
+							options: ['visible', 'hidden', 'none'].map((item) => {
+								return {
+									label:
+										{
+											visible: '显示',
+											hidden: '隐藏',
+											none: '不渲染',
+										}[item] ?? '',
+									value: item,
+								};
+							}),
+						},
+						disabled: {
+							component: 'checkbox',
+							type: Boolean,
+							option: {
+								label: 'disabled',
+							},
+						},
+						property: {
+							component: 'button',
+							props: {
+								vSlots: {
+									default: () => 'JSON',
+								},
+								type: 'primary',
+								onClick(e, index) {
+									openJsonEditor(index);
+								},
 							},
 						},
 					},
 				},
 			},
 		};
-		return () => {
-			const {
-				schema = {
-					properties: {},
-				},
-			} = props;
-			return <AtSchemaForm schema={formSchema} model={model}></AtSchemaForm>;
+		return {
+			form,
+			formSchema,
+			codeEditorIndex,
+			closeJsonEditor,
 		};
 	},
 });

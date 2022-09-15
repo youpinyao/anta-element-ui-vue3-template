@@ -1228,7 +1228,7 @@
   resolved "https://registry.npmmirror.com/@discoveryjs/json-ext/-/json-ext-0.5.7.tgz#1d572bfbbe14b7704e0ba0f39b74815b84870d70"
   integrity sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==
 
-"@element-plus/icons-vue@*", "@element-plus/icons-vue@^2.0.6", "@element-plus/icons-vue@~2.0.6":
+"@element-plus/icons-vue@^2.0.6", "@element-plus/icons-vue@~2.0.6", "@element-plus/icons-vue@~2.0.9":
   version "2.0.9"
   resolved "https://registry.npmmirror.com/@element-plus/icons-vue/-/icons-vue-2.0.9.tgz"
   integrity sha512-okdrwiVeKBmW41Hkl0eMrXDjzJwhQMuKiBOu17rOszqM+LS/yBYpNQNV5Jvoh06Wc+89fMmb/uhzf8NZuDuUaQ==
@@ -2480,6 +2480,11 @@ accepts@~1.3.4, accepts@~1.3.5, accepts@~1.3.8:
     mime-types "~2.1.34"
     negotiator "0.6.3"
 
+ace-builds@~1.10.1:
+  version "1.10.1"
+  resolved "https://registry.npmjs.org/ace-builds/-/ace-builds-1.10.1.tgz#612b78fabb0f2b6bce2d13ef9e44565d1fe01c6b"
+  integrity sha512-w8Xj6lZUtOYAquVYvdpZhb0GxXrZ+qpVfgj5LP2FwUbXE8fPrCmfu86FjwOiSphx/8PMbXXVldFLD2+RIXayyA==
+
 acorn-import-assertions@^1.7.6:
   version "1.8.0"
   resolved "https://registry.npmmirror.com/acorn-import-assertions/-/acorn-import-assertions-1.8.0.tgz"
@@ -2676,10 +2681,10 @@ anta-element-ui-components-next@^0.2.18, anta-element-ui-components-next@~0.2.18
     sortablejs "~1.14.0"
     vue-class-component "~8.0.0-0"
 
-anta-element-ui-schema-form@~0.0.29:
-  version "0.0.29"
-  resolved "https://registry.npmjs.org/anta-element-ui-schema-form/-/anta-element-ui-schema-form-0.0.29.tgz#cee1fc0f57bfa79b64e6dfca1088af771beadce6"
-  integrity sha512-RRjMzwI9xk6h+EMW5l/Lmw5IFKJIwTB91psk7NfIxrYhdcj2AY8Wert42fJia3CrJmqQhiy1yZswVzXliehY2w==
+anta-element-ui-schema-form@~0.0.32:
+  version "0.0.32"
+  resolved "https://registry.npmjs.org/anta-element-ui-schema-form/-/anta-element-ui-schema-form-0.0.32.tgz#559af2da56e25c7265f67c3f3a59202804df5f70"
+  integrity sha512-OOazkDpklzl6oiOMOsOodFDrlkfGUwoPwChiAsrWdA0huTJZxzK1GEITtdiFazGMShYHf6UZhug6Z5LhCW1kBw==
   dependencies:
     "@element-plus/icons-vue" "~2.0.9"
     anta-element-ui-components-next "^0.2.18"
@@ -4539,6 +4544,14 @@ file-entry-cache@^6.0.1:
   integrity sha512-7Gps/XWymbLk2QLYK4NzpMOrYjMhdIxXuIvy2QBsLE6ljuodKvdkWs/cpyJJ3CVIVpH0Oi1Hvg1ovbMzLdFBBg==
   dependencies:
     flat-cache "^3.0.4"
+
+file-loader@~6.2.0:
+  version "6.2.0"
+  resolved "https://registry.npmjs.org/file-loader/-/file-loader-6.2.0.tgz#baef7cf8e1840df325e4390b4484879480eebe4d"
+  integrity sha512-qo3glqyTa61Ytg4u73GultjHGjdRyig3tG6lPtyX/jOEJvHif9uB0/OCI2Kif6ctF3caQTW2G5gym21oAsI4pw==
+  dependencies:
+    loader-utils "^2.0.0"
+    schema-utils "^3.0.0"
 
 fill-range@^7.0.1:
   version "7.0.1"
@@ -7276,9 +7289,9 @@ reusify@^1.0.4:
   resolved "https://registry.npmmirror.com/reusify/-/reusify-1.0.4.tgz"
   integrity sha512-U9nH88a3fc/ekCF1l0/UP1IosiuIjyTh7hBvXVMHYgVcfGvt897Xguj2UOLDeI5BG2m7/uwyaLVT6fbtCwTyzw==
 
-rfdc@^1.3.0:
+rfdc@^1.3.0, rfdc@~1.3.0:
   version "1.3.0"
-  resolved "https://registry.npmmirror.com/rfdc/-/rfdc-1.3.0.tgz"
+  resolved "https://registry.npmjs.org/rfdc/-/rfdc-1.3.0.tgz#d0b7c441ab2720d05dc4cf26e01c89631d9da08b"
   integrity sha512-V2hovdzFbOi77/WajaSMXk2OLm+xNIeQdMMuB7icj7bk6zi2F8GGAxigcnDFpJHbNyNcgyJDiP+8nOrY5cZGrA==
 
 rimraf@3.0.2, rimraf@^3.0.2:

@@ -213,6 +213,7 @@ export default defineComponent({
 				</AtButton>,
 				<AtDialog
 					title="Swagger"
+					closeOnClickModal={false}
 					modelValue={visible.value}
 					onUpdate:modelValue={(e) => {
 						visible.value = e;
