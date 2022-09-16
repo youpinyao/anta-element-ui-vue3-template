@@ -5,12 +5,17 @@ import {
 } from 'anta-element-ui-schema-form';
 import { defineComponent, PropType, reactive, toRaw, ref } from 'vue';
 import clone from 'rfdc';
-import JsonDialog from '../JsonDialog';
+import JsonEditorDialog from '../JsonEditorDialog';
+
+type KeyProperty = AtSchemaFormTypes.Property & {
+	key?: string;
+};
 
 export type FormEditorModelItem = Pick<
 	AtSchemaFormTypes.Property,
 	'label' | 'component' | 'span' | 'disabled' | 'display'
 > & {
+	key?: string;
 	field?: string;
 	labelWidth: NonNullable<
 		AtSchemaFormTypes.Property['formItemProps']
@@ -19,12 +24,14 @@ export type FormEditorModelItem = Pick<
 };
 
 export function transformPropertiesToFormEditorModel(
-	properties?: AtSchemaFormTypes.JSONSchema['properties']
+	properties?: Record<string, KeyProperty>
 ) {
+	// console.log(1);
 	const items: FormEditorModelItem[] = [];
 
 	Object.entries(toRaw(properties) ?? {}).forEach(([field, item]) => {
 		items.push({
+			key: item.key,
 			field,
 			label: item.label,
 			component: item.component,
@@ -35,14 +42,15 @@ export function transformPropertiesToFormEditorModel(
 			property: item,
 		});
 	});
-
+	// return items;
 	return clone()(items);
 }
 
 export function transformFormEditorModelToProperties(
 	items?: FormEditorModelItem[]
 ) {
-	const properties: AtSchemaFormTypes.JSONSchema['properties'] = {};
+	// console.log(2);
+	const properties: Record<string, KeyProperty> = {};
 	const fields: string[] = [];
 
 	items?.forEach((item, index) => {
@@ -58,6 +66,7 @@ export function transformFormEditorModelToProperties(
 
 		properties[field] = {
 			...item.property,
+			key: item.key,
 			label: item.label,
 			component: item.component,
 			span: item.span,
@@ -67,9 +76,10 @@ export function transformFormEditorModelToProperties(
 				...item.property?.formItemProps,
 				labelWidth: item.labelWidth,
 			},
-		} as AtSchemaFormTypes.Property;
+		} as KeyProperty;
 	});
 
+	// return properties;
 	return clone()(toRaw(properties));
 }
 
@@ -95,12 +105,12 @@ export default defineComponent({
 					emit('update:modelValue', model.items);
 				}}
 			/>,
-			<JsonDialog
+			<JsonEditorDialog
 				visible={codeEditorIndex !== undefined}
 				onClose={closeJsonEditor}
 				modeValue={
 					codeEditorIndex !== undefined
-						? clone()(toRaw(props.modelValue?.[codeEditorIndex].property))
+						? clone()(toRaw(props.modelValue?.[codeEditorIndex]?.property))
 						: undefined
 				}
 				onUpdate:modelValue={(json) => {
@@ -130,7 +140,7 @@ export default defineComponent({
 	},
 	setup(props, ctx) {
 		const form = ref<InstanceType<typeof AtSchemaForm>>();
-		const codeEditorIndex = ref<number>();
+		const codeEditorIndex = ref<number | undefined>(0);
 		const closeJsonEditor = () => {
 			codeEditorIndex.value = undefined;
 		};
@@ -141,6 +151,9 @@ export default defineComponent({
 			properties: {
 				items: {
 					component: 'array',
+					props: {
+						sortable: true,
+					},
 					children: {
 						field: {
 							component: 'input',
@@ -172,12 +185,14 @@ export default defineComponent({
 								filterable: true,
 								placeholder: '组件',
 							},
-							options: components.map((item) => {
-								return {
-									label: item,
-									value: item,
-								};
-							}),
+							options: components
+								.map((item) => {
+									return {
+										label: item,
+										value: item,
+									};
+								})
+								.filter((item) => item.value !== 'button'),
 						},
 						labelWidth: {
 							component: 'input-number',
@@ -200,35 +215,6 @@ export default defineComponent({
 								style: {
 									width: '110px',
 								},
-							},
-						},
-						display: {
-							component: 'select',
-							type: String,
-							props: {
-								filterable: true,
-								placeholder: '是否显示',
-							},
-							style: {
-								width: '100px',
-							},
-							options: ['visible', 'hidden', 'none'].map((item) => {
-								return {
-									label:
-										{
-											visible: '显示',
-											hidden: '隐藏',
-											none: '不渲染',
-										}[item] ?? '',
-									value: item,
-								};
-							}),
-						},
-						disabled: {
-							component: 'checkbox',
-							type: Boolean,
-							option: {
-								label: 'disabled',
 							},
 						},
 						property: {

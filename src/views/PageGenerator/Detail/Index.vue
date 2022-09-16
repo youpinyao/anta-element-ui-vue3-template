@@ -71,7 +71,7 @@
 			</EditArea>
 		</Block>
 	</Container>
-	<SearchEditor
+	<SearchEditorDialog
 		:visible="showSearchEditor"
 		:schema="pageConfig.schema?.search"
 		@close="handleCloseSearchEdit"
@@ -107,7 +107,7 @@ import { swaggerGenerateTransform } from './swaggerGenerateTransform';
 import { ReadSwaggerPageResult } from './SwaggerButton/readSwaggerPage';
 import EditArea from './EditArea/Index.vue';
 import { generateDataSource } from './generateDataSource';
-import SearchEditor from './SearchEditor/Index';
+import SearchEditorDialog from './SearchEditorDialog/Index';
 import { PageGenerator } from '../typing';
 
 const router = useRouter();

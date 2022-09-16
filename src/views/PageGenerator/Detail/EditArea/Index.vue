@@ -1,9 +1,9 @@
 <template>
 	<div class="edit-area">
 		<slot />
-		<div class="edit-area__mask">
+		<div class="edit-area__mask" @click="handleEdit">
 			<div class="edit-area__mask__buttons">
-				<AtButton @click="handleEdit">编辑</AtButton>
+				<AtButton>编辑</AtButton>
 			</div>
 		</div>
 	</div>
@@ -39,6 +39,7 @@ const handleEdit = () => {
 		justify-content: center;
 		width: calc(100% + 8px);
 		height: calc(100% + 8px);
+		cursor: pointer;
 		visibility: hidden;
 		background-color: rgba($--color-black, 0.1);
 		border-radius: $--border-radius-small;

@@ -4,6 +4,7 @@ import {
 	AtPopconfirm,
 } from 'anta-element-ui-components-next';
 import { ArrayType } from 'anta-element-ui-components-next/src/utils/arrayType';
+import { RecordType } from 'anta-element-ui-components-next/src/utils/recordType';
 import { PropsType } from 'anta-element-ui-components-next/src/utils/propsType';
 import { AtSchemaFormTypes } from 'anta-element-ui-schema-form';
 import { AtSchemaTableTypes } from 'anta-element-ui-schema-table';
@@ -48,7 +49,6 @@ export namespace PageGenerator {
 			| FunctionButtonTriggerPopconfirm;
 	}
 
-	type RecordType<T> = T extends Record<any, infer U> ? U : T;
 	export interface JSONSchema {
 		title?: string;
 		search?: {

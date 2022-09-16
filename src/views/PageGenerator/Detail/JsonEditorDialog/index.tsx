@@ -25,8 +25,10 @@ export default defineComponent({
 		return () => {
 			return (
 				<AtDialog
-					title="JSON配置编辑"
+					width={1000}
+					appendToBody={true}
 					closeOnClickModal={false}
+					title="JSON配置编辑"
 					modelValue={props.visible}
 					onUpdate:modelValue={(visible) => {
 						if (visible === false) {
@@ -59,20 +61,29 @@ export default defineComponent({
 						},
 					}}
 				>
-					<JsonEditor
-						modelValue={json.value}
-						onChange={(str) => {
-							try {
-								JSON.parse(str ?? '');
-								valid.value = true;
-							} catch (error) {
-								valid.value = false;
-							}
+					<div
+						style={{
+							display: 'flex',
 						}}
-						onUpdate:modelValue={(e) => {
-							json.value = e;
-						}}
-					/>
+					>
+						<div style={{ flex: 1 }}>
+							<JsonEditor
+								modelValue={json.value}
+								onChange={(str) => {
+									try {
+										JSON.parse(str ?? '');
+										valid.value = true;
+									} catch (error) {
+										valid.value = false;
+									}
+								}}
+								onUpdate:modelValue={(e) => {
+									json.value = e;
+								}}
+							/>
+						</div>
+						<div style={{ flex: 1 }}></div>
+					</div>
 				</AtDialog>
 			);
 		};

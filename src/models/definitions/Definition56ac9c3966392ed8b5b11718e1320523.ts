@@ -1,4 +1,4 @@
-// 后台页面配置列表
+// 后台页面配置获取明细
 export type Definition56ac9c3966392ed8b5b11718e1320523 = {
 	// 别名
 	alias?: string;

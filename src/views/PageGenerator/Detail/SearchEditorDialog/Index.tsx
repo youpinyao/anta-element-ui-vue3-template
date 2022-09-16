@@ -1,7 +1,15 @@
 import { AtButton, AtDialog } from 'anta-element-ui-components-next';
 import { AtSchemaForm, AtSchemaFormTypes } from 'anta-element-ui-schema-form';
 import clone from 'rfdc';
-import { defineComponent, PropType, reactive, ref, toRaw, watch } from 'vue';
+import {
+	defineComponent,
+	nextTick,
+	PropType,
+	reactive,
+	ref,
+	toRaw,
+	watch,
+} from 'vue';
 import { PageGenerator } from '../../typing';
 import FormEditor, {
 	transformFormEditorModelToProperties,
@@ -77,9 +85,10 @@ export default defineComponent({
 
 			return (
 				<AtDialog
-					title="搜索条件编辑"
 					closeOnClickModal={false}
-					width={1000}
+					appendToBody={true}
+					title="搜索条件编辑"
+					width={800}
 					modelValue={visible}
 					onUpdate:modelValue={(e) => {
 						emit('close');
