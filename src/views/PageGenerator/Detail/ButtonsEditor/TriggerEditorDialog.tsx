@@ -2,24 +2,25 @@ import JsonEditor, { JsonType } from '@/components/JsonEditor';
 import { AtButton, AtDialog } from 'anta-element-ui-components-next';
 
 import { defineComponent, PropType, ref, watch } from 'vue';
+import { PageGenerator } from '../../typing';
 
 export default defineComponent({
 	props: {
 		visible: Boolean,
-		modelValue: Object as PropType<JsonType>,
+		modelValue: Object as PropType<PageGenerator.FunctionButton['trigger']>,
 	},
 	emits: {
 		close: () => true,
-		'update:modelValue': (json?: JsonType) => true,
+		'update:modelValue': (trigger?: PageGenerator.FunctionButton['trigger']) =>
+			true,
 	},
 	setup(props, ctx) {
-		const json = ref<JsonType>();
-		const valid = ref(true);
+		const trigger = ref<PageGenerator.FunctionButton['trigger']>();
 
 		watch(
 			() => props.modelValue,
 			() => {
-				json.value = props.modelValue;
+				trigger.value = props.modelValue;
 			}
 		);
 		return () => {
@@ -47,9 +48,8 @@ export default defineComponent({
 										取消
 									</AtButton>
 									<AtButton
-										disabled={!valid.value}
 										onClick={() => {
-											ctx.emit('update:modelValue', json.value);
+											ctx.emit('update:modelValue', trigger.value);
 											ctx.emit('close');
 										}}
 										type="primary"
@@ -60,31 +60,7 @@ export default defineComponent({
 							);
 						},
 					}}
-				>
-					<div
-						style={{
-							display: 'flex',
-						}}
-					>
-						<div style={{ flex: 1 }}>
-							<JsonEditor
-								modelValue={json.value}
-								onChange={(str) => {
-									try {
-										JSON.parse(str ?? '');
-										valid.value = true;
-									} catch (error) {
-										valid.value = false;
-									}
-								}}
-								onUpdate:modelValue={(e) => {
-									json.value = e;
-								}}
-							/>
-						</div>
-						<div style={{ flex: 1 }}></div>
-					</div>
-				</AtDialog>
+				></AtDialog>
 			);
 		};
 	},

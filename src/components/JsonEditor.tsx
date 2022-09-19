@@ -1,6 +1,8 @@
 import { AtCodeEditor } from 'anta-element-ui-components-next';
 import { defineComponent, ref, watchEffect, watch, PropType } from 'vue';
 
+import 'ace-builds/src-noconflict/ext-language_tools.js';
+
 export type JsonType = Record<string, any> | any[];
 
 export default defineComponent({
@@ -39,6 +41,17 @@ export default defineComponent({
 				immediate: true,
 			}
 		);
+
+		watch(editor, () => {
+			editor.value?.editor?.setOptions({
+				enableBasicAutocompletion: true,
+				enableSnippets: true,
+				enableLiveAutocompletion: true,
+			});
+			// 自定义自动补全
+			// https://blog.csdn.net/qq_38950073/article/details/125855637
+			// editor.value?.editor?.completers
+		});
 
 		return () => {
 			return (

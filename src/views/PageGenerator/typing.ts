@@ -49,16 +49,23 @@ export namespace PageGenerator {
 			| FunctionButtonTriggerPopconfirm;
 	}
 
+	export type Property = RecordType<
+		AtSchemaFormTypes.JSONSchema['properties']
+	> & {
+		defaultValue?: any;
+	};
+	export type Properties = Record<string, Property>;
+
+	export type TableColumn = ArrayType<
+		AtSchemaTableTypes.JSONSchema['columns']
+	> & {
+		buttons?: FunctionButton[];
+	};
 	export interface JSONSchema {
 		title?: string;
 		search?: {
 			form?: Omit<AtSchemaFormTypes.JSONSchema, 'properties'> & {
-				properties: Record<
-					string,
-					RecordType<AtSchemaFormTypes.JSONSchema['properties']> & {
-						defaultValue?: any;
-					}
-				>;
+				properties: Properties;
 			};
 			resetButton?: boolean;
 			searchButton?: boolean;
@@ -69,9 +76,7 @@ export namespace PageGenerator {
 			method?: Methods;
 			selection?: boolean;
 			schema?: Omit<AtSchemaTableTypes.JSONSchema, 'columns'> & {
-				columns: (ArrayType<AtSchemaTableTypes.JSONSchema['columns']> & {
-					buttons?: FunctionButton[];
-				})[];
+				columns: TableColumn[];
 			};
 		};
 		pagination?: boolean;

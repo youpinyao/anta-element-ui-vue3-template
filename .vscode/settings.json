@@ -2,5 +2,6 @@
 	"stylelint.validate": ["css", "less", "scss", "postcss", "vue"],
 	"editor.codeActionsOnSave": {
 		"source.fixAll.stylelint": false
-	}
+	},
+	"typescript.tsdk": "node_modules/typescript/lib"
 }

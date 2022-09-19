@@ -77,6 +77,15 @@
 		@close="handleCloseSearchEdit"
 		@change="handleSaveSearchEdit"
 	/>
+	<TableHeaderEditorDialog
+		:visible="showTableHeaderEditor"
+		:schema="{
+			title: pageConfig.schema?.title,
+			buttons: pageConfig.schema?.buttons,
+		}"
+		@close="handleCloseTableHeaderEdit"
+		@change="handleSaveTableHeaderEdit"
+	/>
 </template>
 
 <script lang="ts" setup>
@@ -108,6 +117,7 @@ import { ReadSwaggerPageResult } from './SwaggerButton/readSwaggerPage';
 import EditArea from './EditArea/Index.vue';
 import { generateDataSource } from './generateDataSource';
 import SearchEditorDialog from './SearchEditorDialog/Index';
+import TableHeaderEditorDialog from './TableHeaderEditorDialog/Index';
 import { PageGenerator } from '../typing';
 
 const router = useRouter();
@@ -142,9 +152,9 @@ const dataSource = computed<any[]>(() =>
 	generateDataSource(tableSchema.value.columns)
 );
 
-const showSearchEditor = ref(true);
-const showTableEditor = ref(false);
+const showSearchEditor = ref(false);
 const showTableHeaderEditor = ref(false);
+const showTableEditor = ref(false);
 
 if (route.params.id && route.params.id !== 'add') {
 	run({
@@ -187,11 +197,26 @@ const handleSaveSearchEdit = (model: PageGenerator.JSONSchema['search']) => {
 	}
 	pageConfig.schema.search = model;
 };
-const handleTableEdit = () => {
-	showTableEditor.value = true;
-};
+
 const handleTableHeaderEdit = () => {
 	showTableHeaderEditor.value = true;
+};
+const handleCloseTableHeaderEdit = () => {
+	showTableHeaderEditor.value = false;
+};
+const handleSaveTableHeaderEdit = ({
+	title,
+	buttons,
+}: Pick<PageGenerator.JSONSchema, 'title' | 'buttons'>) => {
+	if (!pageConfig.schema) {
+		pageConfig.schema = {};
+	}
+	pageConfig.schema.title = title;
+	pageConfig.schema.buttons = buttons;
+};
+
+const handleTableEdit = () => {
+	showTableEditor.value = true;
 };
 const handlePreview = () => {};
 </script>

@@ -10,12 +10,8 @@ import {
 	toRaw,
 	watch,
 } from 'vue';
+import ButtonsEditor from '../ButtonsEditor/Index';
 import { PageGenerator } from '../../typing';
-import FormEditor, {
-	FormEditorModelItem,
-	transformFormEditorModelToProperties,
-	transformPropertiesToFormEditorModel,
-} from '../FormEditor/Index';
 
 export default defineComponent({
 	props: {
@@ -23,33 +19,35 @@ export default defineComponent({
 			type: Boolean,
 		},
 		schema: {
-			type: Object as PropType<PageGenerator.JSONSchema['search']>,
+			type: Object as PropType<
+				Pick<PageGenerator.JSONSchema, 'title' | 'buttons'>
+			>,
 		},
 	},
 	emits: {
-		change: (schema: PageGenerator.JSONSchema['search']) => true,
+		change: (schema: Pick<PageGenerator.JSONSchema, 'title' | 'buttons'>) =>
+			true,
 		close: () => true,
 	},
 	setup(props, ctx) {
 		const { emit } = ctx;
 		const loading = ref(true);
-		const formEditorModelItems = ref<FormEditorModelItem[]>();
-		const model = reactive<NonNullable<PageGenerator.JSONSchema['search']>>({});
-		const formEditor = ref<InstanceType<typeof FormEditor>>();
+		const model = reactive<Pick<PageGenerator.JSONSchema, 'title' | 'buttons'>>(
+			{}
+		);
+		const buttonsEditor = ref<InstanceType<typeof ButtonsEditor>>();
+		const formEditor = ref<InstanceType<typeof AtSchemaForm>>();
 
 		const formSchema: AtSchemaFormTypes.JSONSchema = {
 			properties: {
-				searchButton: {
-					label: '显示查询按钮',
-					component: 'switch',
-					type: Boolean,
-					span: 12,
-				},
-				resetButton: {
-					label: '显示重置按钮',
-					component: 'switch',
-					type: Boolean,
-					span: 12,
+				title: {
+					label: '标题',
+					component: 'input',
+					type: String,
+					formItemProps: {
+						labelWidth: 100,
+						required: true,
+					},
 				},
 			},
 		};
@@ -59,15 +57,9 @@ export default defineComponent({
 		};
 		const handleSave = async () => {
 			try {
-				await formEditor.value?.form?.form?.validate();
-				if (!model.form) {
-					model.form = {
-						properties: {},
-					};
-				}
-				model.form!.properties = transformFormEditorModelToProperties(
-					formEditorModelItems.value
-				);
+				await formEditor.value?.form?.validate();
+				await buttonsEditor.value?.form?.form?.validate();
+
 				emit('change', clone()(toRaw(model)));
 				emit('close');
 			} catch (error) {
@@ -81,12 +73,8 @@ export default defineComponent({
 				if (props.visible && props.schema) {
 					setTimeout(
 						() => {
-							model.resetButton = props.schema?.resetButton;
-							model.searchButton = props.schema?.searchButton;
-							model.form = props.schema?.form;
-							formEditorModelItems.value = transformPropertiesToFormEditorModel(
-								model.form?.properties
-							);
+							model.title = props.schema?.title;
+							model.buttons = clone()(toRaw(props.schema?.buttons));
 							nextTick(() => {
 								loading.value = false;
 							});
@@ -106,7 +94,7 @@ export default defineComponent({
 				<AtDialog
 					closeOnClickModal={false}
 					appendToBody={true}
-					title="搜索条件编辑"
+					title="表格头部编辑"
 					width={800}
 					modelValue={visible}
 					onUpdate:modelValue={(e) => {
@@ -145,14 +133,14 @@ export default defineComponent({
 							display: loading.value ? 'none' : '',
 						}}
 					>
-						<FormEditor
-							ref={formEditor}
-							modelValue={formEditorModelItems.value}
-							onUpdate:modelValue={(items) => {
-								formEditorModelItems.value = items;
+						<AtSchemaForm ref={formEditor} schema={formSchema} model={model} />
+						<ButtonsEditor
+							ref={buttonsEditor}
+							modelValue={model.buttons}
+							onUpdate:modelValue={(buttons) => {
+								model.buttons = buttons;
 							}}
 						/>
-						<AtSchemaForm schema={formSchema} model={model} />
 					</div>
 				</AtDialog>
 			);

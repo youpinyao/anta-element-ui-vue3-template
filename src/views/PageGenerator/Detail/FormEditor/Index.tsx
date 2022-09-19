@@ -5,7 +5,9 @@ import {
 } from 'anta-element-ui-schema-form';
 import { defineComponent, PropType, reactive, toRaw, ref } from 'vue';
 import clone from 'rfdc';
+import * as uuid from 'uuid';
 import JsonEditorDialog from '../JsonEditorDialog';
+import { JsonType } from '@/components/JsonEditor';
 
 type KeyProperty = AtSchemaFormTypes.Property & {
 	key?: string;
@@ -17,39 +19,28 @@ export type FormEditorModelItem = Pick<
 > & {
 	key?: string;
 	field?: string;
-	labelWidth: NonNullable<
-		AtSchemaFormTypes.Property['formItemProps']
-	>['labelWidth'];
 	property?: AtSchemaFormTypes.Property;
 };
 
 export function transformPropertiesToFormEditorModel(
 	properties?: Record<string, KeyProperty>
 ) {
-	// console.log(1);
 	const items: FormEditorModelItem[] = [];
 
 	Object.entries(toRaw(properties) ?? {}).forEach(([field, item]) => {
 		items.push({
-			key: item.key,
+			...item,
+			key: item.key ?? field,
 			field,
-			label: item.label,
-			component: item.component,
-			span: item.span,
-			display: item.display,
-			disabled: item.disabled,
-			labelWidth: item.formItemProps?.labelWidth as number,
-			property: item,
 		});
 	});
-	// return items;
-	return clone()(items);
+
+	return clone()(toRaw(items));
 }
 
 export function transformFormEditorModelToProperties(
 	items?: FormEditorModelItem[]
 ) {
-	// console.log(2);
 	const properties: Record<string, KeyProperty> = {};
 	const fields: string[] = [];
 
@@ -65,17 +56,7 @@ export function transformFormEditorModelToProperties(
 		fields.push(field);
 
 		properties[field] = {
-			...item.property,
-			key: item.key,
-			label: item.label,
-			component: item.component,
-			span: item.span,
-			display: item.display,
-			disabled: item.disabled,
-			formItemProps: {
-				...item.property?.formItemProps,
-				labelWidth: item.labelWidth,
-			},
+			...item,
 		} as KeyProperty;
 	});
 
@@ -95,42 +76,30 @@ export default defineComponent({
 	render() {
 		const props = this.$props;
 		const emit = this.$emit;
-		const { formSchema, codeEditorIndex, closeJsonEditor } = this;
+		const { formSchema, codeEditContent, codeEditIndex, closeJsonEditor } =
+			this;
 		return [
 			<AtSchemaForm
 				ref="form"
 				schema={formSchema}
 				model={{ items: props.modelValue }}
-				onChange={(model) => {
+				onChange={(keys, value, model) => {
 					emit('update:modelValue', model.items);
 				}}
 			/>,
 			<JsonEditorDialog
-				visible={codeEditorIndex !== undefined}
+				visible={codeEditContent !== undefined}
 				onClose={closeJsonEditor}
-				modeValue={
-					codeEditorIndex !== undefined
-						? clone()(toRaw(props.modelValue?.[codeEditorIndex]?.property))
-						: undefined
-				}
+				modelValue={codeEditContent}
 				onUpdate:modelValue={(json) => {
-					if (codeEditorIndex !== undefined && props.modelValue) {
-						props.modelValue[codeEditorIndex].property =
-							json as AtSchemaFormTypes.Property;
-
+					if (codeEditIndex !== undefined && props.modelValue) {
 						emit(
 							'update:modelValue',
-							props.modelValue.map((item) => {
-								return {
-									...item,
-									label: item?.property?.label,
-									component: item?.property?.component,
-									span: item?.property?.span,
-									display: item?.property?.display,
-									disabled: item?.property?.disabled,
-									labelWidth: item?.property?.formItemProps
-										?.labelWidth as number,
-								} as FormEditorModelItem;
+							props.modelValue.map((item, index) => {
+								if (json && index === codeEditIndex) {
+									return json as KeyProperty;
+								}
+								return item;
 							})
 						);
 					}
@@ -140,12 +109,13 @@ export default defineComponent({
 	},
 	setup(props, ctx) {
 		const form = ref<InstanceType<typeof AtSchemaForm>>();
-		const codeEditorIndex = ref<number | undefined>(0);
+		const codeEditContent = ref<JsonType | undefined>();
+		const codeEditIndex = ref<number>();
 		const closeJsonEditor = () => {
-			codeEditorIndex.value = undefined;
+			codeEditContent.value = undefined;
 		};
-		const openJsonEditor = (index?: number) => {
-			codeEditorIndex.value = index;
+		const openJsonEditor = (json?: JsonType) => {
+			codeEditContent.value = json;
 		};
 		const formSchema: AtSchemaFormTypes.JSONSchema = {
 			properties: {
@@ -194,17 +164,6 @@ export default defineComponent({
 								})
 								.filter((item) => item.value !== 'button'),
 						},
-						labelWidth: {
-							component: 'input-number',
-							type: Number,
-							props: {
-								placeholder: '名称宽度',
-								min: 0,
-								style: {
-									width: '110px',
-								},
-							},
-						},
 						span: {
 							component: 'input-number',
 							type: Number,
@@ -225,7 +184,8 @@ export default defineComponent({
 								},
 								type: 'primary',
 								onClick(e, index) {
-									openJsonEditor(index);
+									openJsonEditor(props.modelValue?.[index ?? 0]);
+									codeEditIndex.value = index;
 								},
 							},
 						},
@@ -236,7 +196,8 @@ export default defineComponent({
 		return {
 			form,
 			formSchema,
-			codeEditorIndex,
+			codeEditContent,
+			codeEditIndex,
 			closeJsonEditor,
 		};
 	},
