@@ -25,7 +25,7 @@ export default defineComponent({
 		return () => {
 			return (
 				<AtDialog
-					width={1000}
+					width={800}
 					appendToBody={true}
 					closeOnClickModal={false}
 					title="JSON配置编辑"

@@ -153,7 +153,7 @@ const dataSource = computed<any[]>(() =>
 );
 
 const showSearchEditor = ref(false);
-const showTableHeaderEditor = ref(false);
+const showTableHeaderEditor = ref(true);
 const showTableEditor = ref(false);
 
 if (route.params.id && route.params.id !== 'add') {

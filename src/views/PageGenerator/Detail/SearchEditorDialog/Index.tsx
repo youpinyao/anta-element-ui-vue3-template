@@ -33,7 +33,7 @@ export default defineComponent({
 	setup(props, ctx) {
 		const { emit } = ctx;
 		const loading = ref(true);
-		const formEditorModelItems = ref<FormEditorModelItem[]>();
+		const formEditorModel = ref<FormEditorModelItem[]>();
 		const model = reactive<NonNullable<PageGenerator.JSONSchema['search']>>({});
 		const formEditor = ref<InstanceType<typeof FormEditor>>();
 
@@ -66,7 +66,7 @@ export default defineComponent({
 					};
 				}
 				model.form!.properties = transformFormEditorModelToProperties(
-					formEditorModelItems.value
+					formEditorModel.value
 				);
 				emit('change', clone()(toRaw(model)));
 				emit('close');
@@ -84,7 +84,7 @@ export default defineComponent({
 							model.resetButton = props.schema?.resetButton;
 							model.searchButton = props.schema?.searchButton;
 							model.form = props.schema?.form;
-							formEditorModelItems.value = transformPropertiesToFormEditorModel(
+							formEditorModel.value = transformPropertiesToFormEditorModel(
 								model.form?.properties
 							);
 							nextTick(() => {
@@ -107,7 +107,6 @@ export default defineComponent({
 					closeOnClickModal={false}
 					appendToBody={true}
 					title="搜索条件编辑"
-					width={800}
 					modelValue={visible}
 					onUpdate:modelValue={(e) => {
 						emit('close');
@@ -147,9 +146,9 @@ export default defineComponent({
 					>
 						<FormEditor
 							ref={formEditor}
-							modelValue={formEditorModelItems.value}
+							modelValue={formEditorModel.value}
 							onUpdate:modelValue={(items) => {
-								formEditorModelItems.value = items;
+								formEditorModel.value = items;
 							}}
 						/>
 						<AtSchemaForm schema={formSchema} model={model} />

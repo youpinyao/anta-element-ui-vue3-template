@@ -94,8 +94,7 @@ export default defineComponent({
 				<AtDialog
 					closeOnClickModal={false}
 					appendToBody={true}
-					title="表格头部编辑"
-					width={800}
+					title="表格顶部编辑"
 					modelValue={visible}
 					onUpdate:modelValue={(e) => {
 						emit('close');

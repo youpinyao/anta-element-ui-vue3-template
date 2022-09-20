@@ -9,11 +9,19 @@ import { PropsType } from 'anta-element-ui-components-next/src/utils/propsType';
 import { AtSchemaFormTypes } from 'anta-element-ui-schema-form';
 import { AtSchemaTableTypes } from 'anta-element-ui-schema-table';
 
+export const functionButtonTriggerTypes = [
+	'jump',
+	'dialog',
+	'popconfirm',
+] as const;
+
+export const methods = ['POST', 'GET', 'PUT', 'PATCH', 'DELETE'] as const;
+
 export namespace PageGenerator {
 	export interface FunctionButtonTrigger {
-		type: 'jump' | 'dialog' | 'popconfirm';
+		type: typeof functionButtonTriggerTypes[number];
 	}
-	export type Methods = 'POST' | 'GET' | 'PUT' | 'PATCH' | 'DELETE';
+	export type Methods = typeof methods[number];
 	export interface FunctionButtonTriggerJump extends FunctionButtonTrigger {
 		type: 'jump';
 		path: string;
@@ -29,8 +37,8 @@ export namespace PageGenerator {
 			};
 			schema: AtSchemaFormTypes.JSONSchema;
 		};
-		cancelText?: string;
-		okText?: string;
+		cancelText?: string | boolean;
+		okText?: string | boolean;
 		dialogProps: PropsType<typeof AtDialog>;
 	}
 	export interface FunctionButtonTriggerPopconfirm

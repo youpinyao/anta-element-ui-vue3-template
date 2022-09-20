@@ -76,6 +76,17 @@ export default defineComponent({
 					component: 'array',
 					props: {
 						sortable: true,
+						handleAdd() {
+							props.modelValue!.push({
+								title: '按钮',
+								type: 'primary',
+								trigger: {
+									type: 'jump',
+									path: '',
+								},
+							});
+							ctx.emit('update:modelValue', props.modelValue ?? []);
+						},
 					},
 					children: {
 						title: {
@@ -104,7 +115,6 @@ export default defineComponent({
 								'warning',
 								'info',
 								'danger',
-								'text',
 							].map((type) => {
 								return {
 									label: type,
