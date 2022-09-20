@@ -10,7 +10,9 @@ export const generateDataSource = (
 		.forEach(() => {
 			const item: Record<string, any> = {};
 			columns.forEach((column) => {
-				item[column.prop ?? '_'] = 'Empty';
+				if (column.prop) {
+					item[column.prop] = 'Empty';
+				}
 			});
 			items.push(item);
 		});

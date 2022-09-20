@@ -63,7 +63,6 @@
 			</EditArea>
 			<EditArea @edit="handleTableEdit">
 				<Table :schema="tableSchema" :dataSource="dataSource"></Table>
-
 				<AtPagination
 					:total="100"
 					v-show="pageConfig.schema?.pagination"
@@ -85,6 +84,15 @@
 		}"
 		@close="handleCloseTableHeaderEdit"
 		@change="handleSaveTableHeaderEdit"
+	/>
+	<TableEditorDialog
+		:visible="showTableEditor"
+		:schema="{
+			pagination: pageConfig.schema?.pagination,
+			table: pageConfig.schema?.table,
+		}"
+		@close="handleCloseTableEdit"
+		@change="handleSaveTableEdit"
 	/>
 </template>
 
@@ -118,6 +126,7 @@ import EditArea from './EditArea/Index.vue';
 import { generateDataSource } from './generateDataSource';
 import SearchEditorDialog from './SearchEditorDialog/Index';
 import TableHeaderEditorDialog from './TableHeaderEditorDialog/Index';
+import TableEditorDialog from './TableEditorDialog/Index';
 import { PageGenerator } from '../typing';
 
 const router = useRouter();
@@ -140,12 +149,22 @@ const searchModel = reactive({});
 const hasSearch = computed(
 	() => !!Object.keys(pageConfig.schema?.search?.form?.properties ?? {}).length
 );
-
 const tableSchema = computed<AtSchemaTableTypes.JSONSchema>(() => {
 	const schema = pageConfig.schema?.table?.schema || {
 		columns: [],
 	};
-	return schema;
+	const columns = [...(schema.columns ?? [])];
+
+	if (pageConfig.schema?.table?.selection) {
+		columns.unshift({
+			type: 'selection',
+			width: 40,
+		});
+	}
+	return {
+		...schema,
+		columns,
+	};
 });
 const hasTable = computed(() => !!tableSchema.value.columns.length);
 const dataSource = computed<any[]>(() =>
@@ -153,7 +172,7 @@ const dataSource = computed<any[]>(() =>
 );
 
 const showSearchEditor = ref(false);
-const showTableHeaderEditor = ref(true);
+const showTableHeaderEditor = ref(false);
 const showTableEditor = ref(false);
 
 if (route.params.id && route.params.id !== 'add') {
@@ -217,6 +236,19 @@ const handleSaveTableHeaderEdit = ({
 
 const handleTableEdit = () => {
 	showTableEditor.value = true;
+};
+const handleCloseTableEdit = () => {
+	showTableEditor.value = false;
+};
+const handleSaveTableEdit = ({
+	table,
+	pagination,
+}: Pick<PageGenerator.JSONSchema, 'table' | 'pagination'>) => {
+	if (!pageConfig.schema) {
+		pageConfig.schema = {};
+	}
+	pageConfig.schema.table = table;
+	pageConfig.schema.pagination = pagination;
 };
 const handlePreview = () => {};
 </script>

@@ -77,7 +77,8 @@ export default defineComponent({
 					props: {
 						sortable: true,
 						handleAdd() {
-							props.modelValue!.push({
+							const items = props.modelValue ?? [];
+							items.push({
 								title: '按钮',
 								type: 'primary',
 								trigger: {
@@ -85,7 +86,7 @@ export default defineComponent({
 									path: '',
 								},
 							});
-							ctx.emit('update:modelValue', props.modelValue ?? []);
+							ctx.emit('update:modelValue', items);
 						},
 					},
 					children: {

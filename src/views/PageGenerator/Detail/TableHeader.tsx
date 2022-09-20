@@ -2,6 +2,7 @@ import { AtTitle } from 'anta-element-ui-components-next';
 import { defineComponent, PropType } from 'vue';
 import { PageGenerator } from '../typing';
 import FunctionButton from './FunctionButton';
+import Placeholder from './Placeholder.vue';
 
 export default defineComponent({
 	props: {
@@ -15,6 +16,9 @@ export default defineComponent({
 	setup(props, ctx) {
 		return () => {
 			const { title, buttons } = props;
+			if (!title && !buttons?.length) {
+				return <Placeholder placeholder="添加标题" />;
+			}
 			return (
 				<div class="at-table-header">
 					<AtTitle border={false}>{title}</AtTitle>

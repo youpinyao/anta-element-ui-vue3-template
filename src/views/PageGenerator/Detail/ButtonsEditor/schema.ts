@@ -38,7 +38,7 @@ export const dialogFormProperties: ({
 		},
 	},
 	method: {
-		component: 'select',
+		component: 'radio-button',
 		label: '提交方法',
 		formItemProps: {
 			required: true,
@@ -59,12 +59,11 @@ export const dialogFormProperties: ({
 		},
 	},
 	dataMethod: {
-		component: 'select',
+		component: 'radio-button',
 		label: '预填数据方法',
 		formItemProps: {
 			labelWidth: 100,
 		},
-
 		options: methods.map((item) => {
 			return {
 				value: item,
@@ -116,7 +115,7 @@ export const popconfirmFormProperties: () => AtSchemaFormTypes.JSONSchema['prope
 			},
 		},
 		method: {
-			component: 'select',
+			component: 'radio-button',
 			label: '提交方法',
 			formItemProps: {
 				required: true,

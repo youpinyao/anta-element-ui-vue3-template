@@ -20,16 +20,19 @@ export default defineComponent({
 	},
 	setup(props, ctx) {
 		return () => {
-			const { schema: _schema, dataSource } = props;
+			const { schema, dataSource } = props;
 
-			const schema: typeof _schema = {
-				...(_schema as unknown as any),
+			const tableSchema: typeof schema = {
+				...(schema as unknown as any),
 				columns: (
-					_schema as NonNullable<
+					schema as NonNullable<
 						NonNullable<PageGenerator.JSONSchema['table']>['schema']
 					>
 				).columns.map((item) => {
-					if (item.buttons) {
+					if (item.type === 'selection') {
+						return item;
+					}
+					if (item.buttons && item.buttons.length) {
 						return {
 							...item,
 							render(row) {
@@ -52,7 +55,7 @@ export default defineComponent({
 				}),
 			};
 
-			return <AtSchemaTable schema={schema} dataSource={dataSource} />;
+			return <AtSchemaTable schema={tableSchema} dataSource={dataSource} />;
 		};
 	},
 });

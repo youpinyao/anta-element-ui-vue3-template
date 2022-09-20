@@ -6,30 +6,32 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, PropType } from 'vue';
 
 export default defineComponent({
 	name: 'Placeholder',
-});
-</script>
-
-<script lang="ts" setup>
-const props = defineProps({
-	placeholder: {
-		type: String,
-		default: '占位',
+	props: {
+		placeholder: {
+			type: String as PropType<string>,
+			default: '占位',
+		},
+	},
+	emits: {
+		click(e: MouseEvent) {
+			e;
+			return true;
+		},
+	},
+	setup(props, ctx) {
+		const handleClick = (e: MouseEvent) => {
+			ctx.emit('click', e);
+		};
+		return {
+			handleClick,
+			props,
+		};
 	},
 });
-const emit = defineEmits({
-	click(e: MouseEvent) {
-		e;
-		return true;
-	},
-});
-
-const handleClick = (e: MouseEvent) => {
-	emit('click', e);
-};
 </script>
 
 <style lang="scss" scoped>

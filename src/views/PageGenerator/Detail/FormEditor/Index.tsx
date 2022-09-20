@@ -15,7 +15,7 @@ type KeyProperty = AtSchemaFormTypes.Property & {
 
 export type FormEditorModelItem = Pick<
 	AtSchemaFormTypes.Property,
-	'label' | 'component' | 'span' | 'disabled' | 'display'
+	'label' | 'component' | 'span'
 > & {
 	key?: string;
 	field?: string;

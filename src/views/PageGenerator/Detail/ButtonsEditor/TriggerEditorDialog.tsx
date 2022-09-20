@@ -3,17 +3,14 @@ import { AtButton, AtDialog } from 'anta-element-ui-components-next';
 import { AtSchemaForm, AtSchemaFormTypes } from 'anta-element-ui-schema-form';
 
 import clone from 'rfdc';
-import { defineComponent, PropType, reactive, ref, toRaw, watch } from 'vue';
+import { defineComponent, PropType, reactive, ref, watch } from 'vue';
+import { PageGenerator } from '../../typing';
 import {
-	functionButtonTriggerTypes,
-	methods,
-	PageGenerator,
-} from '../../typing';
-import FormEditor, {
 	FormEditorModelItem,
 	transformFormEditorModelToProperties,
 	transformPropertiesToFormEditorModel,
 } from '../FormEditor/Index';
+import FormEditorDialog from '../FormEditorDialog/Index';
 import {
 	baseFormProperties,
 	dialogFormProperties,
@@ -33,7 +30,6 @@ export default defineComponent({
 	},
 	setup(props, ctx) {
 		const formEditorVisible = ref(false);
-		const formEditor = ref<InstanceType<typeof FormEditor>>();
 		const formEditorModel = ref<FormEditorModelItem[]>();
 		const form = ref<InstanceType<typeof AtSchemaForm>>();
 		const formModel = reactive<AtSchemaFormTypes.Model>({});
@@ -225,67 +221,33 @@ export default defineComponent({
 						model={formModel}
 					/>
 				</AtDialog>,
-				<AtDialog
-					appendToBody={true}
-					closeOnClickModal={false}
-					title="表单编辑"
-					modelValue={formEditorVisible.value}
-					onUpdate:modelValue={(visible) => {
+				<FormEditorDialog
+					visible={formEditorVisible.value}
+					onClose={() => {
 						formEditorVisible.value = false;
 					}}
-					vSlots={{
-						footer() {
-							return (
-								<span>
-									<AtButton
-										onClick={() => {
-											formEditorVisible.value = false;
-										}}
-									>
-										取消
-									</AtButton>
-									<AtButton
-										onClick={async () => {
-											await formEditor.value?.form?.form?.validate();
-											if (formModel.type === 'dialog') {
-												if (!formModel.form) {
-													formModel.form = {
-														url: '',
-														method: 'POST',
-														schema: {
-															properties: {},
-														},
-													};
-												}
-												if (!formModel.form?.schema) {
-													formModel.form.schema = {
-														properties: {},
-													};
-												}
-												formModel!.form!.schema.properties =
-													transformFormEditorModelToProperties(
-														formEditorModel.value
-													);
-											}
-											formEditorVisible.value = false;
-										}}
-										type="primary"
-									>
-										保存
-									</AtButton>
-								</span>
-							);
-						},
+					modelValue={formEditorModel.value}
+					onUpdate:modelValue={(items) => {
+						if (formModel.type === 'dialog') {
+							if (!formModel.form) {
+								formModel.form = {
+									url: '',
+									method: 'POST',
+									schema: {
+										properties: {},
+									},
+								};
+							}
+							if (!formModel.form?.schema) {
+								formModel.form.schema = {
+									properties: {},
+								};
+							}
+							formModel!.form!.schema.properties =
+								transformFormEditorModelToProperties(items);
+						}
 					}}
-				>
-					<FormEditor
-						ref={formEditor}
-						modelValue={formEditorModel.value}
-						onUpdate:modelValue={(items) => {
-							formEditorModel.value = items;
-						}}
-					/>
-				</AtDialog>,
+				/>,
 			];
 		};
 	},
