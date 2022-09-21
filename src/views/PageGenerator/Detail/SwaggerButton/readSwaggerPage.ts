@@ -15,6 +15,7 @@ export type ReadSwaggerPageResult = {
 	title?: string;
 	api?: string;
 	hash?: string;
+	pagination?: boolean;
 };
 
 function dispatchEvent(
@@ -35,7 +36,7 @@ export function pickTag(hash: string) {
 
 export async function readSwaggerPage(
 	hash: string
-): Promise<Pick<ReadSwaggerPageResult, 'params' | 'result'>> {
+): Promise<Pick<ReadSwaggerPageResult, 'params' | 'result' | 'pagination'>> {
 	const iframe = document.createElement('iframe');
 	const waitFor = (
 		cls: string,
@@ -124,10 +125,13 @@ export async function readSwaggerPage(
 			lastLevel += 1;
 		}
 
-		return getLevelTrs(lastLevel);
+		return [getLevelTrs(lastLevel), lastLevel] as unknown as [
+			NodeListOf<Element>,
+			number
+		];
 	};
 
-	const paramsTrs = getLastLevelTrs(
+	const [paramsTrs] = getLastLevelTrs(
 		[...element.querySelectorAll('.api-title')]
 			.filter((item) => item.innerHTML.trim() === '请求参数')[0]
 			.nextElementSibling?.querySelectorAll('tbody tr')
@@ -157,11 +161,12 @@ export async function readSwaggerPage(
 		}
 	});
 
-	const resultTrs = getLastLevelTrs(
+	const [resultTrs, level] = getLastLevelTrs(
 		[...element.querySelectorAll('.api-title')]
 			.filter((item) => item.innerHTML.trim() === '响应参数')[0]
 			.nextElementSibling?.querySelectorAll('tbody tr')
 	);
+	const pagination = level === 2;
 
 	document.body.removeChild(iframe);
 
@@ -180,5 +185,6 @@ export async function readSwaggerPage(
 	return {
 		params,
 		result,
+		pagination,
 	};
 }

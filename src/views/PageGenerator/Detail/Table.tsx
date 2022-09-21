@@ -1,3 +1,4 @@
+import FunctionButton from '@/components/PageRenderer/FunctionButton';
 import { AtButton } from 'anta-element-ui-components-next';
 import { ArrayType } from 'anta-element-ui-components-next/src/utils/arrayType';
 import {
@@ -39,11 +40,7 @@ export default defineComponent({
 								return (
 									<div>
 										{item.buttons?.map((button) => {
-											return (
-												<AtButton size="small" type={button.type}>
-													{button.title}
-												</AtButton>
-											);
+											return <FunctionButton size="small" {...button} />;
 										})}
 									</div>
 								);

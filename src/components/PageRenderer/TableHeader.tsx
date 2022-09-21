@@ -1,8 +1,8 @@
 import { AtTitle } from 'anta-element-ui-components-next';
 import { defineComponent, PropType } from 'vue';
-import { PageGenerator } from '../typing';
-import FunctionButton from '@components/PageRenderer/FunctionButton';
 import AtTableHeader from '@components/AtTableHeader.vue';
+import FunctionButton from '@/components/PageRenderer/FunctionButton';
+import { PageGenerator } from '@/views/PageGenerator/typing';
 
 export default defineComponent({
 	props: {

@@ -166,6 +166,9 @@ const tableSchema = computed<AtSchemaTableTypes.JSONSchema>(() => {
 		columns: [],
 	};
 	const columns = [...(schema.columns ?? [])];
+	const tableProps = {
+		...schema.props,
+	};
 
 	if (pageConfig.schema?.table?.selection) {
 		columns.unshift({
@@ -173,14 +176,29 @@ const tableSchema = computed<AtSchemaTableTypes.JSONSchema>(() => {
 			width: 40,
 		});
 	}
+	if (pageConfig.schema?.table?.tree) {
+		tableProps.rowKey = 'id';
+		tableProps.treeProps = {
+			children: 'children',
+			hasChildren: 'hasChildren',
+		};
+	}
 	return {
 		...schema,
+		props: {
+			...schema.props,
+			rowKey: 'id',
+			treeProps: {
+				children: 'children',
+				hasChildren: 'hasChildren',
+			},
+		},
 		columns,
 	};
 });
 const hasTable = computed(() => !!tableSchema.value.columns.length);
 const dataSource = computed<any[]>(() =>
-	generateDataSource(tableSchema.value.columns)
+	generateDataSource(tableSchema.value.columns, pageConfig.schema?.table?.tree)
 );
 
 const showSearchEditor = ref(false);

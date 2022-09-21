@@ -59,7 +59,7 @@ module.exports = defineConfig({
 				'@axios': path.resolve('./src/utils/axios'),
 				'@hooks': path.resolve('./src/utils/hooks'),
 				'@PageRenderer': path.resolve(
-					'./src/components/PageRenderer/Index.vue'
+					'./src/components/PageRenderer/Index.tsx'
 				),
 			},
 		},

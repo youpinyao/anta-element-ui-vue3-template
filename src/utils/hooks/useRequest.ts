@@ -11,7 +11,7 @@ export function useRequest<T = any, D = any, K extends any[] = any>(
 	options?: Options
 ) {
 	const data = ref<ResponseBody<T>>();
-	const loading = ref(false);
+	const loading = ref(true);
 	const error = ref<AxiosError<ResponseBody<T>, D>>();
 
 	const run: typeof promise = (...args) => {

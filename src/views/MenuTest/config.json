@@ -1,0 +1,146 @@
+{
+	"schema": {
+		"search": {
+			"form": {
+				"properties": {
+					"moduleFlag": {
+						"component": "input",
+						"label": "模块类型：",
+						"type": "number",
+						"formItemProps": { "labelWidth": 100 },
+						"span": 6
+					},
+					"name": {
+						"component": "input",
+						"label": "名字：",
+						"type": "string",
+						"formItemProps": { "labelWidth": 100 },
+						"span": 6
+					},
+					"remark": {
+						"component": "input",
+						"label": "备注：",
+						"type": "string",
+						"formItemProps": { "labelWidth": 100 },
+						"span": 6
+					}
+				}
+			},
+			"resetButton": true,
+			"searchButton": true
+		},
+		"title": "角色列表",
+		"buttons": [
+			{
+				"title": "新增",
+				"type": "primary",
+				"trigger": {
+					"type": "dialog",
+					"form": {
+						"url": "/admin/api/roles",
+						"method": "POST",
+						"schema": {
+							"properties": {
+								"id": {
+									"component": "input",
+									"label": "主键,示例值(1)：",
+									"formItemProps": { "labelWidth": 100 }
+								},
+								"moduleFlag": {
+									"component": "input",
+									"label": "模块类型：",
+									"type": "number",
+									"formItemProps": { "labelWidth": 100 }
+								},
+								"name": {
+									"component": "input",
+									"label": "名字,示例值(测试)：",
+									"formItemProps": { "labelWidth": 100 }
+								},
+								"remark": {
+									"component": "input",
+									"label": "备注,示例值(测试)：",
+									"formItemProps": { "labelWidth": 100 }
+								}
+							}
+						}
+					},
+					"dialogProps": { "title": "角色新增" }
+				}
+			}
+		],
+		"table": {
+			"url": "/admin/api/roles",
+			"method": "GET",
+			"schema": {
+				"columns": [
+					{ "prop": "bindingQuantity", "label": "绑定菜单数量" },
+					{ "prop": "createTime", "label": "创建时间", "width": 200 },
+					{ "prop": "createdBy", "label": "创建人" },
+					{ "prop": "deleteTime", "label": "删除时间", "width": 200 },
+					{ "prop": "id", "label": "主键" },
+					{ "prop": "moduleFlag", "label": "模块类型" },
+					{ "prop": "name", "label": "名字" },
+					{ "prop": "updateTime", "label": "更新时间", "width": 200 },
+					{ "prop": "updatedBy", "label": "更新人" },
+					{
+						"prop": "id",
+						"label": "操作",
+						"width": 140,
+						"buttons": [
+							{
+								"title": "编辑",
+								"type": "primary",
+								"trigger": {
+									"type": "dialog",
+									"form": {
+										"url": "/admin/api/roles",
+										"method": "PUT",
+										"schema": {
+											"properties": {
+												"id": {
+													"component": "input",
+													"label": "主键,示例值(1)：",
+													"formItemProps": { "labelWidth": 100 }
+												},
+												"moduleFlag": {
+													"component": "input",
+													"label": "模块类型：",
+													"type": "number",
+													"formItemProps": { "labelWidth": 100 }
+												},
+												"name": {
+													"component": "input",
+													"label": "名字,示例值(测试)：",
+													"formItemProps": { "labelWidth": 100 }
+												},
+												"remark": {
+													"component": "input",
+													"label": "备注,示例值(测试)：",
+													"formItemProps": { "labelWidth": 100 }
+												}
+											}
+										}
+									},
+									"dialogProps": { "title": "角色更新" }
+								}
+							},
+							{
+								"title": "删除",
+								"type": "danger",
+								"trigger": {
+									"type": "popconfirm",
+									"url": "/admin/api/roles/{id}",
+									"method": "PUT",
+									"confirmProps": { "title": "确认删除？" }
+								}
+							}
+						]
+					}
+				]
+			}
+		},
+		"pagination": true
+	},
+	"title": "角色列表"
+}

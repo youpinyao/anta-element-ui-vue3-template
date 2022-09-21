@@ -42,6 +42,10 @@ export const useMenuStore = defineStore('menu', function () {
 					title: '菜单管理',
 					path: '/menu',
 				},
+				{
+					title: '菜单管理Test',
+					path: '/menu-test',
+				},
 			],
 		},
 	]);

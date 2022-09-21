@@ -2688,10 +2688,10 @@ anta-element-ui-components-next@^0.2.24, anta-element-ui-components-next@~0.2.24
     sortablejs "~1.14.0"
     vue-class-component "~8.0.0-0"
 
-anta-element-ui-schema-form@~0.0.51:
-  version "0.0.51"
-  resolved "https://registry.npmjs.org/anta-element-ui-schema-form/-/anta-element-ui-schema-form-0.0.51.tgz#bb708d854cb00f8c8e7c2eb525bed0888dbf3a1b"
-  integrity sha512-9y7rANX554V2WKN8R8cccPpRxjHwwMggyPVOrzGQ5Pk/xInTSX89G1N/Y276MLMcBlyOzzlkETJIGJ7ulqK/PA==
+anta-element-ui-schema-form@~0.0.52:
+  version "0.0.52"
+  resolved "https://registry.npmjs.org/anta-element-ui-schema-form/-/anta-element-ui-schema-form-0.0.52.tgz#ff9887b61d0ab4e3c6c392da1a29d76a35e3e9fe"
+  integrity sha512-veVkJ7zwrVKvETrLMGb8HbHLRLF1YX3IeILKG1joI7LoUmU15cWMjGf45XWyUdtH5LVsjvmSoe+PBJCvZsrczQ==
   dependencies:
     "@element-plus/icons-vue" "~2.0.9"
     "@types/uuid" "^8.3.4"

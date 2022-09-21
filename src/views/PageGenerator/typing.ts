@@ -80,6 +80,7 @@ export namespace PageGenerator {
 			url?: string;
 			method?: Methods;
 			selection?: boolean;
+			tree?: boolean;
 			schema?: Omit<AtSchemaTableTypes.JSONSchema, 'columns'> & {
 				columns: TableColumn[];
 			};

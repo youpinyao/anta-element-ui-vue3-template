@@ -36,6 +36,12 @@ export function formSchema() {
 				component: 'tree-select',
 				type: Number,
 				label: '父ID',
+				display: {
+					fields: ['pid'],
+					callback(model) {
+						return model.pid !== 0 ? 'visible' : 'hidden';
+					},
+				},
 				options: getPidTreeSelectOptions,
 				props: {
 					checkStrictly: true,

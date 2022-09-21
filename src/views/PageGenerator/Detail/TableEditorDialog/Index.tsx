@@ -42,6 +42,7 @@ export default defineComponent({
 		const model = reactive<{
 			pagination?: boolean;
 			selection?: boolean;
+			tree?: boolean;
 			url?: string;
 			method?: PageGenerator.Methods;
 			columns?: NonNullable<
@@ -123,7 +124,6 @@ export default defineComponent({
 						},
 						buttons: {
 							component: 'button',
-							watchs: ['buttons'],
 							props: {
 								type: 'primary',
 								vSlots: {
@@ -134,8 +134,11 @@ export default defineComponent({
 									columnButtonEditorContent.value =
 										model?.columns?.[index ?? 0];
 								},
-								badge(model) {
-									return model?.buttons?.length > 0;
+								badge: {
+									fields: ['buttons'],
+									callback(model) {
+										return model?.buttons?.length > 0;
+									},
 								},
 							},
 							formItemProps: {},
@@ -159,19 +162,28 @@ export default defineComponent({
 						},
 					},
 				},
-				selection: {
-					label: '多选',
+				pagination: {
+					label: '分页',
 					component: 'switch',
-					span: 12,
+					span: 8,
 					type: Boolean,
 					formItemProps: {
 						labelWidth: 100,
 					},
 				},
-				pagination: {
-					label: '分页',
+				selection: {
+					label: '多选',
 					component: 'switch',
-					span: 12,
+					span: 8,
+					type: Boolean,
+					formItemProps: {
+						labelWidth: 100,
+					},
+				},
+				tree: {
+					label: '树结构',
+					component: 'switch',
+					span: 8,
 					type: Boolean,
 					formItemProps: {
 						labelWidth: 100,
@@ -205,6 +217,7 @@ export default defineComponent({
 								url: model.url,
 								method: model.method,
 								selection: model.selection,
+								tree: model.tree,
 								schema: {
 									...props.schema?.table?.schema,
 									columns: model.columns ?? [],
@@ -229,6 +242,7 @@ export default defineComponent({
 							model.url = props.schema?.table?.url;
 							model.method = props.schema?.table?.method;
 							model.selection = props.schema?.table?.selection;
+							model.tree = props.schema?.table?.tree;
 							model.columns = clone()(
 								toRaw(props.schema?.table?.schema?.columns)
 							);

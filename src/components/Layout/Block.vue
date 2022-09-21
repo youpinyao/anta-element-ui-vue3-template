@@ -15,6 +15,7 @@ export default defineComponent({
 @import '~anta-element-ui-components-next/src/scss/variables';
 
 .layout-block {
+	position: relative;
 	padding: 24px;
 	margin-bottom: 20px;
 	background-color: $--color-white;

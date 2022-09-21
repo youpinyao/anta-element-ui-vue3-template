@@ -4,6 +4,7 @@ import { ReadSwaggerPageResult } from './readSwaggerPage';
 export const swaggerGeneratePageConfig = ({
 	params,
 	buttons,
+	pagination,
 	result,
 	url,
 	method,
@@ -40,6 +41,7 @@ export const swaggerGeneratePageConfig = ({
 				columns: result,
 			},
 		},
+		pagination,
 	};
 
 	return schema;

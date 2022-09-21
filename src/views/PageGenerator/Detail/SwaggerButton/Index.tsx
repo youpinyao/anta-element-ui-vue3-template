@@ -101,7 +101,7 @@ export default defineComponent({
 				if (hash) {
 					loading.value = true;
 					try {
-						const { params, result } = await readSwaggerPage(hash);
+						const { params, result, pagination } = await readSwaggerPage(hash);
 						const buttons: PageGenerator.FunctionButton[] = [];
 						const post = apiConfigs[`${pickTag(hash)}_post`];
 						const put = apiConfigs[`${pickTag(hash)}_put`];
@@ -162,7 +162,7 @@ export default defineComponent({
 								type: 'danger',
 								trigger: {
 									type: 'popconfirm',
-									url: put.url ?? '',
+									url: `${put.url}/{id}`,
 									method: put.method ?? 'DELETE',
 									confirmProps: {
 										title: '确认删除？',
@@ -176,6 +176,7 @@ export default defineComponent({
 							params,
 							result,
 							buttons,
+							pagination,
 						};
 					} catch (error) {
 						console.error(error);
