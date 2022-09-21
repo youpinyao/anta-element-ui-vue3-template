@@ -5,7 +5,6 @@ import {
 } from 'anta-element-ui-schema-form';
 import { defineComponent, PropType, reactive, toRaw, ref } from 'vue';
 import clone from 'rfdc';
-import * as uuid from 'uuid';
 import JsonEditorDialog from '../JsonEditorDialog';
 import { JsonType } from '@/components/JsonEditor';
 
@@ -13,13 +12,8 @@ type KeyProperty = AtSchemaFormTypes.Property & {
 	key?: string;
 };
 
-export type FormEditorModelItem = Pick<
-	AtSchemaFormTypes.Property,
-	'label' | 'component' | 'span'
-> & {
-	key?: string;
+export type FormEditorModelItem = KeyProperty & {
 	field?: string;
-	property?: AtSchemaFormTypes.Property;
 };
 
 export function transformPropertiesToFormEditorModel(
@@ -69,6 +63,14 @@ export default defineComponent({
 		modelValue: {
 			type: Object as PropType<FormEditorModelItem[]>,
 		},
+		extraFormProps: {
+			type: Object as PropType<Partial<AtSchemaFormTypes.ComponentBase>>,
+			default: () => ({
+				formItemProps: {
+					labelWidth: 100,
+				},
+			}),
+		},
 	},
 	emits: {
 		'update:modelValue': (items: FormEditorModelItem[]) => true,
@@ -87,6 +89,7 @@ export default defineComponent({
 					emit('update:modelValue', model.items);
 				}}
 			/>,
+
 			<JsonEditorDialog
 				visible={codeEditContent !== undefined}
 				onClose={closeJsonEditor}
@@ -117,12 +120,21 @@ export default defineComponent({
 		const openJsonEditor = (json?: JsonType) => {
 			codeEditContent.value = json;
 		};
+
 		const formSchema: AtSchemaFormTypes.JSONSchema = {
 			properties: {
 				items: {
 					component: 'array',
 					props: {
 						sortable: true,
+						handleAdd() {
+							const items = props.modelValue ?? [];
+
+							items.push({
+								...props.extraFormProps,
+							} as FormEditorModelItem);
+							ctx.emit('update:modelValue', items);
+						},
 					},
 					children: {
 						field: {
@@ -176,7 +188,7 @@ export default defineComponent({
 								},
 							},
 						},
-						property: {
+						json: {
 							component: 'button',
 							props: {
 								vSlots: {

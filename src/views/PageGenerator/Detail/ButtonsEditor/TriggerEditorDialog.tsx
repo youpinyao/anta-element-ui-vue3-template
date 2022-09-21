@@ -17,6 +17,8 @@ import {
 	jumpFormProperties,
 	popconfirmFormProperties,
 } from './schema';
+import { ReadSwaggerPageResult } from '../SwaggerButton/readSwaggerPage';
+import SwaggerButton from '../SwaggerButton/Index';
 
 export default defineComponent({
 	props: {
@@ -36,7 +38,42 @@ export default defineComponent({
 		const formSchema = ref<AtSchemaFormTypes.JSONSchema>({
 			properties: {},
 		});
+		const setFormModelFormSchemProperties = (
+			properties: AtSchemaFormTypes.JSONSchema['properties']
+		) => {
+			if (!formModel.form) {
+				formModel.form = {
+					url: '',
+					method: 'POST',
+					schema: {
+						properties: {},
+					},
+				};
+			}
+			if (!formModel.form?.schema) {
+				formModel.form.schema = {
+					properties: {},
+				};
+			}
+			formModel!.form!.schema.properties = properties;
+		};
 
+		const handleGenerate = (result: ReadSwaggerPageResult) => {
+			switch (formModel.type) {
+				case 'dialog':
+					formModel.title = result.title;
+					formModel.url = result.url;
+					formModel.method = result.method;
+
+					setFormModelFormSchemProperties(result.params);
+					break;
+				case 'popconfirm':
+					formModel.title = result.title;
+					formModel.url = result.url;
+					formModel.method = result.method;
+					break;
+			}
+		};
 		watch(
 			() => props.modelValue,
 			() => {
@@ -99,10 +136,10 @@ export default defineComponent({
 								...baseFormProperties(),
 								...dialogFormProperties({
 									onClick() {
-										if (props.modelValue?.type === 'dialog') {
+										if (formModel.type === 'dialog') {
 											formEditorModel.value =
 												transformPropertiesToFormEditorModel(
-													props.modelValue?.form?.schema.properties ?? {}
+													formModel.form?.schema.properties ?? {}
 												);
 											formEditorVisible.value = true;
 										}
@@ -149,6 +186,9 @@ export default defineComponent({
 									>
 										取消
 									</AtButton>
+									{['dialog', 'popconfirm'].includes(formModel.type) ? (
+										<SwaggerButton onGenerate={handleGenerate} />
+									) : null}
 									<AtButton
 										onClick={async () => {
 											await form.value?.form?.validate();
@@ -229,22 +269,9 @@ export default defineComponent({
 					modelValue={formEditorModel.value}
 					onUpdate:modelValue={(items) => {
 						if (formModel.type === 'dialog') {
-							if (!formModel.form) {
-								formModel.form = {
-									url: '',
-									method: 'POST',
-									schema: {
-										properties: {},
-									},
-								};
-							}
-							if (!formModel.form?.schema) {
-								formModel.form.schema = {
-									properties: {},
-								};
-							}
-							formModel!.form!.schema.properties =
-								transformFormEditorModelToProperties(items);
+							setFormModelFormSchemProperties(
+								transformFormEditorModelToProperties(items)
+							);
 						}
 					}}
 				/>,

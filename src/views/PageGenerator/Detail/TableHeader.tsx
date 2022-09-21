@@ -17,7 +17,7 @@ export default defineComponent({
 		return () => {
 			const { title, buttons } = props;
 			if (!title && !buttons?.length) {
-				return <Placeholder placeholder="添加标题" />;
+				return null;
 			}
 			return (
 				<div class="at-table-header">

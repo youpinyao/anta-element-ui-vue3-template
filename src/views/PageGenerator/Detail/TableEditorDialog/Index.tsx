@@ -16,6 +16,9 @@ import { AtSchemaTableTypes } from 'anta-element-ui-schema-table';
 import { ArrayType } from 'anta-element-ui-components-next/src/utils/arrayType';
 import ButtonsEditorDialog from '../ButtonsEditorDialog/Index';
 import JsonEditorDialog from '../JsonEditorDialog';
+import { ReadSwaggerPageResult } from '../SwaggerButton/readSwaggerPage';
+import SwaggerButton from '../SwaggerButton/Index';
+import { swaggerGeneratePageConfig } from '../SwaggerButton/swaggerGeneratePageConfig';
 
 export default defineComponent({
 	props: {
@@ -79,6 +82,9 @@ export default defineComponent({
 				columns: {
 					label: '列',
 					component: 'array',
+					props: {
+						sortable: true,
+					},
 					formItemProps: {
 						labelWidth: 100,
 						required: true,
@@ -156,6 +162,7 @@ export default defineComponent({
 				selection: {
 					label: '多选',
 					component: 'switch',
+					span: 12,
 					type: Boolean,
 					formItemProps: {
 						labelWidth: 100,
@@ -164,12 +171,21 @@ export default defineComponent({
 				pagination: {
 					label: '分页',
 					component: 'switch',
+					span: 12,
 					type: Boolean,
 					formItemProps: {
 						labelWidth: 100,
 					},
 				},
 			},
+		};
+
+		const handleGenerate = (result: ReadSwaggerPageResult) => {
+			const pageConfig = swaggerGeneratePageConfig(result);
+			model.pagination = pageConfig.pagination;
+			model.url = pageConfig.table?.url;
+			model.method = pageConfig.table?.method;
+			model.columns = pageConfig.table?.schema?.columns;
 		};
 
 		const handleCancel = () => {
@@ -255,6 +271,7 @@ export default defineComponent({
 									<div></div>
 									<div>
 										<AtButton onClick={handleCancel}>取消</AtButton>
+										<SwaggerButton onGenerate={handleGenerate} />
 										<AtButton onClick={handleSave} type="primary">
 											保存
 										</AtButton>

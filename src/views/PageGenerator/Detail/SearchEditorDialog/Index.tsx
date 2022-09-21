@@ -16,6 +16,8 @@ import FormEditor, {
 	transformFormEditorModelToProperties,
 	transformPropertiesToFormEditorModel,
 } from '../FormEditor/Index';
+import { ReadSwaggerPageResult } from '../SwaggerButton/readSwaggerPage';
+import SwaggerButton from '../SwaggerButton/Index';
 
 export default defineComponent({
 	props: {
@@ -37,6 +39,23 @@ export default defineComponent({
 		const model = reactive<NonNullable<PageGenerator.JSONSchema['search']>>({});
 		const formEditor = ref<InstanceType<typeof FormEditor>>();
 
+		const extraFormProps = {
+			span: 6,
+			formItemProps: {
+				labelWidth: 100,
+			},
+		};
+		const setModelFormProperties = (
+			properties: AtSchemaFormTypes.JSONSchema['properties']
+		) => {
+			if (!model.form) {
+				model.form = {
+					properties: {},
+				};
+			}
+			model.form!.properties = properties;
+		};
+
 		const formSchema: AtSchemaFormTypes.JSONSchema = {
 			properties: {
 				searchButton: {
@@ -53,6 +72,30 @@ export default defineComponent({
 				},
 			},
 		};
+		const handleGenerate = (result: ReadSwaggerPageResult) => {
+			if (!model.form) {
+				model.form = {
+					properties: {},
+				};
+			}
+			setModelFormProperties(
+				Object.fromEntries(
+					Object.entries(result.params).map(([field, item]) => {
+						return [
+							field,
+							{
+								...item,
+								...extraFormProps,
+							},
+						];
+					})
+				)
+			);
+
+			formEditorModel.value = transformPropertiesToFormEditorModel(
+				model.form?.properties
+			);
+		};
 
 		const handleCancel = () => {
 			emit('close');
@@ -60,14 +103,10 @@ export default defineComponent({
 		const handleSave = async () => {
 			try {
 				await formEditor.value?.form?.form?.validate();
-				if (!model.form) {
-					model.form = {
-						properties: {},
-					};
-				}
-				model.form!.properties = transformFormEditorModelToProperties(
-					formEditorModel.value
+				setModelFormProperties(
+					transformFormEditorModelToProperties(formEditorModel.value)
 				);
+
 				emit('change', clone()(toRaw(model)));
 				emit('close');
 			} catch (error) {
@@ -125,6 +164,7 @@ export default defineComponent({
 									<div></div>
 									<div>
 										<AtButton onClick={handleCancel}>取消</AtButton>
+										<SwaggerButton onGenerate={handleGenerate} />
 										<AtButton onClick={handleSave} type="primary">
 											保存
 										</AtButton>
@@ -150,6 +190,7 @@ export default defineComponent({
 							onUpdate:modelValue={(items) => {
 								formEditorModel.value = items;
 							}}
+							extraFormProps={extraFormProps}
 						/>
 						<AtSchemaForm schema={formSchema} model={model} />
 					</div>

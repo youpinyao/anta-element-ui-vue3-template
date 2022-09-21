@@ -113,26 +113,25 @@ export async function readSwaggerPage(
 	const params: ReadSwaggerPageResult['params'] = {};
 	const result: ReadSwaggerPageResult['result'] = [];
 
-	let paramsTrs = [...element.querySelectorAll('.api-title')]
-		.filter((item) => item.innerHTML.trim() === '请求参数')[0]
-		.nextElementSibling?.querySelectorAll('tbody tr');
+	const getLastLevelTrs = (trs?: NodeListOf<Element>) => {
+		let lastLevel = 0;
+		const getLevelTrs = (level: number) => {
+			return [...(trs ?? [])].filter((tr) =>
+				new RegExp(`ant-table-row-level-${level}`, 'g').test(tr.className)
+			);
+		};
+		while (getLevelTrs(lastLevel + 1).length > 0) {
+			lastLevel += 1;
+		}
 
-	const level0paramsTrs = [...(paramsTrs ?? [])].filter((tr) =>
-		/ant-table-row-level-0/g.test(tr.className)
+		return getLevelTrs(lastLevel);
+	};
+
+	const paramsTrs = getLastLevelTrs(
+		[...element.querySelectorAll('.api-title')]
+			.filter((item) => item.innerHTML.trim() === '请求参数')[0]
+			.nextElementSibling?.querySelectorAll('tbody tr')
 	);
-	const level1paramsTrs = [...(paramsTrs ?? [])].filter((tr) =>
-		/ant-table-row-level-1/g.test(tr.className)
-	);
-	const level2paramsTrs = [...(paramsTrs ?? [])].filter((tr) =>
-		/ant-table-row-level-2/g.test(tr.className)
-	);
-	if (level2paramsTrs.length > 0) {
-		paramsTrs = level2paramsTrs as unknown as NodeListOf<Element>;
-	} else if (level1paramsTrs.length > 0) {
-		paramsTrs = level1paramsTrs as unknown as NodeListOf<Element>;
-	} else {
-		paramsTrs = level0paramsTrs as unknown as NodeListOf<Element>;
-	}
 
 	const singleTypeMap: Partial<Record<string, any>> = {
 		integer: 'number',
@@ -158,27 +157,12 @@ export async function readSwaggerPage(
 		}
 	});
 
-	let resultTrs = [...element.querySelectorAll('.api-title')]
-		.filter((item) => item.innerHTML.trim() === '响应参数')[0]
-		.nextElementSibling?.querySelectorAll('tbody tr');
-
-	const level0resultTrs = [...(resultTrs ?? [])].filter((tr) =>
-		/ant-table-row-level-0/g.test(tr.className)
-	);
-	const level1resultTrs = [...(resultTrs ?? [])].filter((tr) =>
-		/ant-table-row-level-1/g.test(tr.className)
-	);
-	const level2resultTrs = [...(resultTrs ?? [])].filter((tr) =>
-		/ant-table-row-level-2/g.test(tr.className)
+	const resultTrs = getLastLevelTrs(
+		[...element.querySelectorAll('.api-title')]
+			.filter((item) => item.innerHTML.trim() === '响应参数')[0]
+			.nextElementSibling?.querySelectorAll('tbody tr')
 	);
 
-	if (level2resultTrs.length > 0) {
-		resultTrs = level2resultTrs as unknown as NodeListOf<Element>;
-	} else if (level1resultTrs.length > 0) {
-		resultTrs = level1resultTrs as unknown as NodeListOf<Element>;
-	} else {
-		resultTrs = level0resultTrs as unknown as NodeListOf<Element>;
-	}
 	document.body.removeChild(iframe);
 
 	[...(resultTrs ?? [])].forEach((tr) => {

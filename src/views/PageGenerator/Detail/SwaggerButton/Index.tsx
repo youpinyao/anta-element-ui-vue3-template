@@ -1,5 +1,10 @@
 import { get, post } from '@/utils/axios';
-import { AtButton, AtDialog, AtEmpty } from 'anta-element-ui-components-next';
+import {
+	AtButton,
+	AtDialog,
+	AtEmpty,
+	AtLoading,
+} from 'anta-element-ui-components-next';
 import { AtSchemaForm, AtSchemaFormTypes } from 'anta-element-ui-schema-form';
 import { defineComponent, reactive, ref, toRaw, watch } from 'vue';
 
@@ -14,9 +19,7 @@ import { PageGenerator } from '../../typing';
 
 export default defineComponent({
 	emits: {
-		generate(result: ReadSwaggerPageResult) {
-			return true;
-		},
+		generate: (result: ReadSwaggerPageResult) => true,
 	},
 	setup(props, ctx) {
 		const visible = ref(false);
@@ -239,7 +242,9 @@ export default defineComponent({
 						},
 					}}
 				>
-					<AtSchemaForm schema={formSchema.value} model={formModel} />
+					<AtLoading visible={loading.value}>
+						<AtSchemaForm schema={formSchema.value} model={formModel} />
+					</AtLoading>
 				</AtDialog>,
 			];
 		};

@@ -24,11 +24,11 @@ export function adminApiPageTemplatesGet(
 }
 
 export function adminApiPageTemplatesPost(
-	data: AdminApiPage$TemplatesPostParams
+	data: AdminApiPage$TemplatesPostParams['req']
 ) {
 	return post<
 		AdminApiPage$TemplatesPostResult['data'],
-		AdminApiPage$TemplatesPostParams
+		AdminApiPage$TemplatesPostParams['req']
 	>({
 		url: '/admin/api/page-templates',
 		data,
@@ -36,11 +36,11 @@ export function adminApiPageTemplatesPost(
 }
 
 export function adminApiPageTemplatesPut(
-	data: AdminApiPage$TemplatesPutParams
+	data: AdminApiPage$TemplatesPutParams['req']
 ) {
 	return put<
 		AdminApiPage$TemplatesPutResult['data'],
-		AdminApiPage$TemplatesPutParams
+		AdminApiPage$TemplatesPutParams['req']
 	>({
 		url: '/admin/api/page-templates',
 		data,

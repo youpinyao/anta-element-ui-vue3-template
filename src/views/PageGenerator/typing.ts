@@ -62,7 +62,6 @@ export namespace PageGenerator {
 	> & {
 		defaultValue?: any;
 	};
-	export type Properties = Record<string, Property>;
 
 	export type TableColumn = ArrayType<
 		AtSchemaTableTypes.JSONSchema['columns']
@@ -72,9 +71,7 @@ export namespace PageGenerator {
 	export interface JSONSchema {
 		title?: string;
 		search?: {
-			form?: Omit<AtSchemaFormTypes.JSONSchema, 'properties'> & {
-				properties: Properties;
-			};
+			form?: AtSchemaFormTypes.JSONSchema;
 			resetButton?: boolean;
 			searchButton?: boolean;
 		};

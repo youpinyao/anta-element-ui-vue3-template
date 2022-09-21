@@ -19,7 +19,10 @@
 				<AtButton :loading="loading" type="primary" @click="handlePreview"
 					>预览</AtButton
 				>
-				<AtButton :loading="loading" type="primary" @click="handleSave"
+				<AtButton
+					:loading="loading || saveLoading"
+					type="primary"
+					@click="handleSave"
 					>保存</AtButton
 				>
 			</div>
@@ -55,6 +58,12 @@
 		/>
 
 		<Block v-show="hasTable">
+			<Placeholder
+				v-if="!pageConfig.schema?.title && !pageConfig.schema?.buttons?.length"
+				placeholder="添加标题"
+				@click="handleTableHeaderEdit"
+			/>
+
 			<EditArea @click="handleTableHeaderEdit">
 				<TableHeader
 					:title="pageConfig.schema?.title"
@@ -99,6 +108,8 @@
 <script lang="ts" setup>
 import {
 	adminApiPageGeneratorDetailGet,
+	adminApiPageTemplatesPut,
+	adminApiPageTemplatesPost,
 	AdminApiPageGeneratorDetailGetResult,
 } from '@/apis/adminApiPageTemplates';
 import { useRequest } from '@/utils/hooks/useRequest';
@@ -120,7 +131,7 @@ import TableSearch from './TableSearch';
 import Table from './Table';
 import Placeholder from './Placeholder.vue';
 import SwaggerButton from './SwaggerButton/Index';
-import { swaggerGenerateTransform } from './swaggerGenerateTransform';
+import { swaggerGeneratePageConfig } from './SwaggerButton/swaggerGeneratePageConfig';
 import { ReadSwaggerPageResult } from './SwaggerButton/readSwaggerPage';
 import EditArea from './EditArea/Index.vue';
 import { generateDataSource } from './generateDataSource';
@@ -141,6 +152,7 @@ const pageConfig = reactive<AdminApiPageGeneratorDetailGetResult>({
 		},
 	},
 });
+const saveLoading = ref(false);
 const { run, loading } = useRequest(adminApiPageGeneratorDetailGet, {
 	immediate: false,
 });
@@ -179,9 +191,7 @@ if (route.params.id && route.params.id !== 'add') {
 	run({
 		id: route.params.id as string,
 	}).then(({ data }) => {
-		pageConfig.id = data.data.id;
-		pageConfig.title = data.data.title;
-		pageConfig.schema = data.data.schema;
+		Object.assign(pageConfig, data.data);
 	});
 }
 
@@ -189,7 +199,7 @@ const handleGenerate = (result: ReadSwaggerPageResult) => {
 	pageConfig.title = result.title;
 	pageConfig.schema = {
 		...pageConfig.schema,
-		...swaggerGenerateTransform(result),
+		...swaggerGeneratePageConfig(result),
 	};
 };
 
@@ -200,9 +210,22 @@ const handleChangePageTitle = (title: string) => {
 const handleBack = () => {
 	router.back();
 };
-const handleSave = () => {
+const handleSave = async () => {
 	console.log(pageConfig);
-	console.log(JSON.stringify(pageConfig));
+	// console.log(JSON.stringify(pageConfig));
+
+	saveLoading.value = true;
+	try {
+		if (pageConfig.id) {
+			await adminApiPageTemplatesPut(pageConfig);
+		} else {
+			await adminApiPageTemplatesPost(pageConfig);
+		}
+	} catch (error) {
+		console.log(error);
+	} finally {
+		saveLoading.value = false;
+	}
 };
 const handleSearchEdit = () => {
 	showSearchEditor.value = true;

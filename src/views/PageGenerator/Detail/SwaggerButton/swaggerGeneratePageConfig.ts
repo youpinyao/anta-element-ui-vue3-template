@@ -1,7 +1,7 @@
-import { PageGenerator } from '../typing';
-import { ReadSwaggerPageResult } from './SwaggerButton/readSwaggerPage';
+import { PageGenerator } from '../../typing';
+import { ReadSwaggerPageResult } from './readSwaggerPage';
 
-export const swaggerGenerateTransform = ({
+export const swaggerGeneratePageConfig = ({
 	params,
 	buttons,
 	result,
