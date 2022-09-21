@@ -8,7 +8,7 @@ import { AdminApiPage$TemplatesPostResult } from '@/models/pageTemplateApi/Admin
 import { AdminApiPage$TemplatesPutParams } from '@/models/pageTemplateApi/AdminApiPage$TemplatesPutParams';
 import { AdminApiPage$TemplatesPutResult } from '@/models/pageTemplateApi/AdminApiPage$TemplatesPutResult';
 import { del, get, post, put } from '@/utils/axios';
-import { PageGenerator } from '@/views/PageGenerator/typing';
+import { PageRenderer } from '@/components/PageRenderer/typing';
 import { ArrayType } from 'anta-element-ui-components-next/src/utils/arrayType';
 
 export function adminApiPageTemplatesGet(
@@ -63,7 +63,7 @@ export type AdminApiPageGeneratorDetailGetResult = Omit<
 	NonNullable<ArrayType<Definition2109f27d03411ab2d387f6d44a00e6a5['list']>>,
 	'schema'
 > & {
-	schema?: PageGenerator.JSONSchema;
+	schema?: PageRenderer.JSONSchema;
 };
 
 export async function adminApiPageGeneratorDetailGet(data: any) {

@@ -11,7 +11,8 @@ import {
 	watch,
 } from 'vue';
 import ButtonsEditor from '../ButtonsEditor/Index';
-import { PageGenerator } from '../../typing';
+import { PageRenderer } from '@components/PageRenderer/typing';
+import DialogFooter from '@/components/DialogFooter';
 
 export default defineComponent({
 	props: {
@@ -20,19 +21,19 @@ export default defineComponent({
 		},
 		schema: {
 			type: Object as PropType<
-				Pick<PageGenerator.JSONSchema, 'title' | 'buttons'>
+				Pick<PageRenderer.JSONSchema, 'title' | 'buttons'>
 			>,
 		},
 	},
 	emits: {
-		change: (schema: Pick<PageGenerator.JSONSchema, 'title' | 'buttons'>) =>
+		change: (schema: Pick<PageRenderer.JSONSchema, 'title' | 'buttons'>) =>
 			true,
 		close: () => true,
 	},
 	setup(props, ctx) {
 		const { emit } = ctx;
 		const loading = ref(true);
-		const model = reactive<Pick<PageGenerator.JSONSchema, 'title' | 'buttons'>>(
+		const model = reactive<Pick<PageRenderer.JSONSchema, 'title' | 'buttons'>>(
 			{}
 		);
 		const buttonsEditor = ref<InstanceType<typeof ButtonsEditor>>();
@@ -102,22 +103,12 @@ export default defineComponent({
 					vSlots={{
 						footer() {
 							return (
-								<div
-									class="dialog-footer"
-									style={{
-										display: 'flex',
-										justifyContent: 'space-between',
-										alignItems: 'center',
-									}}
-								>
-									<div></div>
-									<div>
-										<AtButton onClick={handleCancel}>取消</AtButton>
-										<AtButton onClick={handleSave} type="primary">
-											保存
-										</AtButton>
-									</div>
-								</div>
+								<DialogFooter>
+									<AtButton onClick={handleCancel}>取消</AtButton>
+									<AtButton onClick={handleSave} type="primary">
+										保存
+									</AtButton>
+								</DialogFooter>
 							);
 						},
 					}}

@@ -137,7 +137,7 @@ import { generateDataSource } from './generateDataSource';
 import SearchEditorDialog from './SearchEditorDialog/Index';
 import TableHeaderEditorDialog from './TableHeaderEditorDialog/Index';
 import TableEditorDialog from './TableEditorDialog/Index';
-import { PageGenerator } from '../typing';
+import { PageRenderer } from '@components/PageRenderer/typing';
 
 const router = useRouter();
 const menuStore = useMenuStore();
@@ -222,7 +222,7 @@ const handleSearchEdit = () => {
 const handleCloseSearchEdit = () => {
 	showSearchEditor.value = false;
 };
-const handleSaveSearchEdit = (model: PageGenerator.JSONSchema['search']) => {
+const handleSaveSearchEdit = (model: PageRenderer.JSONSchema['search']) => {
 	if (!pageConfig.schema) {
 		pageConfig.schema = {};
 	}
@@ -238,7 +238,7 @@ const handleCloseTableHeaderEdit = () => {
 const handleSaveTableHeaderEdit = ({
 	title,
 	buttons,
-}: Pick<PageGenerator.JSONSchema, 'title' | 'buttons'>) => {
+}: Pick<PageRenderer.JSONSchema, 'title' | 'buttons'>) => {
 	if (!pageConfig.schema) {
 		pageConfig.schema = {};
 	}
@@ -255,7 +255,7 @@ const handleCloseTableEdit = () => {
 const handleSaveTableEdit = ({
 	table,
 	pagination,
-}: Pick<PageGenerator.JSONSchema, 'table' | 'pagination'>) => {
+}: Pick<PageRenderer.JSONSchema, 'table' | 'pagination'>) => {
 	if (!pageConfig.schema) {
 		pageConfig.schema = {};
 	}

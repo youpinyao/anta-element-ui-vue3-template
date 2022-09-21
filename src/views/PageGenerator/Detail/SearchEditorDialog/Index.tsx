@@ -10,7 +10,7 @@ import {
 	toRaw,
 	watch,
 } from 'vue';
-import { PageGenerator } from '../../typing';
+import { PageRenderer } from '@components/PageRenderer/typing';
 import FormEditor, {
 	FormEditorModelItem,
 	transformFormEditorModelToProperties,
@@ -18,6 +18,7 @@ import FormEditor, {
 } from '../FormEditor/Index';
 import { ReadSwaggerPageResult } from '../SwaggerButton/readSwaggerPage';
 import SwaggerButton from '../SwaggerButton/Index';
+import DialogFooter from '@/components/DialogFooter';
 
 export default defineComponent({
 	props: {
@@ -25,18 +26,18 @@ export default defineComponent({
 			type: Boolean,
 		},
 		schema: {
-			type: Object as PropType<PageGenerator.JSONSchema['search']>,
+			type: Object as PropType<PageRenderer.JSONSchema['search']>,
 		},
 	},
 	emits: {
-		change: (schema: PageGenerator.JSONSchema['search']) => true,
+		change: (schema: PageRenderer.JSONSchema['search']) => true,
 		close: () => true,
 	},
 	setup(props, ctx) {
 		const { emit } = ctx;
 		const loading = ref(true);
 		const formEditorModel = ref<FormEditorModelItem[]>();
-		const model = reactive<NonNullable<PageGenerator.JSONSchema['search']>>({});
+		const model = reactive<NonNullable<PageRenderer.JSONSchema['search']>>({});
 		const formEditor = ref<InstanceType<typeof FormEditor>>();
 
 		const extraFormProps = {
@@ -153,23 +154,13 @@ export default defineComponent({
 					vSlots={{
 						footer() {
 							return (
-								<div
-									class="dialog-footer"
-									style={{
-										display: 'flex',
-										justifyContent: 'space-between',
-										alignItems: 'center',
-									}}
-								>
-									<div></div>
-									<div>
-										<AtButton onClick={handleCancel}>取消</AtButton>
-										<SwaggerButton onGenerate={handleGenerate} />
-										<AtButton onClick={handleSave} type="primary">
-											保存
-										</AtButton>
-									</div>
-								</div>
+								<DialogFooter>
+									<AtButton onClick={handleCancel}>取消</AtButton>
+									<SwaggerButton onGenerate={handleGenerate} />
+									<AtButton onClick={handleSave} type="primary">
+										保存
+									</AtButton>
+								</DialogFooter>
 							);
 						},
 					}}

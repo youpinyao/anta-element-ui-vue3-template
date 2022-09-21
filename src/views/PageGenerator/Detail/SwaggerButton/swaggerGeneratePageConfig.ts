@@ -1,4 +1,4 @@
-import { PageGenerator } from '../../typing';
+import { PageRenderer } from '@components/PageRenderer/typing';
 import { ReadSwaggerPageResult } from './readSwaggerPage';
 
 export const swaggerGeneratePageConfig = ({
@@ -10,7 +10,7 @@ export const swaggerGeneratePageConfig = ({
 	method,
 	title,
 }: ReadSwaggerPageResult) => {
-	const schema: PageGenerator.JSONSchema = {
+	const schema: PageRenderer.JSONSchema = {
 		title,
 		search: {
 			form: {

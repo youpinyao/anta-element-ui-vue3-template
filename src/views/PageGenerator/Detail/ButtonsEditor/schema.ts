@@ -1,5 +1,8 @@
 import { AtSchemaFormTypes } from 'anta-element-ui-schema-form';
-import { functionButtonTriggerTypes, methods } from '../../typing';
+import {
+	functionButtonTriggerTypes,
+	methods,
+} from '@components/PageRenderer/typing';
 import { transformPropertiesToFormEditorModel } from '../FormEditor/Index';
 
 export const jumpFormProperties: () => AtSchemaFormTypes.JSONSchema['properties'] =

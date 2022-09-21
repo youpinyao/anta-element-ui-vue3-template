@@ -1,16 +1,16 @@
 import { AtSchemaForm, AtSchemaFormTypes } from 'anta-element-ui-schema-form';
 import { defineComponent, PropType, ref } from 'vue';
-import { PageGenerator } from '../../typing';
+import { PageRenderer } from '@components/PageRenderer/typing';
 import TriggerEditorDialog from './TriggerEditorDialog';
 
 export default defineComponent({
 	props: {
 		modelValue: {
-			type: Object as PropType<PageGenerator.FunctionButton[]>,
+			type: Object as PropType<PageRenderer.FunctionButton[]>,
 		},
 	},
 	emits: {
-		'update:modelValue': (items: PageGenerator.FunctionButton[]) => true,
+		'update:modelValue': (items: PageRenderer.FunctionButton[]) => true,
 	},
 	render() {
 		const props = this.$props;
@@ -43,7 +43,7 @@ export default defineComponent({
 								if (trigger && index === triggerEditIndex) {
 									return {
 										...item,
-										trigger: trigger as PageGenerator.FunctionButton['trigger'],
+										trigger: trigger as PageRenderer.FunctionButton['trigger'],
 									};
 								}
 								return item;
@@ -56,13 +56,13 @@ export default defineComponent({
 	},
 	setup(props, ctx) {
 		const form = ref<InstanceType<typeof AtSchemaForm>>();
-		const triggerEditContent = ref<PageGenerator.FunctionButton['trigger']>();
+		const triggerEditContent = ref<PageRenderer.FunctionButton['trigger']>();
 		const triggerEditIndex = ref<number>();
 		const closeTriggerEditor = () => {
 			triggerEditContent.value = undefined;
 		};
 		const openTriggerEditor = (
-			trigger?: PageGenerator.FunctionButton['trigger']
+			trigger?: PageRenderer.FunctionButton['trigger']
 		) => {
 			triggerEditContent.value = trigger;
 		};

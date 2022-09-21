@@ -4,12 +4,12 @@ import { defineComponent, PropType } from 'vue';
 import Block from '@components/Layout/Block.vue';
 import Placeholder from './Placeholder.vue';
 import AtSearchButtons from '@components/AtSearchButtons.vue';
-import { PageGenerator } from '@/views/PageGenerator/typing';
+import { PageRenderer } from '@/components/PageRenderer/typing';
 
 export default defineComponent({
 	props: {
 		schema: {
-			type: Object as PropType<NonNullable<PageGenerator.JSONSchema['search']>>,
+			type: Object as PropType<NonNullable<PageRenderer.JSONSchema['search']>>,
 		},
 		model: Object,
 		loading: Boolean,

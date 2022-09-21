@@ -3,21 +3,21 @@ import { ArrayType } from 'anta-element-ui-components-next/src/utils/arrayType';
 
 import { defineComponent, PropType, ref, toRaw, watch } from 'vue';
 import clone from 'rfdc';
-import { PageGenerator } from '../../typing';
+import { PageRenderer } from '@components/PageRenderer/typing';
 import ButtonsEditor from '../ButtonsEditor/Index';
 
 export default defineComponent({
 	props: {
 		visible: Boolean,
-		modelValue: Object as PropType<PageGenerator.TableColumn['buttons']>,
+		modelValue: Object as PropType<PageRenderer.TableColumn['buttons']>,
 	},
 	emits: {
 		close: () => true,
-		'update:modelValue': (buttons?: PageGenerator.TableColumn['buttons']) =>
+		'update:modelValue': (buttons?: PageRenderer.TableColumn['buttons']) =>
 			true,
 	},
 	setup(props, ctx) {
-		const buttons = ref<PageGenerator.TableColumn['buttons']>();
+		const buttons = ref<PageRenderer.TableColumn['buttons']>();
 		const buttonsEditor = ref<InstanceType<typeof ButtonsEditor>>();
 
 		watch(

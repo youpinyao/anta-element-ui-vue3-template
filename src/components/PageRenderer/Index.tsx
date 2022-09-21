@@ -16,7 +16,7 @@ import Table from './Table';
 import TableHeader from './TableHeader';
 import { useRequest } from '@/utils/hooks/useRequest';
 import { request } from '@axios';
-import { PageGenerator } from '@/views/PageGenerator/typing';
+import { PageRenderer } from '@/components/PageRenderer/typing';
 import { AtLoading, AtPagination } from 'anta-element-ui-components-next';
 import { PropsType } from 'anta-element-ui-components-next/src/utils/propsType';
 import { debounce } from 'throttle-debounce';
@@ -57,7 +57,7 @@ export default defineComponent({
 						loading: loading.value,
 					},
 				},
-			} as PageGenerator.JSONSchema['table'];
+			} as PageRenderer.JSONSchema['table'];
 		});
 		const dataSource = computed(() =>
 			props.config.schema?.pagination

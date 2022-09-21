@@ -4,7 +4,7 @@ import { AtSchemaForm, AtSchemaFormTypes } from 'anta-element-ui-schema-form';
 
 import clone from 'rfdc';
 import { defineComponent, PropType, reactive, ref, watch } from 'vue';
-import { PageGenerator } from '../../typing';
+import { PageRenderer } from '@components/PageRenderer/typing';
 import {
 	FormEditorModelItem,
 	transformFormEditorModelToProperties,
@@ -23,11 +23,11 @@ import SwaggerButton from '../SwaggerButton/Index';
 export default defineComponent({
 	props: {
 		visible: Boolean,
-		modelValue: Object as PropType<PageGenerator.FunctionButton['trigger']>,
+		modelValue: Object as PropType<PageRenderer.FunctionButton['trigger']>,
 	},
 	emits: {
 		close: () => true,
-		'update:modelValue': (trigger?: PageGenerator.FunctionButton['trigger']) =>
+		'update:modelValue': (trigger?: PageRenderer.FunctionButton['trigger']) =>
 			true,
 	},
 	setup(props, ctx) {
@@ -85,13 +85,13 @@ export default defineComponent({
 				switch (formModel.type) {
 					case 'jump':
 						formModel.path = (
-							props.modelValue as PageGenerator.FunctionButtonTriggerJump
+							props.modelValue as PageRenderer.FunctionButtonTriggerJump
 						).path;
 						break;
 					case 'dialog':
 						{
 							const dialogModel =
-								props.modelValue as PageGenerator.FunctionButtonTriggerDialog;
+								props.modelValue as PageRenderer.FunctionButtonTriggerDialog;
 
 							formModel.title = dialogModel.dialogProps?.title;
 							formModel.url = dialogModel.form?.url;
@@ -106,7 +106,7 @@ export default defineComponent({
 					case 'popconfirm':
 						{
 							const dialogModel =
-								props.modelValue as PageGenerator.FunctionButtonTriggerPopconfirm;
+								props.modelValue as PageRenderer.FunctionButtonTriggerPopconfirm;
 
 							formModel.title = dialogModel.confirmProps?.title;
 							formModel.url = dialogModel.url;
@@ -192,7 +192,7 @@ export default defineComponent({
 									<AtButton
 										onClick={async () => {
 											await form.value?.form?.validate();
-											let trigger: PageGenerator.FunctionButton['trigger'];
+											let trigger: PageRenderer.FunctionButton['trigger'];
 
 											switch (formModel.type) {
 												case 'jump':

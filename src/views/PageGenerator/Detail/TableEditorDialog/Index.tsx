@@ -11,7 +11,7 @@ import {
 	watch,
 } from 'vue';
 import ButtonsEditor from '../ButtonsEditor/Index';
-import { methods, PageGenerator } from '../../typing';
+import { methods, PageRenderer } from '@components/PageRenderer/typing';
 import { AtSchemaTableTypes } from 'anta-element-ui-schema-table';
 import { ArrayType } from 'anta-element-ui-components-next/src/utils/arrayType';
 import ButtonsEditorDialog from '../ButtonsEditorDialog/Index';
@@ -19,6 +19,7 @@ import JsonEditorDialog from '../JsonEditorDialog';
 import { ReadSwaggerPageResult } from '../SwaggerButton/readSwaggerPage';
 import SwaggerButton from '../SwaggerButton/Index';
 import { swaggerGeneratePageConfig } from '../SwaggerButton/swaggerGeneratePageConfig';
+import DialogFooter from '@/components/DialogFooter';
 
 export default defineComponent({
 	props: {
@@ -27,12 +28,12 @@ export default defineComponent({
 		},
 		schema: {
 			type: Object as PropType<
-				Pick<PageGenerator.JSONSchema, 'pagination' | 'table'>
+				Pick<PageRenderer.JSONSchema, 'pagination' | 'table'>
 			>,
 		},
 	},
 	emits: {
-		change: (schema: Pick<PageGenerator.JSONSchema, 'pagination' | 'table'>) =>
+		change: (schema: Pick<PageRenderer.JSONSchema, 'pagination' | 'table'>) =>
 			true,
 		close: () => true,
 	},
@@ -44,17 +45,17 @@ export default defineComponent({
 			selection?: boolean;
 			tree?: boolean;
 			url?: string;
-			method?: PageGenerator.Methods;
+			method?: PageRenderer.Methods;
 			columns?: NonNullable<
-				NonNullable<PageGenerator.JSONSchema['table']>['schema']
+				NonNullable<PageRenderer.JSONSchema['table']>['schema']
 			>['columns'];
 		}>({});
 		const formEditor = ref<InstanceType<typeof AtSchemaForm>>();
 
 		const columnButtonEditorIndex = ref<number>();
 		const columnJsonEditorIndex = ref<number>();
-		const columnButtonEditorContent = ref<PageGenerator.TableColumn>();
-		const columnJsonEditorContent = ref<PageGenerator.TableColumn>();
+		const columnButtonEditorContent = ref<PageRenderer.TableColumn>();
+		const columnJsonEditorContent = ref<PageRenderer.TableColumn>();
 
 		const formSchema: AtSchemaFormTypes.JSONSchema = {
 			properties: {
@@ -274,23 +275,13 @@ export default defineComponent({
 					vSlots={{
 						footer() {
 							return (
-								<div
-									class="dialog-footer"
-									style={{
-										display: 'flex',
-										justifyContent: 'space-between',
-										alignItems: 'center',
-									}}
-								>
-									<div></div>
-									<div>
-										<AtButton onClick={handleCancel}>取消</AtButton>
-										<SwaggerButton onGenerate={handleGenerate} />
-										<AtButton onClick={handleSave} type="primary">
-											保存
-										</AtButton>
-									</div>
-								</div>
+								<DialogFooter>
+									<AtButton onClick={handleCancel}>取消</AtButton>
+									<SwaggerButton onGenerate={handleGenerate} />
+									<AtButton onClick={handleSave} type="primary">
+										保存
+									</AtButton>
+								</DialogFooter>
 							);
 						},
 					}}

@@ -2,15 +2,15 @@ import { AtTitle } from 'anta-element-ui-components-next';
 import { defineComponent, PropType } from 'vue';
 import AtTableHeader from '@components/AtTableHeader.vue';
 import FunctionButton from '@/components/PageRenderer/FunctionButton';
-import { PageGenerator } from '@/views/PageGenerator/typing';
+import { PageRenderer } from '@/components/PageRenderer/typing';
 
 export default defineComponent({
 	props: {
 		title: {
-			type: String as PropType<PageGenerator.JSONSchema['title']>,
+			type: String as PropType<PageRenderer.JSONSchema['title']>,
 		},
 		buttons: {
-			type: Array as PropType<PageGenerator.JSONSchema['buttons']>,
+			type: Array as PropType<PageRenderer.JSONSchema['buttons']>,
 		},
 	},
 	setup(props, ctx) {

@@ -2,16 +2,16 @@ import { AtMessage } from 'anta-element-ui-components-next';
 import { AtSchemaFormTypes } from 'anta-element-ui-schema-form';
 import axios from 'axios';
 import { has } from 'lodash';
-import { PageGenerator } from '../../typing';
+import { PageRenderer } from '@components/PageRenderer/typing';
 
 export type ReadSwaggerPageResult = {
 	params: AtSchemaFormTypes.JSONSchema['properties'];
 	result: NonNullable<
-		NonNullable<PageGenerator.JSONSchema['table']>['schema']
+		NonNullable<PageRenderer.JSONSchema['table']>['schema']
 	>['columns'];
-	buttons?: PageGenerator.FunctionButton[];
+	buttons?: PageRenderer.FunctionButton[];
 	url?: string;
-	method?: PageGenerator.Methods;
+	method?: PageRenderer.Methods;
 	title?: string;
 	api?: string;
 	hash?: string;

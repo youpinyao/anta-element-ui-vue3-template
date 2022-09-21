@@ -1,4 +1,4 @@
-import { PageGenerator } from '@/views/PageGenerator/typing';
+import { PageRenderer } from '@/components/PageRenderer/typing';
 import { AtButton, AtPagination } from 'anta-element-ui-components-next';
 import { ArrayType } from 'anta-element-ui-components-next/src/utils/arrayType';
 import {
@@ -11,7 +11,7 @@ import FunctionButton from './FunctionButton';
 export default defineComponent({
 	props: {
 		schema: {
-			type: Object as PropType<PageGenerator.JSONSchema['table']>,
+			type: Object as PropType<PageRenderer.JSONSchema['table']>,
 			required: true,
 		},
 		dataSource: {

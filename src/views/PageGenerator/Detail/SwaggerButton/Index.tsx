@@ -15,7 +15,8 @@ import {
 	readSwaggerPage,
 	ReadSwaggerPageResult,
 } from './readSwaggerPage';
-import { PageGenerator } from '../../typing';
+import { PageRenderer } from '@components/PageRenderer/typing';
+import DialogFooter from '@/components/DialogFooter';
 
 export default defineComponent({
 	emits: {
@@ -44,7 +45,7 @@ export default defineComponent({
 
 				Object.entries(resource.value.paths).forEach(([api, methods]) => {
 					const option: AtSchemaFormTypes.SelectOption<{
-						method?: PageGenerator.Methods;
+						method?: PageRenderer.Methods;
 						url?: string;
 					}> = {
 						label: api,
@@ -56,7 +57,7 @@ export default defineComponent({
 						const hash = `${resource.value?.basePath}/${value.tags[0]}/${value.operationId}`;
 						const tag = `${value.tags.join('_')}_${method}`;
 						const extra = {
-							method: method.toUpperCase() as PageGenerator.Methods,
+							method: method.toUpperCase() as PageRenderer.Methods,
 							url: `${resource.value?.basePath}${api}`,
 							api,
 							title: value.summary,
@@ -102,7 +103,7 @@ export default defineComponent({
 					loading.value = true;
 					try {
 						const { params, result, pagination } = await readSwaggerPage(hash);
-						const buttons: PageGenerator.FunctionButton[] = [];
+						const buttons: PageRenderer.FunctionButton[] = [];
 						const post = apiConfigs[`${pickTag(hash)}_post`];
 						const put = apiConfigs[`${pickTag(hash)}_put`];
 						const del = apiConfigs[`${pickTag(hash)}_delete`];
@@ -226,7 +227,7 @@ export default defineComponent({
 					vSlots={{
 						footer() {
 							return (
-								<span class="dialog-footer">
+								<DialogFooter>
 									<AtButton onClick={handleCancel} loading={loading.value}>
 										取消
 									</AtButton>
@@ -238,7 +239,7 @@ export default defineComponent({
 									>
 										生成
 									</AtButton>
-								</span>
+								</DialogFooter>
 							);
 						},
 					}}

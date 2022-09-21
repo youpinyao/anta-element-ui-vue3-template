@@ -17,7 +17,7 @@ export const functionButtonTriggerTypes = [
 
 export const methods = ['POST', 'GET', 'PUT', 'PATCH', 'DELETE'] as const;
 
-export namespace PageGenerator {
+export namespace PageRenderer {
 	export interface FunctionButtonTrigger {
 		type: typeof functionButtonTriggerTypes[number];
 	}

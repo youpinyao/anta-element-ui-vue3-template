@@ -1,4 +1,5 @@
 import { adminApiMenuPost, adminApiMenuPut } from '@/apis/adminApiMenu';
+import DialogFooter from '@/components/DialogFooter';
 import { AdminApiMenusGetResult } from '@/models/menuApi/AdminApiMenusGetResult';
 import { AtButton, AtDialog, AtMessage } from 'anta-element-ui-components-next';
 import { ArrayType } from 'anta-element-ui-components-next/src/utils/arrayType';
@@ -31,14 +32,14 @@ const dialog = defineComponent({
 				v-slots={{
 					footer() {
 						return (
-							<span class="dialog-footer">
+							<DialogFooter>
 								<AtButton onClick={handleCancel} loading={loading}>
 									取消
 								</AtButton>
 								<AtButton onClick={handleSave} loading={loading} type="primary">
 									保存
 								</AtButton>
-							</span>
+							</DialogFooter>
 						);
 					},
 				}}
