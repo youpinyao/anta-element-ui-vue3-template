@@ -2,7 +2,7 @@ import { AtTitle } from 'anta-element-ui-components-next';
 import { defineComponent, PropType } from 'vue';
 import { PageGenerator } from '../typing';
 import FunctionButton from './FunctionButton';
-import Placeholder from './Placeholder.vue';
+import AtTableHeader from '@components/AtTableHeader.vue';
 
 export default defineComponent({
 	props: {
@@ -20,14 +20,11 @@ export default defineComponent({
 				return null;
 			}
 			return (
-				<div class="at-table-header">
-					<AtTitle border={false}>{title}</AtTitle>
-					<div>
-						{(buttons ?? []).map((button) => {
-							return <FunctionButton {...button} />;
-						})}
-					</div>
-				</div>
+				<AtTableHeader title={title}>
+					{(buttons ?? []).map((button) => {
+						return <FunctionButton {...button} />;
+					})}
+				</AtTableHeader>
 			);
 		};
 	},

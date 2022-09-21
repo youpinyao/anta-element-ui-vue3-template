@@ -31,6 +31,9 @@ import {
 import { debounce } from 'throttle-debounce';
 import { useRoute, useRouter } from 'vue-router';
 
+import AtTableHeader from '@components/AtTableHeader.vue';
+import AtSearchButtons from '@components/AtSearchButtons.vue';
+
 export default defineComponent({
 	name: 'PageGenerator',
 	setup() {
@@ -127,7 +130,7 @@ export default defineComponent({
 								schema={searchSchemaRef.value}
 								model={searchModelRef}
 							/>
-							<div class="at-search-button">
+							<AtSearchButtons>
 								<AtButton
 									type="primary"
 									loading={loading.value}
@@ -152,18 +155,16 @@ export default defineComponent({
 								>
 									重置
 								</AtButton>
-							</div>
+							</AtSearchButtons>
 						</Block>
 					) : null}
 					<Block>
-						<div class="at-table-header">
-							<AtTitle border={false}>页面列表</AtTitle>
-							<div>
-								<AtButton type="primary" onClick={handleAdd}>
-									新增
-								</AtButton>
-							</div>
-						</div>
+						<AtTableHeader title="页面列表">
+							<AtButton type="primary" onClick={handleAdd}>
+								新增
+							</AtButton>
+						</AtTableHeader>
+
 						<AtSchemaTable
 							schema={tableSchemaRef.value}
 							dataSource={tableDataSource.value}

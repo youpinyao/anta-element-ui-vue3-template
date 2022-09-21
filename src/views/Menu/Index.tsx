@@ -14,6 +14,7 @@ import { AtButton, AtMessage, AtTitle } from 'anta-element-ui-components-next';
 import Dialog from './Dialog/Index';
 import { ArrayType } from 'anta-element-ui-components-next/src/utils/arrayType';
 import { AdminApiMenusGetResult } from '@/models/menuApi/AdminApiMenusGetResult';
+import AtTableHeader from '@components/AtTableHeader.vue';
 
 export default defineComponent({
 	name: 'Menu',
@@ -76,14 +77,12 @@ export default defineComponent({
 						</Block>
 					) : null}
 					<Block>
-						<div class="at-table-header">
-							<AtTitle border={false}>菜单</AtTitle>
-							<div>
-								<AtButton type="primary" onClick={handleAdd}>
-									新增
-								</AtButton>
-							</div>
-						</div>
+						<AtTableHeader title="菜单">
+							<AtButton type="primary" onClick={handleAdd}>
+								新增
+							</AtButton>
+						</AtTableHeader>
+
 						<AtSchemaTable
 							schema={tableSchemaRef.value}
 							dataSource={tableDataSource.value}

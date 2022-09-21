@@ -4,6 +4,7 @@ import { defineComponent, PropType } from 'vue';
 import Block from '@components/Layout/Block.vue';
 import Placeholder from './Placeholder.vue';
 import { PageGenerator } from '../typing';
+import AtSearchButtons from '@components/AtSearchButtons.vue';
 
 export default defineComponent({
 	props: {
@@ -29,7 +30,8 @@ export default defineComponent({
 
 			return [
 				<AtSchemaForm schema={formSchema} model={model ?? {}} />,
-				<div class="at-search-button">
+
+				<AtSearchButtons>
 					<AtButton
 						style={{
 							display: searchButton ? undefined : 'none',
@@ -45,7 +47,7 @@ export default defineComponent({
 					>
 						重置
 					</AtButton>
-				</div>,
+				</AtSearchButtons>,
 			];
 		};
 	},

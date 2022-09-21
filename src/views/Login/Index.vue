@@ -80,9 +80,9 @@ import {
 	AtCol,
 } from 'anta-element-ui-components-next';
 import { reactive, ref, watch } from 'vue';
-// import { useRouter } from 'vue-router';
+import { useRouter } from 'vue-router';
 
-// const router = useRouter();
+const router = useRouter();
 
 const atIconUser = AtIconRender({
 	name: 'user',
@@ -118,13 +118,15 @@ const login = async () => {
 		useTokenStore().setToken(result.data.data?.token);
 		useUserStore().updateUserInfo();
 		useMenuStore().updateMenu();
-		// router.push('/');
-		window.location.href = '/';
+		router.push('/');
+		// window.location.href = '/';
 	} catch (err: any) {
 		errorMessage.value = getAxiosErrorMsg(err);
 		console.error(err);
 	} finally {
-		loading.value = false;
+		setTimeout(() => {
+			loading.value = false;
+		}, 1000);
 	}
 };
 

@@ -14,23 +14,3 @@
 .user-select-none {
 	user-select: none;
 }
-
-.at-table-header {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	margin: 0 0 16px;
-
-	.at-title {
-		padding: 0;
-	}
-
-	.at-button + .at-button {
-		margin-left: 12px;
-	}
-}
-
-.at-search-button {
-	display: flex;
-	justify-content: right;
-}

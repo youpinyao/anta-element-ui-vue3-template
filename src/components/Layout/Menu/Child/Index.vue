@@ -36,13 +36,13 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { AdminApiMenusGetResult } from '@/models/menuApi/AdminApiMenusGetResult';
+import { AsideMenus } from '@/store/menu';
 import { AtMenuItem, AtSubMenu } from 'anta-element-ui-components-next';
 import { PropType } from 'vue';
 
 defineProps({
 	items: {
-		type: Array as PropType<AdminApiMenusGetResult['data']>,
+		type: Array as PropType<AsideMenus>,
 		default: () => [],
 	},
 });
