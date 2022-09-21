@@ -58,6 +58,9 @@ module.exports = defineConfig({
 				'@models': path.resolve('./src/models'),
 				'@axios': path.resolve('./src/utils/axios'),
 				'@hooks': path.resolve('./src/utils/hooks'),
+				'@PageRenderer': path.resolve(
+					'./src/components/PageRenderer/Index.vue'
+				),
 			},
 		},
 		plugins: [

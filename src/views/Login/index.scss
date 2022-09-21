@@ -78,6 +78,12 @@
 					height: 33px;
 					padding-bottom: 15px;
 				}
+
+				:deep(.el-alert__content) {
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+				}
 			}
 
 			&__title {
