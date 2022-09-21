@@ -2,7 +2,7 @@ import { AtSchemaTableTypes } from 'anta-element-ui-schema-table';
 import * as uuid from 'uuid';
 
 export const generateDataSource = (
-	columns: AtSchemaTableTypes.JSONSchema['columns'],
+	columns: AtSchemaTableTypes.JSONSchema['columns'] = [],
 	tree?: boolean
 ) => {
 	const items: any[] = [];

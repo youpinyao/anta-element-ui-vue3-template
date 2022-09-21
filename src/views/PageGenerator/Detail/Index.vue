@@ -42,12 +42,7 @@
 
 		<Block v-show="hasSearch">
 			<EditArea @edit="handleSearchEdit">
-				<TableSearch
-					:schema="searchFormSchema"
-					:resetButton="pageConfig.schema?.search?.resetButton"
-					:searchButton="pageConfig.schema?.search?.searchButton"
-					:model="searchModel"
-				/>
+				<Search :schema="pageConfig.schema?.search" :model="searchModel" />
 			</EditArea>
 		</Block>
 
@@ -71,7 +66,11 @@
 				/>
 			</EditArea>
 			<EditArea @edit="handleTableEdit">
-				<Table :schema="tableSchema" :dataSource="dataSource"></Table>
+				<Table
+					v-if="pageConfig.schema?.table"
+					:schema="pageConfig.schema?.table"
+					:dataSource="dataSource"
+				></Table>
 				<AtPagination
 					:total="100"
 					v-show="pageConfig.schema?.pagination"
@@ -126,9 +125,9 @@ import { AtSchemaTableTypes } from 'anta-element-ui-schema-table';
 import { useMenuStore } from '@/store/menu';
 
 import PageTitleEditor from './PageTitleEditor.vue';
-import TableHeader from './TableHeader';
-import TableSearch from './TableSearch';
-import Table from './Table';
+import TableHeader from '@components/PageRenderer/TableHeader';
+import Search from '@components/PageRenderer/Search';
+import Table from '@components/PageRenderer/Table';
 import Placeholder from './Placeholder.vue';
 import SwaggerButton from './SwaggerButton/Index';
 import { swaggerGeneratePageConfig } from './SwaggerButton/swaggerGeneratePageConfig';
@@ -156,49 +155,19 @@ const saveLoading = ref(false);
 const { run, loading } = useRequest(adminApiPageGeneratorDetailGet, {
 	immediate: false,
 });
-const searchFormSchema = computed<any>(() => pageConfig.schema?.search?.form);
 const searchModel = reactive({});
 const hasSearch = computed(
 	() => !!Object.keys(pageConfig.schema?.search?.form?.properties ?? {}).length
 );
-const tableSchema = computed<AtSchemaTableTypes.JSONSchema>(() => {
-	const schema = pageConfig.schema?.table?.schema || {
-		columns: [],
-	};
-	const columns = [...(schema.columns ?? [])];
-	const tableProps = {
-		...schema.props,
-	};
-
-	if (pageConfig.schema?.table?.selection) {
-		columns.unshift({
-			type: 'selection',
-			width: 40,
-		});
-	}
-	if (pageConfig.schema?.table?.tree) {
-		tableProps.rowKey = 'id';
-		tableProps.treeProps = {
-			children: 'children',
-			hasChildren: 'hasChildren',
-		};
-	}
-	return {
-		...schema,
-		props: {
-			...schema.props,
-			rowKey: 'id',
-			treeProps: {
-				children: 'children',
-				hasChildren: 'hasChildren',
-			},
-		},
-		columns,
-	};
-});
-const hasTable = computed(() => !!tableSchema.value.columns.length);
+const hasTable = computed(
+	() => !!pageConfig.schema?.table?.schema?.columns?.length
+);
 const dataSource = computed<any[]>(() =>
-	generateDataSource(tableSchema.value.columns, pageConfig.schema?.table?.tree)
+	generateDataSource(
+		pageConfig.schema?.table?.schema
+			?.columns as AtSchemaTableTypes.JSONSchema['columns'],
+		pageConfig.schema?.table?.tree
+	)
 );
 
 const showSearchEditor = ref(false);
@@ -211,6 +180,8 @@ if (route.params.id && route.params.id !== 'add') {
 	}).then(({ data }) => {
 		Object.assign(pageConfig, data.data);
 	});
+} else {
+	loading.value = false;
 }
 
 const handleGenerate = (result: ReadSwaggerPageResult) => {
