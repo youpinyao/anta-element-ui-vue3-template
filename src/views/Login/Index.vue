@@ -31,7 +31,7 @@
 									placeholder="输入账号"
 								/>
 							</AtCol>
-							<AtCol>
+							<AtCol style="margin-bottom: 20px">
 								<AtInput
 									type="password"
 									v-model="user.password"
@@ -43,9 +43,9 @@
 								/>
 							</AtCol>
 
-							<AtCol class="forget">
+							<!-- <AtCol class="forget">
 								<a href="#" @click.prevent="forgot">忘记密码</a>
-							</AtCol>
+							</AtCol> -->
 							<AtCol>
 								<AtButton
 									block
@@ -98,9 +98,9 @@ const user = reactive({
 	password: '',
 });
 
-const forgot = () => {
-	AtMessage.warning('别点我，点了也没用！');
-};
+// const forgot = () => {
+// 	AtMessage.warning('别点我，点了也没用！');
+// };
 const login = async () => {
 	const { username, password } = user;
 	if (!username || !password) {
