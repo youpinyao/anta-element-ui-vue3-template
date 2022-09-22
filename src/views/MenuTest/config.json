@@ -71,8 +71,18 @@
 			"selection": true,
 			"schema": {
 				"columns": [
-					{ "prop": "bindingQuantity", "label": "绑定菜单数量", "width": 120 },
-					{ "prop": "createTime", "label": "创建时间", "width": 200 },
+					{
+						"prop": "bindingQuantity",
+						"sortable": true,
+						"label": "绑定菜单数量",
+						"width": 150
+					},
+					{
+						"prop": "createTime",
+						"sortable": true,
+						"label": "创建时间",
+						"width": 200
+					},
 					{ "prop": "createdBy", "label": "创建人", "width": 120 },
 					{ "prop": "deleteTime", "label": "删除时间", "width": 200 },
 					{ "prop": "id", "label": "主键" },

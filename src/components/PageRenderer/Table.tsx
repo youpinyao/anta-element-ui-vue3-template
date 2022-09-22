@@ -21,6 +21,7 @@ export default defineComponent({
 	},
 	emits: {
 		functionButtonCallback: () => true,
+		sortChange: (sort?: Record<string, 'ascending' | 'descending'>) => true,
 	},
 	render() {
 		const { tableSchema } = this;
@@ -31,6 +32,16 @@ export default defineComponent({
 	},
 	setup(props, ctx) {
 		const table = ref<InstanceType<typeof AtSchemaTable>>();
+		const onSortChange = (sort: any) => {
+			ctx.emit(
+				'sortChange',
+				sort.prop
+					? {
+							[sort.prop]: sort.order,
+					  }
+					: undefined
+			);
+		};
 		const tableSchema = computed<AtSchemaTableTypes.JSONSchema>(() => {
 			const schema = props.schema?.schema || {
 				columns: [],
@@ -62,6 +73,7 @@ export default defineComponent({
 						children: 'children',
 						hasChildren: 'hasChildren',
 					},
+					'onSort-change': onSortChange,
 				},
 				columns: columns.map((item) => {
 					if (item.type === 'selection') {

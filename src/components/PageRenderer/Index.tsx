@@ -31,7 +31,15 @@ export default defineComponent({
 	},
 	setup(props, ctx) {
 		const table = ref<InstanceType<typeof Table>>();
-		const searchModel = reactive({
+		const flatSort = (sort: Record<string, any> = {}) => {
+			return (
+				Object.entries(sort)
+					.map((item) => `${item[0]}|${item[1]}`)
+					.join(',') || undefined
+			);
+		};
+		const searchModel = reactive<Record<string, any>>({
+			sort: flatSort(props.config.schema?.table?.schema?.props?.defaultSort),
 			...Object.fromEntries(
 				Object.entries(props.config.schema?.search?.form?.properties ?? {})
 					.filter(([field, item]) => (item as any).defaultValue !== undefined)
@@ -97,6 +105,10 @@ export default defineComponent({
 			searchModel.pageSize = pageSize;
 			handleSearch();
 		};
+		const onSortChange = (sort: any) => {
+			searchModel.sort = flatSort(sort);
+			handleSearch();
+		};
 		const skipSearch = ref(false);
 		const debounceDelay = 300;
 		const handleDebounceSearch = debounce(debounceDelay, handleSearch);
@@ -108,6 +120,7 @@ export default defineComponent({
 				};
 				delete params.page;
 				delete params.pageSize;
+				delete params.sort;
 				return JSON.stringify(params);
 			},
 			() => {
@@ -160,6 +173,7 @@ export default defineComponent({
 							/>
 							<Table
 								ref={table}
+								onSortChange={onSortChange}
 								schema={tableSchema.value}
 								dataSource={dataSource.value}
 								onFunctionButtonCallback={handleSearch}
