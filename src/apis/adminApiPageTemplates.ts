@@ -11,17 +11,17 @@ import { del, get, post, put } from '@/utils/axios';
 import { PageRenderer } from '@/components/PageRenderer/typing';
 import { ArrayType } from 'anta-element-ui-components-next/src/utils/arrayType';
 
-export function adminApiPageTemplatesGet(
-	data: AdminApiPage$TemplatesGetParams
-) {
-	return get<
-		AdminApiPage$TemplatesGetResult['data'],
-		AdminApiPage$TemplatesGetParams
-	>({
-		url: '/admin/api/page-templates',
-		data,
-	});
-}
+// export function adminApiPageTemplatesGet(
+// 	data: AdminApiPage$TemplatesGetParams
+// ) {
+// 	return get<
+// 		AdminApiPage$TemplatesGetResult['data'],
+// 		AdminApiPage$TemplatesGetParams
+// 	>({
+// 		url: '/admin/api/page-templates',
+// 		data,
+// 	});
+// }
 
 export function adminApiPageTemplatesPost(
 	data: AdminApiPage$TemplatesPostParams['req']
@@ -59,11 +59,13 @@ export function adminApiPageTemplatesDel(
 	});
 }
 
-export type AdminApiPageGeneratorDetailGetResult = Omit<
+export type AdminApiPageGeneratorDetailGetResult<
+	T extends Record<string, any> = any
+> = Omit<
 	NonNullable<ArrayType<Definition2109f27d03411ab2d387f6d44a00e6a5['list']>>,
 	'schema'
 > & {
-	schema?: PageRenderer.JSONSchema;
+	schema?: PageRenderer.JSONSchema<T>;
 };
 
 export async function adminApiPageGeneratorDetailGet(data: any) {

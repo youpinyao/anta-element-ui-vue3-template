@@ -71,12 +71,12 @@ export namespace PageRenderer {
 		defaultValue?: any;
 	};
 
-	export type TableColumn = ArrayType<
-		AtSchemaTableTypes.JSONSchema['columns']
+	export type TableColumn<T extends Record<string, any> = any> = ArrayType<
+		AtSchemaTableTypes.JSONSchema<T>['columns']
 	> & {
 		buttons?: FunctionButton[];
 	};
-	export interface JSONSchema {
+	export interface JSONSchema<T extends Record<string, any> = any> {
 		title?: string;
 		search?: {
 			form?: AtSchemaFormTypes.JSONSchema;
@@ -89,8 +89,8 @@ export namespace PageRenderer {
 			method?: Methods;
 			selection?: boolean;
 			tree?: boolean;
-			schema?: Omit<AtSchemaTableTypes.JSONSchema, 'columns'> & {
-				columns: TableColumn[];
+			schema?: Omit<AtSchemaTableTypes.JSONSchema<T>, 'columns'> & {
+				columns: TableColumn<T>[];
 			};
 		};
 		pagination?: boolean;

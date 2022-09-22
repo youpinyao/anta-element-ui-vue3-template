@@ -13,6 +13,7 @@ export type ReadSwaggerPageResult = {
 	url?: string;
 	method?: PageRenderer.Methods;
 	title?: string;
+	alias?: string;
 	api?: string;
 	hash?: string;
 	pagination?: boolean;

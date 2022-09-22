@@ -7,10 +7,17 @@
 			}"
 		>
 			<div>
-				<PageTitleEditor
+				<InputEditor
 					v-show="!loading"
-					:title="pageConfig.title"
+					:content="pageConfig.title"
+					placeholder="请输入页面标题"
 					@change="handleChangePageTitle"
+				/>
+				<InputEditor
+					v-show="!loading"
+					:content="pageConfig.alias"
+					placeholder="请输入页面别名"
+					@change="handleChangePageAlias"
 				/>
 			</div>
 			<div class="header__buttons">
@@ -119,12 +126,13 @@ import Block from '@components/Layout/Block.vue';
 import {
 	AtButton,
 	AtLoading,
+	AtMessage,
 	AtPagination,
 } from 'anta-element-ui-components-next';
 import { AtSchemaTableTypes } from 'anta-element-ui-schema-table';
 import { useMenuStore } from '@/store/menu';
 
-import PageTitleEditor from './PageTitleEditor.vue';
+import InputEditor from './InputEditor.vue';
 import TableHeader from '@components/PageRenderer/TableHeader';
 import Search from '@components/PageRenderer/Search';
 import Table from '@components/PageRenderer/Table';
@@ -186,6 +194,7 @@ if (route.params.id && route.params.id !== 'add') {
 
 const handleGenerate = (result: ReadSwaggerPageResult) => {
 	pageConfig.title = result.title;
+	pageConfig.alias = result.alias;
 	pageConfig.schema = {
 		...pageConfig.schema,
 		...swaggerGeneratePageConfig(result),
@@ -196,20 +205,32 @@ const handleChangePageTitle = (title: string) => {
 	pageConfig.title = title;
 };
 
+const handleChangePageAlias = (alias: string) => {
+	pageConfig.alias = alias;
+};
+
 const handleBack = () => {
 	router.back();
 };
 const handleSave = async () => {
-	console.log(pageConfig);
+	// console.log(pageConfig);
 	// console.log(JSON.stringify(pageConfig));
 
 	saveLoading.value = true;
 	try {
 		if (pageConfig.id) {
-			await adminApiPageTemplatesPut(pageConfig);
+			await adminApiPageTemplatesPut({
+				...pageConfig,
+				schema: JSON.stringify(pageConfig.schema),
+			});
 		} else {
-			await adminApiPageTemplatesPost(pageConfig);
+			await adminApiPageTemplatesPost({
+				...pageConfig,
+				status: 0,
+				schema: JSON.stringify(pageConfig.schema),
+			});
 		}
+		AtMessage.success('保存成功');
 	} catch (error) {
 		console.log(error);
 	} finally {

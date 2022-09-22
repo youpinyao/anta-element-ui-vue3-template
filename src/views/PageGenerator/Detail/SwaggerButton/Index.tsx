@@ -33,7 +33,10 @@ export default defineComponent({
 		const apiConfigs = reactive<
 			Record<
 				string,
-				Pick<ReadSwaggerPageResult, 'url' | 'method' | 'title' | 'api' | 'hash'>
+				Pick<
+					ReadSwaggerPageResult,
+					'url' | 'method' | 'title' | 'alias' | 'api' | 'hash'
+				>
 			>
 		>({});
 
@@ -56,12 +59,14 @@ export default defineComponent({
 					Object.entries(methods).forEach(([method, value]) => {
 						const hash = `${resource.value?.basePath}/${value.tags[0]}/${value.operationId}`;
 						const tag = `${value.tags.join('_')}_${method}`;
+						const url = `${resource.value?.basePath}${api}`;
 						const extra = {
 							method: method.toUpperCase() as PageRenderer.Methods,
-							url: `${resource.value?.basePath}${api}`,
+							url,
 							api,
 							title: value.summary,
 							hash,
+							alias: url.replace(/\//g, '.').replace(/^(\.)/g, ''),
 						};
 						option!.children!.push({
 							label: `${api} ${method} ${value.summary}`,
