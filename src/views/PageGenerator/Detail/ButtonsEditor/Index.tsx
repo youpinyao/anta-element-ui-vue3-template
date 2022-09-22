@@ -82,7 +82,7 @@ export default defineComponent({
 								title: '按钮',
 								type: 'primary',
 								trigger: {
-									type: 'jump',
+									type: 'route',
 									path: '',
 								},
 							});

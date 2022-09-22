@@ -26,8 +26,12 @@ export default defineComponent({
 				typeof trigger?.data === 'function' ? trigger?.data?.() : trigger?.data;
 
 			switch (trigger?.type) {
-				case 'jump':
+				case 'route':
 					router.push(replaceStringParams(trigger.path, data));
+					break;
+
+				case 'link':
+					window.open(replaceStringParams(trigger.url, data));
 					break;
 				case 'dialog':
 					dialogConfig.value = trigger;
@@ -46,7 +50,9 @@ export default defineComponent({
 				typeof trigger?.data === 'function' ? trigger?.data?.() : trigger?.data;
 
 			switch (trigger?.type) {
-				case 'jump':
+				case 'route':
+					break;
+				case 'link':
 					break;
 				case 'dialog':
 					break;

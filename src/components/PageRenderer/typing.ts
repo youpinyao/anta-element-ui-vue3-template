@@ -10,7 +10,8 @@ import { AtSchemaFormTypes } from 'anta-element-ui-schema-form';
 import { AtSchemaTableTypes } from 'anta-element-ui-schema-table';
 
 export const functionButtonTriggerTypes = [
-	'jump',
+	'route',
+	'link',
 	'dialog',
 	'popconfirm',
 ] as const;
@@ -26,9 +27,16 @@ export namespace PageRenderer {
 	export type FunctionButtonTriggerData =
 		| Record<string, any>
 		| (() => Record<string, any>);
-	export interface FunctionButtonTriggerJump extends FunctionButtonTrigger {
-		type: 'jump';
+	export interface FunctionButtonTriggerRoute extends FunctionButtonTrigger {
+		type: 'route';
 		path: string;
+		data?: FunctionButtonTriggerData;
+		callback?: () => void;
+	}
+
+	export interface FunctionButtonTriggerLink extends FunctionButtonTrigger {
+		type: 'link';
+		url: string;
 		data?: FunctionButtonTriggerData;
 		callback?: () => void;
 	}
@@ -60,7 +68,8 @@ export namespace PageRenderer {
 		title: string;
 		type: PropsType<typeof AtButton>['type'];
 		trigger:
-			| FunctionButtonTriggerJump
+			| FunctionButtonTriggerLink
+			| FunctionButtonTriggerRoute
 			| FunctionButtonTriggerDialog
 			| FunctionButtonTriggerPopconfirm;
 	}

@@ -5,13 +5,28 @@ import {
 } from '@components/PageRenderer/typing';
 import { transformPropertiesToFormEditorModel } from '../FormEditor/Index';
 
-export const jumpFormProperties: () => AtSchemaFormTypes.JSONSchema['properties'] =
+export const routeFormProperties: () => AtSchemaFormTypes.JSONSchema['properties'] =
 	() => ({
 		path: {
 			component: 'input',
 			label: '跳转路径',
 			props: {
 				placeholder: 'vue路由地址',
+			},
+			formItemProps: {
+				required: true,
+				labelWidth: 100,
+			},
+		},
+	});
+
+export const linkFormProperties: () => AtSchemaFormTypes.JSONSchema['properties'] =
+	() => ({
+		url: {
+			component: 'input',
+			label: '跳转路径',
+			props: {
+				placeholder: '链接',
 			},
 			formItemProps: {
 				required: true,

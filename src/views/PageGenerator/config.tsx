@@ -13,7 +13,7 @@ export default {
 				title: '新增',
 				type: 'primary',
 				trigger: {
-					type: 'jump',
+					type: 'route',
 					path: '/page-generator/add',
 				},
 			},
@@ -63,7 +63,7 @@ export default {
 								title: '编辑',
 								type: 'primary',
 								trigger: {
-									type: 'jump',
+									type: 'route',
 									path: '/page-generator/{id}',
 								},
 							},

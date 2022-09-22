@@ -14,7 +14,8 @@ import FormEditorDialog from '../FormEditorDialog/Index';
 import {
 	baseFormProperties,
 	dialogFormProperties,
-	jumpFormProperties,
+	routeFormProperties,
+	linkFormProperties,
 	popconfirmFormProperties,
 } from './schema';
 import { ReadSwaggerPageResult } from '../SwaggerButton/readSwaggerPage';
@@ -83,10 +84,16 @@ export default defineComponent({
 				Object.keys(formModel).forEach((key) => delete formModel[key]);
 				formModel.type = props.modelValue.type;
 				switch (formModel.type) {
-					case 'jump':
+					case 'route':
 						formModel.path = (
-							props.modelValue as PageRenderer.FunctionButtonTriggerJump
+							props.modelValue as PageRenderer.FunctionButtonTriggerRoute
 						).path;
+						break;
+
+					case 'link':
+						formModel.url = (
+							props.modelValue as PageRenderer.FunctionButtonTriggerLink
+						).url;
 						break;
 					case 'dialog':
 						{
@@ -120,12 +127,22 @@ export default defineComponent({
 			() => formModel.type,
 			() => {
 				switch (formModel.type) {
-					case 'jump':
+					case 'route':
 						formSchema.value = {
 							...formSchema.value,
 							properties: {
 								...baseFormProperties(),
-								...jumpFormProperties(),
+								...routeFormProperties(),
+							},
+						};
+						break;
+
+					case 'link':
+						formSchema.value = {
+							...formSchema.value,
+							properties: {
+								...baseFormProperties(),
+								...linkFormProperties(),
 							},
 						};
 						break;
@@ -195,10 +212,16 @@ export default defineComponent({
 											let trigger: PageRenderer.FunctionButton['trigger'];
 
 											switch (formModel.type) {
-												case 'jump':
+												case 'route':
 													trigger = {
-														type: 'jump',
+														type: 'route',
 														path: formModel.path,
+													};
+													break;
+												case 'lnk':
+													trigger = {
+														type: 'link',
+														url: formModel.url,
 													};
 													break;
 												case 'dialog':
@@ -236,8 +259,8 @@ export default defineComponent({
 													break;
 												default:
 													trigger = {
-														type: 'jump',
-														path: '',
+														type: 'link',
+														url: '',
 													};
 											}
 
