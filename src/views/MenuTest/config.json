@@ -41,25 +41,20 @@
 						"method": "POST",
 						"schema": {
 							"properties": {
-								"id": {
-									"component": "input",
-									"label": "主键,示例值(1)：",
-									"formItemProps": { "labelWidth": 100 }
-								},
 								"moduleFlag": {
 									"component": "input",
-									"label": "模块类型：",
+									"label": "模块：",
 									"type": "number",
 									"formItemProps": { "labelWidth": 100 }
 								},
 								"name": {
 									"component": "input",
-									"label": "名字,示例值(测试)：",
+									"label": "名字：",
 									"formItemProps": { "labelWidth": 100 }
 								},
 								"remark": {
 									"component": "input",
-									"label": "备注,示例值(测试)：",
+									"label": "备注：",
 									"formItemProps": { "labelWidth": 100 }
 								}
 							}
@@ -72,21 +67,23 @@
 		"table": {
 			"url": "/admin/api/roles",
 			"method": "GET",
+			"selection": true,
 			"schema": {
 				"columns": [
-					{ "prop": "bindingQuantity", "label": "绑定菜单数量" },
+					{ "prop": "bindingQuantity", "label": "绑定菜单数量", "width": 120 },
 					{ "prop": "createTime", "label": "创建时间", "width": 200 },
-					{ "prop": "createdBy", "label": "创建人" },
+					{ "prop": "createdBy", "label": "创建人", "width": 120 },
 					{ "prop": "deleteTime", "label": "删除时间", "width": 200 },
 					{ "prop": "id", "label": "主键" },
 					{ "prop": "moduleFlag", "label": "模块类型" },
-					{ "prop": "name", "label": "名字" },
+					{ "prop": "name", "label": "名字", "width": 120 },
 					{ "prop": "updateTime", "label": "更新时间", "width": 200 },
-					{ "prop": "updatedBy", "label": "更新人" },
+					{ "prop": "updatedBy", "label": "更新人", "width": 120 },
 					{
 						"prop": "id",
 						"label": "操作",
 						"width": 140,
+						"fixed": "right",
 						"buttons": [
 							{
 								"title": "编辑",
@@ -98,25 +95,20 @@
 										"method": "PUT",
 										"schema": {
 											"properties": {
-												"id": {
-													"component": "input",
-													"label": "主键,示例值(1)：",
-													"formItemProps": { "labelWidth": 100 }
-												},
 												"moduleFlag": {
 													"component": "input",
-													"label": "模块类型：",
+													"label": "模块：",
 													"type": "number",
 													"formItemProps": { "labelWidth": 100 }
 												},
 												"name": {
 													"component": "input",
-													"label": "名字,示例值(测试)：",
+													"label": "名字：",
 													"formItemProps": { "labelWidth": 100 }
 												},
 												"remark": {
 													"component": "input",
-													"label": "备注,示例值(测试)：",
+													"label": "备注：",
 													"formItemProps": { "labelWidth": 100 }
 												}
 											}
@@ -131,7 +123,7 @@
 								"trigger": {
 									"type": "popconfirm",
 									"url": "/admin/api/roles/{id}",
-									"method": "PUT",
+									"method": "DELETE",
 									"confirmProps": { "title": "确认删除？" }
 								}
 							}

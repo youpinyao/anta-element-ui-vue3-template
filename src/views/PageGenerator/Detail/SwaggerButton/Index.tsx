@@ -163,8 +163,8 @@ export default defineComponent({
 								type: 'danger',
 								trigger: {
 									type: 'popconfirm',
-									url: `${put.url}/{id}`,
-									method: put.method ?? 'DELETE',
+									url: `${del.url}/{id}`,
+									method: del.method ?? 'DELETE',
 									confirmProps: {
 										title: '确认删除？',
 									},

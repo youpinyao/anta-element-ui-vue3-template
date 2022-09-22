@@ -19,6 +19,9 @@ export function loginInterceptor(instance: AxiosInstance) {
 				timer = setTimeout(() => {
 					router.replace({
 						name: 'Login',
+						query: {
+							from: router.currentRoute.value.fullPath,
+						},
 					});
 				}, 300);
 			}

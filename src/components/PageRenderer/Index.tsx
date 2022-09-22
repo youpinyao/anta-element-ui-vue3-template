@@ -30,6 +30,7 @@ export default defineComponent({
 		},
 	},
 	setup(props, ctx) {
+		const table = ref<InstanceType<typeof Table>>();
 		const searchModel = reactive({
 			...Object.fromEntries(
 				Object.entries(props.config.schema?.search?.form?.properties ?? {})
@@ -69,10 +70,7 @@ export default defineComponent({
 				request<any>({
 					url: props.config.schema?.table?.url,
 					method: props.config.schema?.table?.method,
-					data:
-						props.config.schema?.table?.method === 'GET' ? undefined : params,
-					params:
-						props.config.schema?.table?.method !== 'GET' ? undefined : params,
+					data: params,
 				}),
 			{
 				immediate: false,
@@ -155,15 +153,23 @@ export default defineComponent({
 					<Block style={tableStyle}>
 						<AtLoading visible={loading.value && dataSource.value.length !== 0}>
 							<TableHeader
+								table={table.value}
 								title={config.schema?.title}
 								buttons={config.schema?.buttons}
+								onFunctionButtonCallback={handleSearch}
 							/>
-							<Table schema={tableSchema.value} dataSource={dataSource.value} />
+							<Table
+								ref={table}
+								schema={tableSchema.value}
+								dataSource={dataSource.value}
+								onFunctionButtonCallback={handleSearch}
+							/>
 							{config.schema?.pagination ? (
 								<AtPagination
 									total={pagination.value.total}
 									currentPage={searchModel.page ?? 1}
 									pageSize={searchModel.pageSize ?? 10}
+									pageSizes={[10, 15, 20, 30, 40, 50]}
 									onUpdate:current-page={handleCurrentChange}
 									onUpdate:page-size={handleSizeChange}
 								></AtPagination>

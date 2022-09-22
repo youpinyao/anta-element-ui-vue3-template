@@ -96,8 +96,8 @@ export default defineComponent({
 							formModel.title = dialogModel.dialogProps?.title;
 							formModel.url = dialogModel.form?.url;
 							formModel.method = dialogModel.form?.method;
-							formModel.dataUrl = dialogModel.form?.data?.url;
-							formModel.dataMethod = dialogModel.form?.data?.method;
+							formModel.dataUrl = dialogModel?.form?.dataUrl;
+							formModel.dataMethod = dialogModel?.form?.dataMethod;
 							formModel.okText = dialogModel.okText;
 							formModel.cancelText = dialogModel.cancelText;
 							formModel.form = dialogModel.form;
@@ -205,15 +205,13 @@ export default defineComponent({
 													{
 														trigger = {
 															type: 'dialog',
+
 															form: {
 																url: formModel.url,
 																method: formModel.method,
-																data: formModel.dataUrl
-																	? {
-																			url: formModel.dataUrl,
-																			method: formModel.dataMethod,
-																	  }
-																	: undefined,
+																dataUrl: formModel.dataUrl,
+																dataMethod: formModel.dataMethod,
+
 																schema: formModel.form?.schema,
 															},
 															cancelText: formModel.cancelText,

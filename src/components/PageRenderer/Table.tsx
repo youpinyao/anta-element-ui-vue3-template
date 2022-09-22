@@ -5,7 +5,7 @@ import {
 	AtSchemaTable,
 	AtSchemaTableTypes,
 } from 'anta-element-ui-schema-table';
-import { computed, defineComponent, PropType } from 'vue';
+import { computed, defineComponent, PropType, ref } from 'vue';
 import FunctionButton from './FunctionButton';
 
 export default defineComponent({
@@ -19,7 +19,18 @@ export default defineComponent({
 			required: true,
 		},
 	},
+	emits: {
+		functionButtonCallback: () => true,
+	},
+	render() {
+		const { tableSchema } = this;
+		const { dataSource } = this.$props;
+		return (
+			<AtSchemaTable ref="table" schema={tableSchema} dataSource={dataSource} />
+		);
+	},
 	setup(props, ctx) {
+		const table = ref<InstanceType<typeof AtSchemaTable>>();
 		const tableSchema = computed<AtSchemaTableTypes.JSONSchema>(() => {
 			const schema = props.schema?.schema || {
 				columns: [],
@@ -63,7 +74,20 @@ export default defineComponent({
 								return (
 									<div>
 										{item.buttons?.map((button) => {
-											return <FunctionButton size="small" {...button} />;
+											return (
+												<FunctionButton
+													size="small"
+													{...button}
+													trigger={{
+														...button.trigger,
+														data: button.trigger.data ?? row,
+														callback() {
+															button.trigger.callback?.();
+															ctx.emit('functionButtonCallback');
+														},
+													}}
+												/>
+											);
 										})}
 									</div>
 								);
@@ -75,12 +99,9 @@ export default defineComponent({
 				}),
 			};
 		});
-		return () => {
-			const { dataSource } = props;
-
-			return [
-				<AtSchemaTable schema={tableSchema.value} dataSource={dataSource} />,
-			];
+		return {
+			table,
+			tableSchema,
 		};
 	},
 });

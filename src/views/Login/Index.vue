@@ -69,7 +69,7 @@ import { adminApiLoginPost } from '@/apis/adminApiLogin';
 import { useMenuStore } from '@/store/menu';
 import { useTokenStore } from '@/store/token';
 import { useUserStore } from '@/store/user';
-import { getAxiosErrorMsg } from '@axios/error';
+import { getAxiosErrorMsg } from '@axios/msg';
 import {
 	AtIconRender,
 	AtMessage,
@@ -118,7 +118,7 @@ const login = async () => {
 		useTokenStore().setToken(result.data.data?.token);
 		useUserStore().updateUserInfo();
 		useMenuStore().updateMenu();
-		router.push('/');
+		router.push((router.currentRoute?.value?.query?.from as string) || '/');
 		// window.location.href = '/';
 	} catch (err: any) {
 		errorMessage.value = getAxiosErrorMsg(err);

@@ -22,21 +22,27 @@ export namespace PageRenderer {
 		type: typeof functionButtonTriggerTypes[number];
 	}
 	export type Methods = typeof methods[number];
+
+	export type FunctionButtonTriggerData =
+		| Record<string, any>
+		| (() => Record<string, any>);
 	export interface FunctionButtonTriggerJump extends FunctionButtonTrigger {
 		type: 'jump';
 		path: string;
+		data?: FunctionButtonTriggerData;
+		callback?: () => void;
 	}
 	export interface FunctionButtonTriggerDialog extends FunctionButtonTrigger {
 		type: 'dialog';
+		data?: FunctionButtonTriggerData;
 		form: {
 			url: string;
 			method: Methods;
-			data?: {
-				url: string;
-				method: Methods;
-			};
+			dataUrl?: string;
+			dataMethod?: Methods;
 			schema: AtSchemaFormTypes.JSONSchema;
 		};
+		callback?: () => void;
 		cancelText?: string | boolean;
 		okText?: string | boolean;
 		dialogProps: PropsType<typeof AtDialog>;
@@ -46,6 +52,8 @@ export namespace PageRenderer {
 		type: 'popconfirm';
 		url: string;
 		method: Methods;
+		data?: FunctionButtonTriggerData;
+		callback?: () => void;
 		confirmProps: PropsType<typeof AtPopconfirm>;
 	}
 	export interface FunctionButton {

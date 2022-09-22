@@ -1,5 +1,18 @@
-import { AxiosError } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 import { ResponseBody } from './types';
+
+export function getAxiosMsg<T extends ResponseBody, D>(
+	response: AxiosResponse<ResponseBody<any>, any>
+) {
+	let message;
+	if (response?.data?.errsMsg) {
+		message = errsMsgToString(response?.data?.errsMsg);
+	} else if (response?.data?.msg) {
+		message = response?.data?.msg;
+	}
+
+	return message || '';
+}
 
 export function getAxiosErrorMsg<T extends ResponseBody, D>(
 	err: AxiosError<T, D>

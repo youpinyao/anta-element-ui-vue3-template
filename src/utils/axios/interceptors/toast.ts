@@ -1,7 +1,7 @@
 import { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import { ElNotification } from 'anta-element-ui-components-next';
 import { RequestConfig, ResponseBody } from '../types';
-import { errsMsgToString } from '../error';
+import { errsMsgToString } from '../msg';
 
 export function toastInterceptor(instance: AxiosInstance) {
 	instance.interceptors.response.use(

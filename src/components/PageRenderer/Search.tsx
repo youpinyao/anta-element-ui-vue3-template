@@ -1,8 +1,6 @@
 import { AtButton } from 'anta-element-ui-components-next';
 import { AtSchemaForm } from 'anta-element-ui-schema-form';
 import { defineComponent, PropType } from 'vue';
-import Block from '@components/Layout/Block.vue';
-import Placeholder from './Placeholder.vue';
 import AtSearchButtons from '@components/AtSearchButtons.vue';
 import { PageRenderer } from '@/components/PageRenderer/typing';
 
