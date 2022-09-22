@@ -42,9 +42,10 @@
 						"schema": {
 							"properties": {
 								"moduleFlag": {
-									"component": "input",
+									"component": "select",
 									"label": "模块：",
 									"type": "number",
+									"options": "https://mockapi.eolink.com/P53yfvi48d34d7911634f79adf81360dff9866c33ced788/admin/api/role/list",
 									"formItemProps": { "labelWidth": 100 }
 								},
 								"name": {

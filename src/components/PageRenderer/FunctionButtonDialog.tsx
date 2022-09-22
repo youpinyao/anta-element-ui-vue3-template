@@ -66,6 +66,12 @@ export default defineComponent({
 					timer.value = setTimeout(() => {
 						dialogLoading.value = false;
 					}, 300);
+
+					// 清空
+					Object.keys(model).forEach((key) => {
+						model[key] = undefined;
+					});
+
 					if (props.config?.form.dataUrl) {
 						// get data from url
 						loading.value = true;
@@ -91,10 +97,6 @@ export default defineComponent({
 								? props.config?.data?.()
 								: props.config?.data
 						);
-					} else {
-						Object.keys(model).forEach((key) => {
-							model[key] = undefined;
-						});
 					}
 				}
 			}
