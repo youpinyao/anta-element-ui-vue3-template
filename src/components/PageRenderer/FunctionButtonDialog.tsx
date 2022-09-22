@@ -1,7 +1,12 @@
 import { request } from '@/utils/axios';
 import { getAxiosMsg } from '@/utils/axios/msg';
 import replaceStringParams from '@/utils/replaceStringParams';
-import { AtButton, AtDialog, AtMessage } from 'anta-element-ui-components-next';
+import {
+	AtButton,
+	AtDialog,
+	AtLoading,
+	AtMessage,
+} from 'anta-element-ui-components-next';
 import { AtSchemaFormTypes } from 'anta-element-ui-schema-form';
 import { defineComponent, PropType, ref, reactive, watch, toRaw } from 'vue';
 import DialogFooter from '../DialogFooter';
@@ -23,8 +28,17 @@ export default defineComponent({
 	setup(props, ctx) {
 		const model = reactive<AtSchemaFormTypes.Model>({});
 		const loading = ref(false);
-		const handleDialogCancel = () => {
+		const timer = ref();
+		const dialogLoading = ref(true);
+		const handleClose = () => {
 			ctx.emit('close');
+		};
+		const handleDialogCancel = () => {
+			handleClose();
+			clearTimeout(timer.value);
+			timer.value = setTimeout(() => {
+				dialogLoading.value = true;
+			}, 300);
 		};
 		const handleDialogSave = async () => {
 			loading.value = true;
@@ -36,7 +50,7 @@ export default defineComponent({
 				});
 				AtMessage.success(getAxiosMsg(result) || '操作成功');
 				props.config?.callback?.();
-				ctx.emit('close');
+				handleClose();
 			} catch (error) {
 				console.error(error);
 			} finally {
@@ -48,6 +62,10 @@ export default defineComponent({
 			() => props.visible,
 			(visible) => {
 				if (visible === true) {
+					clearTimeout(timer.value);
+					timer.value = setTimeout(() => {
+						dialogLoading.value = false;
+					}, 300);
 					if (props.config?.form.dataUrl) {
 						// get data from url
 						loading.value = true;
@@ -89,7 +107,7 @@ export default defineComponent({
 					modelValue={props.visible}
 					{...props.config?.dialogProps}
 					onUpdate:modelValue={() => {
-						ctx.emit('close');
+						handleClose();
 					}}
 					vSlots={{
 						footer() {
@@ -120,7 +138,17 @@ export default defineComponent({
 						},
 					}}
 				>
-					{props.config?.form ? (
+					{
+						<AtLoading
+							static
+							visible={dialogLoading.value}
+							style={{
+								padding: '50px 0',
+								display: dialogLoading.value ? '' : 'none',
+							}}
+						></AtLoading>
+					}
+					{props.config?.form && dialogLoading.value === false ? (
 						<SchemaForm schema={props.config?.form.schema} model={model} />
 					) : null}
 				</AtDialog>
