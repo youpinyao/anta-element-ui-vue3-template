@@ -5,21 +5,21 @@ const StylelintPlugin = require('stylelint-webpack-plugin');
 module.exports = defineConfig({
 	filenameHashing: true,
 	runtimeCompiler: true,
-	// transpileDependencies: [
-	// 	'anta-element-ui-components-next',
-	// 	'anta-element-ui-schema-form',
-	// 	'anta-element-ui-schema-table',
-	// 	'element-plus',
-	// ],
-	dll: {
-		element: [
-			'element-plus',
-			'anta-element-ui-components-next',
-			'anta-element-ui-components-next/src/scss/index.scss',
-			'anta-element-ui-schema-form',
-			'anta-element-ui-schema-table',
-		],
-	},
+	transpileDependencies: [
+		'anta-element-ui-components-next',
+		'anta-element-ui-schema-form',
+		'anta-element-ui-schema-table',
+		'element-plus',
+	],
+	// dll: {
+	// 	element: [
+	// 		'element-plus',
+	// 		'anta-element-ui-components-next',
+	// 		'anta-element-ui-components-next/src/scss/index.scss',
+	// 		'anta-element-ui-schema-form',
+	// 		'anta-element-ui-schema-table',
+	// 	],
+	// },
 	devServer: {
 		proxy: {
 			'/admin/api': {
