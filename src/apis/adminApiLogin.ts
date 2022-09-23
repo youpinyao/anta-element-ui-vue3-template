@@ -4,7 +4,7 @@ import { post } from '@/utils/axios';
 
 export function adminApiLoginPost(data: AdminApiLoginPostParams['req']) {
 	return post<AdminApiLoginPostResult['data'], AdminApiLoginPostParams['req']>({
-		url: '/admin/api/login',
+		url: '/admin/v1/login',
 		data,
 		toast: false,
 	});

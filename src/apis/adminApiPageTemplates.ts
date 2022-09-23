@@ -18,7 +18,7 @@ import { ArrayType } from 'anta-element-ui-components-next/src/utils/arrayType';
 // 		AdminApiPage$TemplatesGetResult['data'],
 // 		AdminApiPage$TemplatesGetParams
 // 	>({
-// 		url: '/admin/api/page-templates',
+// 		url: '/admin/v1/page-templates',
 // 		data,
 // 	});
 // }
@@ -30,7 +30,7 @@ export function adminApiPageTemplatesPost(
 		AdminApiPage$TemplatesPostResult['data'],
 		AdminApiPage$TemplatesPostParams['req']
 	>({
-		url: '/admin/api/page-templates',
+		url: '/admin/v1/page-templates',
 		data,
 	});
 }
@@ -42,7 +42,7 @@ export function adminApiPageTemplatesPut(
 		AdminApiPage$TemplatesPutResult['data'],
 		AdminApiPage$TemplatesPutParams['req']
 	>({
-		url: '/admin/api/page-templates',
+		url: '/admin/v1/page-templates',
 		data,
 	});
 }
@@ -54,7 +54,7 @@ export function adminApiPageTemplatesDel(
 		AdminApiPage$Templates$pageTemplateId$DeleteResult['data'],
 		AdminApiPage$Templates$pageTemplateId$DeleteParams
 	>({
-		url: `/admin/api/page-templates/${data.pageTemplateId}`,
+		url: `/admin/v1/page-templates/${data.pageTemplateId}`,
 		data,
 	});
 }
@@ -70,7 +70,7 @@ export type AdminApiPageGeneratorDetailGetResult<
 
 export async function adminApiPageGeneratorDetailGet(data: any) {
 	const result = await get<AdminApiPageGeneratorDetailGetResult, any>({
-		url: `https://mockapi.eolink.com/P53yfvi48d34d7911634f79adf81360dff9866c33ced788/admin/api/page/generator/${data.id}`,
+		url: `https://mockapi.eolink.com/P53yfvi48d34d7911634f79adf81360dff9866c33ced788/admin/v1/page/generator/${data.id}`,
 	});
 
 	return {

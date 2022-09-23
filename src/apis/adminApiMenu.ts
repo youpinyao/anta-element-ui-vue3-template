@@ -10,20 +10,20 @@ import { del, get, post, put } from '@/utils/axios';
 
 export function adminApiMenuGet(data: AdminApiMenusGetParams) {
 	return get<AdminApiMenusGetResult['data'], AdminApiMenusGetParams>({
-		url: '/admin/api/menus',
+		url: '/admin/v1/menus',
 	});
 }
 
 export function adminApiMenuPost(data: AdminApiMenusPostParams['req']) {
 	return post<AdminApiMenusPostResult['data'], AdminApiMenusPostParams['req']>({
-		url: '/admin/api/menus',
+		url: '/admin/v1/menus',
 		data,
 	});
 }
 
 export function adminApiMenuPut(data: AdminApiMenusPutParams['req']) {
 	return put<AdminApiMenusPutResult['data'], AdminApiMenusPutParams['req']>({
-		url: '/admin/api/menus',
+		url: '/admin/v1/menus',
 		data,
 	});
 }
@@ -33,7 +33,7 @@ export function adminApiMenuDel(data: AdminApiMenus$menuId$DeleteParams) {
 		AdminApiMenus$menuId$DeleteResult['data'],
 		AdminApiMenus$menuId$DeleteParams
 	>({
-		url: `/admin/api/menus/${data.menuId}`,
+		url: `/admin/v1/menus/${data.menuId}`,
 		data,
 	});
 }

@@ -3,6 +3,6 @@ import { get } from '@/utils/axios';
 
 export function adminApiUserInfoGet() {
 	return get<AdminApiUsersInfoGetResult['data']>({
-		url: '/admin/api/users/info',
+		url: '/admin/v1/users/info',
 	});
 }

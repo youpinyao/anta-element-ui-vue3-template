@@ -24,9 +24,10 @@ module.exports = defineConfig({
 
 	devServer: {
 		proxy: {
-			'/admin/api': {
+			'/admin/v1': {
 				target: 'https://admin-api-dev.atxapi.com/',
 				changeOrigin: true,
+				// pathRewrite: { '^/admin/api': '/admin/v1' },
 			},
 		},
 	},

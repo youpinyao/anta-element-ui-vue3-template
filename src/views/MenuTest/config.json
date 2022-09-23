@@ -37,7 +37,7 @@
 				"trigger": {
 					"type": "dialog",
 					"form": {
-						"url": "/admin/api/roles",
+						"url": "/admin/v1/roles",
 						"method": "POST",
 						"schema": {
 							"properties": {
@@ -45,7 +45,7 @@
 									"component": "select",
 									"label": "模块：",
 									"type": "number",
-									"options": "https://mockapi.eolink.com/P53yfvi48d34d7911634f79adf81360dff9866c33ced788/admin/api/role/list",
+									"options": "https://mockapi.eolink.com/P53yfvi48d34d7911634f79adf81360dff9866c33ced788/admin/v1/role/list",
 									"formItemProps": { "labelWidth": 100 }
 								},
 								"name": {
@@ -66,7 +66,7 @@
 			}
 		],
 		"table": {
-			"url": "/admin/api/roles",
+			"url": "/admin/v1/roles",
 			"method": "GET",
 			"selection": true,
 			"schema": {
@@ -102,7 +102,7 @@
 								"trigger": {
 									"type": "dialog",
 									"form": {
-										"url": "/admin/api/roles",
+										"url": "/admin/v1/roles",
 										"method": "PUT",
 										"schema": {
 											"properties": {
@@ -133,7 +133,7 @@
 								"type": "danger",
 								"trigger": {
 									"type": "popconfirm",
-									"url": "/admin/api/roles/{id}",
+									"url": "/admin/v1/roles/{id}",
 									"method": "DELETE",
 									"confirmProps": { "title": "确认删除？" }
 								}

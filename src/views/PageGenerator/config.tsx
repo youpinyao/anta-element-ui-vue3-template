@@ -19,7 +19,7 @@ export default {
 			},
 		],
 		table: {
-			url: '/admin/api/page-templates',
+			url: '/admin/v1/page-templates',
 			method: 'GET',
 			schema: {
 				columns: [
@@ -39,7 +39,7 @@ export default {
 									loading={loading.value}
 									onUpdate:modelValue={(value) => {
 										put({
-											url: '/admin/api/page-templates',
+											url: '/admin/v1/page-templates',
 											data: {
 												id: row.id,
 												status: value ? 1 : 0,
@@ -72,7 +72,7 @@ export default {
 								type: 'danger',
 								trigger: {
 									type: 'popconfirm',
-									url: '/admin/api/page-templates/{id}',
+									url: '/admin/v1/page-templates/{id}',
 									method: 'DELETE',
 									confirmProps: { title: '确认删除？' },
 								},
