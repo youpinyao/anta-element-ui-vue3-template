@@ -32,7 +32,16 @@ export default defineComponent({
 					></AtLoading>
 				);
 			}
-			return <PageRenderer config={data.value.data} />;
+			return (
+				<div
+					class="global-bg-color"
+					style={{
+						height: '100vh',
+					}}
+				>
+					<PageRenderer config={data.value.data} />
+				</div>
+			);
 		};
 	},
 });
