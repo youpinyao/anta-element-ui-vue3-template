@@ -54,8 +54,10 @@ export default defineComponent({
 
 		const columnButtonEditorIndex = ref<number>();
 		const columnJsonEditorIndex = ref<number>();
+		const columnSwitchEditorIndex = ref<number>();
 		const columnButtonEditorContent = ref<PageRenderer.TableColumn>();
 		const columnJsonEditorContent = ref<PageRenderer.TableColumn>();
+		const columnSwitchEditorContent = ref<PageRenderer.TableColumn>();
 
 		const formSchema: AtSchemaFormTypes.JSONSchema = {
 			properties: {
@@ -122,6 +124,27 @@ export default defineComponent({
 							option: {
 								label: '排序',
 							},
+						},
+						switch: {
+							component: 'button',
+							props: {
+								type: 'primary',
+								vSlots: {
+									default: () => 'switch编辑',
+								},
+								onClick(evt, index?) {
+									columnSwitchEditorIndex.value = index;
+									columnSwitchEditorContent.value =
+										model?.columns?.[index ?? 0];
+								},
+								badge: {
+									fields: ['switch'],
+									callback(model) {
+										return model?.switch?.url;
+									},
+								},
+							},
+							formItemProps: {},
 						},
 						buttons: {
 							component: 'button',

@@ -7,6 +7,7 @@ import {
 } from 'anta-element-ui-schema-table';
 import { computed, defineComponent, PropType, ref } from 'vue';
 import FunctionButton from './FunctionButton';
+import Swtich from './Swtich';
 
 export default defineComponent({
 	props: {
@@ -79,7 +80,26 @@ export default defineComponent({
 					if (item.type === 'selection') {
 						return item;
 					}
-					if (item.buttons && item.buttons.length) {
+					if (item?.switch?.url) {
+						return {
+							...item,
+							render(row) {
+								const prop = item.switch?.prop ?? item.prop;
+								return (
+									<Swtich
+										{...item.switch}
+										prop={prop}
+										data={row}
+										onChange={(result) => {
+											if (prop) {
+												row[prop] = result;
+											}
+										}}
+									/>
+								);
+							},
+						};
+					} else if (item?.buttons?.length) {
 						return {
 							...item,
 							render(row) {

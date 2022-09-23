@@ -70,7 +70,7 @@ export type AdminApiPageGeneratorDetailGetResult<
 
 export async function adminApiPageGeneratorDetailGet(data: any) {
 	const result = await get<AdminApiPageGeneratorDetailGetResult, any>({
-		url: `https://mockapi.eolink.com/P53yfvi48d34d7911634f79adf81360dff9866c33ced788/admin/v1/page/generator/${data.id}`,
+		url: `/admin/v1/page-templates/${data.id}`,
 	});
 
 	return {

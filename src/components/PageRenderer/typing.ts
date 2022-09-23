@@ -2,6 +2,7 @@ import {
 	AtButton,
 	AtDialog,
 	AtPopconfirm,
+	AtSwitch,
 } from 'anta-element-ui-components-next';
 import { ArrayType } from 'anta-element-ui-components-next/src/utils/arrayType';
 import { RecordType } from 'anta-element-ui-components-next/src/utils/recordType';
@@ -74,6 +75,15 @@ export namespace PageRenderer {
 			| FunctionButtonTriggerPopconfirm;
 	}
 
+	export interface Swtich {
+		trueValue: any;
+		falseValue: any;
+		url: string;
+		method: Methods;
+		prop?: string;
+		props: PropsType<typeof AtSwitch>;
+	}
+
 	export type Property = RecordType<
 		AtSchemaFormTypes.JSONSchema['properties']
 	> & {
@@ -84,6 +94,7 @@ export namespace PageRenderer {
 		AtSchemaTableTypes.JSONSchema<T>['columns']
 	> & {
 		buttons?: FunctionButton[];
+		switch?: Swtich;
 	};
 	export interface JSONSchema<T extends Record<string, any> = any> {
 		title?: string;

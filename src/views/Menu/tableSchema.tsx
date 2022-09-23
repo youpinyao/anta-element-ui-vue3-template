@@ -50,6 +50,7 @@ export default function tableSchema({
 				label: '标题',
 				prop: 'title',
 				width: 200,
+				showOverflowTooltip: true,
 			},
 			{
 				label: '权限码',
@@ -61,41 +62,18 @@ export default function tableSchema({
 				label: '类型',
 				prop: 'typeFlag',
 				width: 80,
+				template: `<div>{{ ['模块', '菜单' ,'功能'][row.typeFlag] || '未知' }}</div>`,
 			},
 			{
 				label: '绑定菜单数量',
 				prop: 'bindingQuantity',
 				width: 120,
 			},
-			// {
-			// 	label: '备注',
-			// 	prop: 'remark',
-			// 	minWidth: 200,
-			// },
-			// {
-			// 	label: '更新时间',
-			// 	prop: 'updateTime',
-			// 	width: 100,
-			// },
-			// {
-			// 	label: '更新人',
-			// 	prop: 'updatedBy',
-			// 	width: 200,
-			// },
-			// {
-			// 	label: '创建时间',
-			// 	prop: 'createTime',
-			// 	width: 100,
-			// },
-			// {
-			// 	label: '创建人',
-			// 	prop: 'createdBy',
-			// 	width: 200,
-			// },
 			{
 				label: '操作',
 				prop: 'id',
 				width: 160,
+				fixed: 'right',
 				render(row) {
 					return (
 						<div>

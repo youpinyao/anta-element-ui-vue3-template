@@ -29,30 +29,15 @@ export default {
 					{
 						prop: 'status',
 						label: '状态',
-						minWidth: 100,
-						render(row) {
-							const checked = row.status === 1;
-							const loading = ref(false);
-							return (
-								<AtSwitch
-									modelValue={checked}
-									loading={loading.value}
-									onUpdate:modelValue={(value) => {
-										put({
-											url: '/admin/v1/page-templates',
-											data: {
-												id: row.id,
-												status: value ? 1 : 0,
-											},
-										}).finally(() => {
-											loading.value = false;
-										});
-									}}
-								/>
-							);
+						width: 100,
+						switch: {
+							url: '/admin/v1/page-templates',
+							method: 'PUT',
+							trueValue: 1,
+							falseValue: 0,
 						},
 					},
-					{ prop: 'updateTime', label: '更新时间', width: 200 },
+					{ prop: 'updateTime', label: '更新时间', width: 180 },
 					{
 						prop: 'id',
 						label: '操作',
@@ -84,7 +69,7 @@ export default {
 		},
 		pagination: true,
 	},
-	title: '角色列表',
+	title: '页面列表',
 } as AdminApiPageGeneratorDetailGetResult<
 	NonNullable<ArrayType<Definition2109f27d03411ab2d387f6d44a00e6a5['list']>>
 >;
