@@ -6,5 +6,4 @@ export type Definition0bd4c4c91d3103b3b44431e994666e97 = {
 	data?: Array<string>;
 	// 错误信息
 	msg?: string;
-	success?: boolean;
 };

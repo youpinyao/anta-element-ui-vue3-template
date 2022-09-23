@@ -7,5 +7,4 @@ export type Definition909143f7a73e6f36c80ba92119a507ff = {
 	data?: Definitiond4c01f76047c85412883a2eb0a21aa3e;
 	// 错误信息
 	msg?: string;
-	success?: boolean;
 };

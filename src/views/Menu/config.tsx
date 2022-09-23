@@ -1,6 +1,6 @@
-import { AdminApiPageGeneratorDetailGetResult } from '@/apis/adminApiPageTemplates';
+import { AdminV1PageGeneratorDetailGetResult } from '@/apis/adminApiPageTemplates';
 import { Definition2109f27d03411ab2d387f6d44a00e6a5 } from '@/models/definitions/Definition2109f27d03411ab2d387f6d44a00e6a5';
-import { AdminApiMenusGetResult } from '@/models/menuApi/AdminApiMenusGetResult';
+import { AdminV1MenusGetResult } from '@/models/menuApi/AdminV1MenusGetResult';
 import { put } from '@/utils/axios';
 import { AtSwitch } from 'anta-element-ui-components-next';
 import { ArrayType } from 'anta-element-ui-components-next/src/utils/arrayType';
@@ -115,6 +115,6 @@ export default {
 		},
 	},
 	title: '菜单列表',
-} as AdminApiPageGeneratorDetailGetResult<
-	NonNullable<ArrayType<AdminApiMenusGetResult['data']>>
+} as AdminV1PageGeneratorDetailGetResult<
+	NonNullable<ArrayType<AdminV1MenusGetResult['data']>>
 >;

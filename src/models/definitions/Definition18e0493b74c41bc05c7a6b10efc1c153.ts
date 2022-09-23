@@ -7,5 +7,4 @@ export type Definition18e0493b74c41bc05c7a6b10efc1c153 = {
 	data?: Array<Definition8aa8342f2f8a2acb70c5df7553db9036>;
 	// 错误信息
 	msg?: string;
-	success?: boolean;
 };

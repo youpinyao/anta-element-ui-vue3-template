@@ -6,5 +6,4 @@ export type Definition819de6b226123145f465f6757062180f = {
 	data?: Array<number>;
 	// 错误信息
 	msg?: string;
-	success?: boolean;
 };

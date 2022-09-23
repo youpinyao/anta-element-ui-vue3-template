@@ -1,65 +1,63 @@
 import { Definition2109f27d03411ab2d387f6d44a00e6a5 } from '@/models/definitions/Definition2109f27d03411ab2d387f6d44a00e6a5';
-import { AdminApiPage$Templates$pageTemplateId$DeleteParams } from '@/models/pageTemplateApi/AdminApiPage$Templates$pageTemplateId$DeleteParams';
-import { AdminApiPage$Templates$pageTemplateId$DeleteResult } from '@/models/pageTemplateApi/AdminApiPage$Templates$pageTemplateId$DeleteResult';
-import { AdminApiPage$TemplatesGetParams } from '@/models/pageTemplateApi/AdminApiPage$TemplatesGetParams';
-import { AdminApiPage$TemplatesGetResult } from '@/models/pageTemplateApi/AdminApiPage$TemplatesGetResult';
-import { AdminApiPage$TemplatesPostParams } from '@/models/pageTemplateApi/AdminApiPage$TemplatesPostParams';
-import { AdminApiPage$TemplatesPostResult } from '@/models/pageTemplateApi/AdminApiPage$TemplatesPostResult';
-import { AdminApiPage$TemplatesPutParams } from '@/models/pageTemplateApi/AdminApiPage$TemplatesPutParams';
-import { AdminApiPage$TemplatesPutResult } from '@/models/pageTemplateApi/AdminApiPage$TemplatesPutResult';
 import { del, get, post, put } from '@/utils/axios';
 import { PageRenderer } from '@/components/PageRenderer/typing';
 import { ArrayType } from 'anta-element-ui-components-next/src/utils/arrayType';
+import { AdminV1Page$Templates$pageTemplateId$DeleteParams } from '@/models/pageTemplateApi/AdminV1Page$Templates$pageTemplateId$DeleteParams';
+import { AdminV1Page$TemplatesPutParams } from '@/models/pageTemplateApi/AdminV1Page$TemplatesPutParams';
+import { AdminV1Page$TemplatesPutResult } from '@/models/pageTemplateApi/AdminV1Page$TemplatesPutResult';
+import { AdminV1Page$Templates$pageTemplateId$DeleteResult } from '@/models/pageTemplateApi/AdminV1Page$Templates$pageTemplateId$DeleteResult';
+import { AdminV1Page$TemplatesPostParams } from '@/models/pageTemplateApi/AdminV1Page$TemplatesPostParams';
+import { AdminV1Page$TemplatesPostResult } from '@/models/pageTemplateApi/AdminV1Page$TemplatesPostResult';
 
-// export function adminApiPageTemplatesGet(
-// 	data: AdminApiPage$TemplatesGetParams
+// export function adminV1PageTemplatesGet(
+// 	data: AdminV1Page$TemplatesGetParams
 // ) {
 // 	return get<
-// 		AdminApiPage$TemplatesGetResult['data'],
-// 		AdminApiPage$TemplatesGetParams
+// 		AdminV1Page$TemplatesGetResult['data'],
+// 		AdminV1Page$TemplatesGetParams
 // 	>({
 // 		url: '/admin/v1/page-templates',
 // 		data,
 // 	});
 // }
 
-export function adminApiPageTemplatesPost(
-	data: AdminApiPage$TemplatesPostParams['req']
+export function adminV1PageTemplatesPost(
+	data: AdminV1Page$TemplatesPostParams['req']
 ) {
 	return post<
-		AdminApiPage$TemplatesPostResult['data'],
-		AdminApiPage$TemplatesPostParams['req']
+		AdminV1Page$TemplatesPostResult['data'],
+		AdminV1Page$TemplatesPostParams['req']
 	>({
 		url: '/admin/v1/page-templates',
 		data,
 	});
 }
 
-export function adminApiPageTemplatesPut(
-	data: AdminApiPage$TemplatesPutParams['req']
+export function adminV1PageTemplatesPut(
+	data: AdminV1Page$TemplatesPutParams['req']
 ) {
 	return put<
-		AdminApiPage$TemplatesPutResult['data'],
-		AdminApiPage$TemplatesPutParams['req']
+		AdminV1Page$TemplatesPutResult['data'],
+		AdminV1Page$TemplatesPutParams['req']
 	>({
 		url: '/admin/v1/page-templates',
 		data,
 	});
 }
 
-export function adminApiPageTemplatesDel(
-	data: AdminApiPage$Templates$pageTemplateId$DeleteParams
+export function adminV1PageTemplatesDel(
+	data: AdminV1Page$Templates$pageTemplateId$DeleteParams
 ) {
 	return del<
-		AdminApiPage$Templates$pageTemplateId$DeleteResult['data'],
-		AdminApiPage$Templates$pageTemplateId$DeleteParams
+		AdminV1Page$Templates$pageTemplateId$DeleteResult['data'],
+		AdminV1Page$Templates$pageTemplateId$DeleteParams
 	>({
 		url: `/admin/v1/page-templates/${data.pageTemplateId}`,
 		data,
 	});
 }
 
-export type AdminApiPageGeneratorDetailGetResult<
+export type AdminV1PageGeneratorDetailGetResult<
 	T extends Record<string, any> = any
 > = Omit<
 	NonNullable<ArrayType<Definition2109f27d03411ab2d387f6d44a00e6a5['list']>>,
@@ -68,8 +66,8 @@ export type AdminApiPageGeneratorDetailGetResult<
 	schema?: PageRenderer.JSONSchema<T>;
 };
 
-export async function adminApiPageGeneratorDetailGet(data: any) {
-	const result = await get<AdminApiPageGeneratorDetailGetResult, any>({
+export async function adminV1PageGeneratorDetailGet(data: any) {
+	const result = await get<AdminV1PageGeneratorDetailGetResult, any>({
 		url: `/admin/v1/page-templates/${data.id}`,
 	});
 
@@ -85,7 +83,7 @@ export async function adminApiPageGeneratorDetailGet(data: any) {
 								(result.data.data.schema as unknown as string) ?? null
 						  ) || undefined
 						: result.data.data.schema,
-			} as AdminApiPageGeneratorDetailGetResult,
+			} as AdminV1PageGeneratorDetailGetResult,
 		},
 	};
 }

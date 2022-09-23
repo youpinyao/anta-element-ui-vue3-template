@@ -1,5 +1,5 @@
-import { adminApiMenuGet } from '@/apis/adminApiMenu';
-import { AdminApiMenusGetResult } from '@/models/menuApi/AdminApiMenusGetResult';
+import { adminV1MenuGet } from '@/apis/adminApiMenu';
+import { AdminV1MenusGetResult } from '@/models/menuApi/AdminV1MenusGetResult';
 import { AtSchemaFormTypes } from 'anta-element-ui-schema-form';
 
 export function formSchema() {
@@ -88,8 +88,8 @@ export function formSchema() {
 }
 
 async function getPidTreeSelectOptions() {
-	const menus: NonNullable<AdminApiMenusGetResult['data']> =
-		(await adminApiMenuGet({})).data.data ?? [];
+	const menus: NonNullable<AdminV1MenusGetResult['data']> =
+		(await adminV1MenuGet({})).data.data ?? [];
 	const options: AtSchemaFormTypes.SelectOption[] = [];
 
 	const each = (parent: typeof options, items: typeof menus) => {

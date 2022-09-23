@@ -1,37 +1,37 @@
-import { AdminApiMenus$menuId$DeleteParams } from '@/models/menuApi/AdminApiMenus$menuId$DeleteParams';
-import { AdminApiMenus$menuId$DeleteResult } from '@/models/menuApi/AdminApiMenus$menuId$DeleteResult';
-import { AdminApiMenusGetParams } from '@/models/menuApi/AdminApiMenusGetParams';
-import { AdminApiMenusGetResult } from '@/models/menuApi/AdminApiMenusGetResult';
-import { AdminApiMenusPostParams } from '@/models/menuApi/AdminApiMenusPostParams';
-import { AdminApiMenusPostResult } from '@/models/menuApi/AdminApiMenusPostResult';
-import { AdminApiMenusPutParams } from '@/models/menuApi/AdminApiMenusPutParams';
-import { AdminApiMenusPutResult } from '@/models/menuApi/AdminApiMenusPutResult';
+import { AdminV1Menus$menuId$DeleteParams } from '@/models/menuApi/AdminV1Menus$menuId$DeleteParams';
+import { AdminV1Menus$menuId$DeleteResult } from '@/models/menuApi/AdminV1Menus$menuId$DeleteResult';
+import { AdminV1MenusGetParams } from '@/models/menuApi/AdminV1MenusGetParams';
+import { AdminV1MenusGetResult } from '@/models/menuApi/AdminV1MenusGetResult';
+import { AdminV1MenusPostParams } from '@/models/menuApi/AdminV1MenusPostParams';
+import { AdminV1MenusPostResult } from '@/models/menuApi/AdminV1MenusPostResult';
+import { AdminV1MenusPutParams } from '@/models/menuApi/AdminV1MenusPutParams';
+import { AdminV1MenusPutResult } from '@/models/menuApi/AdminV1MenusPutResult';
 import { del, get, post, put } from '@/utils/axios';
 
-export function adminApiMenuGet(data: AdminApiMenusGetParams) {
-	return get<AdminApiMenusGetResult['data'], AdminApiMenusGetParams>({
+export function adminV1MenuGet(data: AdminV1MenusGetParams) {
+	return get<AdminV1MenusGetResult['data'], AdminV1MenusGetParams>({
 		url: '/admin/v1/menus',
 	});
 }
 
-export function adminApiMenuPost(data: AdminApiMenusPostParams['req']) {
-	return post<AdminApiMenusPostResult['data'], AdminApiMenusPostParams['req']>({
-		url: '/admin/v1/menus',
-		data,
-	});
-}
-
-export function adminApiMenuPut(data: AdminApiMenusPutParams['req']) {
-	return put<AdminApiMenusPutResult['data'], AdminApiMenusPutParams['req']>({
+export function adminV1MenuPost(data: AdminV1MenusPostParams['req']) {
+	return post<AdminV1MenusPostResult['data'], AdminV1MenusPostParams['req']>({
 		url: '/admin/v1/menus',
 		data,
 	});
 }
 
-export function adminApiMenuDel(data: AdminApiMenus$menuId$DeleteParams) {
+export function adminV1MenuPut(data: AdminV1MenusPutParams['req']) {
+	return put<AdminV1MenusPutResult['data'], AdminV1MenusPutParams['req']>({
+		url: '/admin/v1/menus',
+		data,
+	});
+}
+
+export function adminV1MenuDel(data: AdminV1Menus$menuId$DeleteParams) {
 	return del<
-		AdminApiMenus$menuId$DeleteResult['data'],
-		AdminApiMenus$menuId$DeleteParams
+		AdminV1Menus$menuId$DeleteResult['data'],
+		AdminV1Menus$menuId$DeleteParams
 	>({
 		url: `/admin/v1/menus/${data.menuId}`,
 		data,

@@ -112,12 +112,6 @@
 </template>
 
 <script lang="ts" setup>
-import {
-	adminApiPageGeneratorDetailGet,
-	adminApiPageTemplatesPut,
-	adminApiPageTemplatesPost,
-	AdminApiPageGeneratorDetailGetResult,
-} from '@/apis/adminApiPageTemplates';
 import { useRequest } from '@/utils/hooks/useRequest';
 import { computed, reactive, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
@@ -146,12 +140,18 @@ import SearchEditorDialog from './SearchEditorDialog/Index';
 import TableHeaderEditorDialog from './TableHeaderEditorDialog/Index';
 import TableEditorDialog from './TableEditorDialog/Index';
 import { PageRenderer } from '@components/PageRenderer/typing';
+import {
+	adminV1PageGeneratorDetailGet,
+	AdminV1PageGeneratorDetailGetResult,
+	adminV1PageTemplatesPost,
+	adminV1PageTemplatesPut,
+} from '@/apis/adminApiPageTemplates';
 
 const router = useRouter();
 const menuStore = useMenuStore();
 const route = useRoute();
 
-const pageConfig = reactive<AdminApiPageGeneratorDetailGetResult>({
+const pageConfig = reactive<AdminV1PageGeneratorDetailGetResult>({
 	schema: {
 		search: {
 			resetButton: true,
@@ -160,7 +160,7 @@ const pageConfig = reactive<AdminApiPageGeneratorDetailGetResult>({
 	},
 });
 const saveLoading = ref(false);
-const { run, loading } = useRequest(adminApiPageGeneratorDetailGet, {
+const { run, loading } = useRequest(adminV1PageGeneratorDetailGet, {
 	immediate: false,
 });
 const searchModel = reactive({});
@@ -219,13 +219,13 @@ const handleSave = async () => {
 	saveLoading.value = true;
 	try {
 		if (pageConfig.id) {
-			await adminApiPageTemplatesPut({
+			await adminV1PageTemplatesPut({
 				...pageConfig,
 				status: 0,
 				schema: JSON.stringify(pageConfig.schema),
 			});
 		} else {
-			const result = await adminApiPageTemplatesPost({
+			const result = await adminV1PageTemplatesPost({
 				...pageConfig,
 				status: 0,
 				schema: JSON.stringify(pageConfig.schema),

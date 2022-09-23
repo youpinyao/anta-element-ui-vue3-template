@@ -1,4 +1,3 @@
-import { AdminApiPageGeneratorDetailGetResult } from '@/apis/adminApiPageTemplates';
 import {
 	computed,
 	defineComponent,
@@ -20,12 +19,13 @@ import { PageRenderer } from '@/components/PageRenderer/typing';
 import { AtLoading, AtPagination } from 'anta-element-ui-components-next';
 import { PropsType } from 'anta-element-ui-components-next/src/utils/propsType';
 import { debounce } from 'throttle-debounce';
+import { AdminV1PageGeneratorDetailGetResult } from '@/apis/adminApiPageTemplates';
 
 export default defineComponent({
 	name: 'PageRenderer',
 	props: {
 		config: {
-			type: Object as PropType<AdminApiPageGeneratorDetailGetResult>,
+			type: Object as PropType<AdminV1PageGeneratorDetailGetResult>,
 			required: true,
 		},
 	},

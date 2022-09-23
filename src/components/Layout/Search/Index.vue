@@ -25,9 +25,7 @@
 </template>
 
 <script lang="ts" setup>
-import { AdminApiMenusGetResult } from '@/models/menuApi/AdminApiMenusGetResult';
-import { ArrayType } from 'anta-element-ui-components-next/src/utils/arrayType';
-import { useMenuStore } from '@/store/menu';
+import { AsideMenu, useMenuStore } from '@/store/menu';
 import {
 	AtAutocomplete,
 	AutocompleteFetchSuggestions,
@@ -38,16 +36,13 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 const menuStore = useMenuStore();
 const menuItems = computed(() => {
-	const newItems: (ArrayType<AdminApiMenusGetResult['data']> & {
+	const newItems: (AsideMenu & {
 		fullTitle?: string;
 		match?: boolean;
 		value?: string;
 	})[] = [];
 
-	const flatMenu = (
-		items: AdminApiMenusGetResult['data'],
-		parents: AdminApiMenusGetResult['data']
-	) => {
+	const flatMenu = (items: AsideMenu[], parents: AsideMenu[]) => {
 		items?.forEach((item) => {
 			if (item.children && item.children.length) {
 				flatMenu(item.children, [...(parents ?? []), item]);
