@@ -120,6 +120,9 @@ export default defineComponent({
 						const del = apiConfigs[`${pickTag(hash)}_delete`];
 
 						if (post) {
+							const properties = (await readSwaggerPage(post.hash ?? ''))
+								?.params;
+							delete properties.id;
 							buttons.push({
 								title: '新增',
 								type: 'primary',
@@ -129,8 +132,7 @@ export default defineComponent({
 										url: post.url ?? '',
 										method: post.method ?? 'POST',
 										schema: {
-											properties: (await readSwaggerPage(post.hash ?? ''))
-												?.params,
+											properties,
 										},
 									},
 									dialogProps: {
@@ -149,6 +151,9 @@ export default defineComponent({
 							});
 						}
 						if (put) {
+							const properties = (await readSwaggerPage(put.hash ?? ''))
+								?.params;
+							delete properties.id;
 							result[result.length - 1].buttons?.push({
 								title: '编辑',
 								type: 'primary',
@@ -158,8 +163,7 @@ export default defineComponent({
 										url: put.url ?? '',
 										method: put.method ?? 'PUT',
 										schema: {
-											properties: (await readSwaggerPage(put.hash ?? ''))
-												?.params,
+											properties,
 										},
 									},
 									dialogProps: {
@@ -174,7 +178,7 @@ export default defineComponent({
 								type: 'danger',
 								trigger: {
 									type: 'popconfirm',
-									url: `${del.url}/{id}`,
+									url: `${del.url?.replace(/{.*?}/g, '')}{id}`,
 									method: del.method ?? 'DELETE',
 									confirmProps: {
 										title: '确认删除？',
