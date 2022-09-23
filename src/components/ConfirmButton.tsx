@@ -20,13 +20,18 @@ const ConfirmButton = defineComponent({
 				<AtPopconfirm
 					title={props.title}
 					onConfirm={async (e) => {
+						if (loading.value) {
+							return;
+						}
 						loading.value = true;
 						try {
 							await onConfirm?.(e);
 						} catch (error) {
 							console.error(error);
 						} finally {
-							loading.value = false;
+							setTimeout(() => {
+								loading.value = false;
+							}, 100);
 						}
 					}}
 					v-slots={{

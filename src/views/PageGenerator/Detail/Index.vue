@@ -221,14 +221,16 @@ const handleSave = async () => {
 		if (pageConfig.id) {
 			await adminApiPageTemplatesPut({
 				...pageConfig,
+				status: 0,
 				schema: JSON.stringify(pageConfig.schema),
 			});
 		} else {
-			await adminApiPageTemplatesPost({
+			const result = await adminApiPageTemplatesPost({
 				...pageConfig,
 				status: 0,
 				schema: JSON.stringify(pageConfig.schema),
 			});
+			pageConfig.id = result.data.data;
 		}
 		AtMessage.success('保存成功');
 	} catch (error) {
