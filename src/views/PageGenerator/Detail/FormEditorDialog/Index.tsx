@@ -1,6 +1,6 @@
-import { AtButton, AtDialog } from 'anta-element-ui-components-next';
+import { AtButton, AtDialog, AtLoading } from 'anta-element-ui-components-next';
 
-import { defineComponent, PropType, ref, toRaw, watch } from 'vue';
+import { defineComponent, nextTick, PropType, ref, toRaw, watch } from 'vue';
 import clone from 'rfdc';
 import FormEditor, { FormEditorModelItem } from '../FormEditor/Index';
 
@@ -14,13 +14,27 @@ export default defineComponent({
 		'update:modelValue': (items?: FormEditorModelItem[]) => true,
 	},
 	setup(props, ctx) {
+		const loading = ref(true);
 		const items = ref<FormEditorModelItem[]>();
 		const formEditor = ref<InstanceType<typeof FormEditor>>();
 
 		watch(
-			() => props.modelValue,
+			[() => props.visible, () => props.modelValue],
 			() => {
-				items.value = props.modelValue ?? [];
+				if (props.visible && props.modelValue) {
+					setTimeout(
+						() => {
+							items.value = clone()(props.modelValue ?? []);
+							nextTick(() => {
+								loading.value = false;
+							});
+						},
+						loading.value ? 300 : 50
+					);
+				}
+			},
+			{
+				immediate: true,
 			}
 		);
 		return () => {
@@ -62,13 +76,24 @@ export default defineComponent({
 						},
 					}}
 				>
-					<FormEditor
-						ref={formEditor}
-						modelValue={items.value}
-						onUpdate:modelValue={(its) => {
-							items.value = its;
+					<AtLoading
+						static={true}
+						visible={loading.value}
+						style={{ padding: '50px 0', display: loading.value ? '' : 'none' }}
+					></AtLoading>
+					<div
+						style={{
+							display: loading.value ? 'none' : '',
 						}}
-					/>
+					>
+						<FormEditor
+							ref={formEditor}
+							modelValue={items.value}
+							onUpdate:modelValue={(its) => {
+								items.value = its;
+							}}
+						/>
+					</div>
 				</AtDialog>
 			);
 		};

@@ -3,6 +3,7 @@ import { AtSchemaForm } from 'anta-element-ui-schema-form';
 import { defineComponent, PropType } from 'vue';
 import AtSearchButtons from '@components/AtSearchButtons.vue';
 import { PageRenderer } from '@/components/PageRenderer/typing';
+import SchemaForm from './SchemaForm';
 
 export default defineComponent({
 	props: {
@@ -25,7 +26,7 @@ export default defineComponent({
 			};
 
 			return [
-				<AtSchemaForm schema={formSchema} model={model ?? {}} />,
+				<SchemaForm schema={formSchema} model={model ?? {}} />,
 
 				<AtSearchButtons>
 					<AtButton
