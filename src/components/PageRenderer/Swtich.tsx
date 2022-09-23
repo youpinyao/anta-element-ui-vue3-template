@@ -9,11 +9,11 @@ export default defineComponent({
 		url: String,
 		method: String as PropType<PageRenderer.Methods>,
 		trueValue: {
-			type: [String, Number, Boolean, Object],
+			type: [String, Number, Boolean],
 			default: () => true,
 		},
 		falseValue: {
-			type: [String, Number, Boolean, Object],
+			type: [String, Number, Boolean],
 			default: () => false,
 		},
 		props: Object as PropType<PropsType<typeof AtSwitch>>,
@@ -26,15 +26,29 @@ export default defineComponent({
 	},
 	setup(props, ctx) {
 		const loading = ref(false);
+		const transformValue = (value: any) => {
+			if (value == parseFloat(value)) {
+				return parseFloat(value);
+			}
+			if (value === 'true') {
+				return true;
+			}
+			if (value === 'false') {
+				return false;
+			}
+			return value;
+		};
 		return () => {
-			const checked = props.data?.status == props.trueValue;
+			const trueValue = transformValue(props.trueValue);
+			const falseValue = transformValue(props.falseValue);
+			const checked = props.data?.[props.prop ?? ''] == trueValue;
 			return (
 				<AtSwitch
 					modelValue={checked}
 					loading={loading.value}
 					onUpdate:modelValue={async (value) => {
 						loading.value = true;
-						const result = value ? props.trueValue : props.falseValue;
+						const result = value ? trueValue : falseValue;
 						try {
 							await request({
 								url: props.url,
