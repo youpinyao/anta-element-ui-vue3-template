@@ -4,6 +4,7 @@ import { useRouterStore } from '@/store/router';
 import Layout from '@/components/Layout/Index.vue';
 import NotFound from '@/views/NotFound.vue';
 import Login from '@/views/Login/Index.vue';
+import PagePreview from '@/views/PagePreview/Index';
 
 // @ts-ignore
 const files = require.context('./routes', true, /\.ts$/);
@@ -23,6 +24,15 @@ const routes: RouteRecordRaw[] = [
 			keepAlive: false,
 		},
 		component: Login,
+	},
+	{
+		path: '/page-preview/:id',
+		name: 'PagePreview',
+		meta: {
+			keepAlive: false,
+			title: '页面预览',
+		},
+		component: PagePreview,
 	},
 	{
 		path: '/',

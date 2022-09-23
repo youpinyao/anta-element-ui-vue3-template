@@ -8,18 +8,7 @@ import { AdminV1Page$TemplatesPutResult } from '@/models/pageTemplateApi/AdminV1
 import { AdminV1Page$Templates$pageTemplateId$DeleteResult } from '@/models/pageTemplateApi/AdminV1Page$Templates$pageTemplateId$DeleteResult';
 import { AdminV1Page$TemplatesPostParams } from '@/models/pageTemplateApi/AdminV1Page$TemplatesPostParams';
 import { AdminV1Page$TemplatesPostResult } from '@/models/pageTemplateApi/AdminV1Page$TemplatesPostResult';
-
-// export function adminV1PageTemplatesGet(
-// 	data: AdminV1Page$TemplatesGetParams
-// ) {
-// 	return get<
-// 		AdminV1Page$TemplatesGetResult['data'],
-// 		AdminV1Page$TemplatesGetParams
-// 	>({
-// 		url: '/admin/v1/page-templates',
-// 		data,
-// 	});
-// }
+import { AdminV1Page$Templates$pageTemplateId$GetParams } from '@/models/pageTemplateApi/AdminV1Page$Templates$pageTemplateId$GetParams';
 
 export function adminV1PageTemplatesPost(
 	data: AdminV1Page$TemplatesPostParams['req']
@@ -66,9 +55,14 @@ export type AdminV1PageGeneratorDetailGetResult<
 	schema?: PageRenderer.JSONSchema<T>;
 };
 
-export async function adminV1PageGeneratorDetailGet(data: any) {
-	const result = await get<AdminV1PageGeneratorDetailGetResult, any>({
-		url: `/admin/v1/page-templates/${data.id}`,
+export async function adminV1PageGeneratorDetailGet(
+	data: AdminV1Page$Templates$pageTemplateId$GetParams
+) {
+	const result = await get<
+		AdminV1PageGeneratorDetailGetResult,
+		AdminV1Page$Templates$pageTemplateId$GetParams
+	>({
+		url: `/admin/v1/page-templates/${data.pageTemplateId}`,
 	});
 
 	return {

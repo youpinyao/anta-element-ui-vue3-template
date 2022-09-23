@@ -184,7 +184,7 @@ const showTableEditor = ref(false);
 
 if (route.params.id && route.params.id !== 'add') {
 	run({
-		id: route.params.id as string,
+		pageTemplateId: route.params.id as unknown as number,
 	}).then(({ data }) => {
 		Object.assign(pageConfig, data.data);
 	});
@@ -285,7 +285,9 @@ const handleSaveTableEdit = ({
 	pageConfig.schema.table = table;
 	pageConfig.schema.pagination = pagination;
 };
-const handlePreview = () => {};
+const handlePreview = () => {
+	window.open(`${location.origin}/page-preview/${pageConfig.id}`);
+};
 </script>
 
 <style lang="scss" scoped>
