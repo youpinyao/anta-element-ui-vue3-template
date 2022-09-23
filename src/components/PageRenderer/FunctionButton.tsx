@@ -78,7 +78,7 @@ export default defineComponent({
 			return [
 				trigger?.type === 'popconfirm' ? (
 					<ConfirmButton
-						title={trigger.confirmProps.title ?? '确认操作？'}
+						title={trigger.confirmProps?.title ?? '确认操作？'}
 						onConfirm={onConfirm}
 					>
 						{button}

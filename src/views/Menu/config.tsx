@@ -5,6 +5,7 @@ import { put } from '@/utils/axios';
 import { AtSwitch } from 'anta-element-ui-components-next';
 import { ArrayType } from 'anta-element-ui-components-next/src/utils/arrayType';
 import { ref } from 'vue';
+import { formSchema } from './schema';
 
 export default {
 	schema: {
@@ -14,14 +15,22 @@ export default {
 				title: '新增',
 				type: 'primary',
 				trigger: {
-					type: 'route',
-					path: '/page-generator/add',
+					type: 'dialog',
+					form: {
+						url: '/admin/v1/menus',
+						method: 'POST',
+						schema: formSchema(),
+					},
+					dialogProps: {
+						title: '菜单新增',
+					},
 				},
 			},
 		],
 		table: {
 			url: '/admin/v1/menus',
 			method: 'GET',
+			tree: true,
 			schema: {
 				props: {
 					rowKey: 'id',
@@ -80,35 +89,30 @@ export default {
 								title: '编辑',
 								trigger: {
 									type: 'dialog',
+									form: {
+										url: '/admin/v1/menus',
+										method: 'PUT',
+										schema: formSchema(),
+									},
+									dialogProps: {
+										title: '菜单更新',
+									},
+								},
+							},
+							{
+								type: 'danger',
+								title: '删除',
+								trigger: {
+									type: 'popconfirm',
+									url: '/admin/v1/menus/{id}',
+									method: 'DELETE',
 								},
 							},
 						],
-						// render(row) {
-						// 	return (
-						// 		<div>
-						// 			<AtButton
-						// 				size="small"
-						// 				onClick={(e) => handleEdit(e, row)}
-						// 				type="primary"
-						// 			>
-						// 				编辑
-						// 			</AtButton>
-						// 			<ConfirmButton
-						// 				title="确认删除？"
-						// 				onConfirm={(e) => handleDel(e, row)}
-						// 			>
-						// 				<AtButton size="small" type="danger">
-						// 					删除
-						// 				</AtButton>
-						// 			</ConfirmButton>
-						// 		</div>
-						// 	);
-						// },
 					},
 				],
 			},
 		},
-		pagination: true,
 	},
 	title: '菜单列表',
 } as AdminApiPageGeneratorDetailGetResult<

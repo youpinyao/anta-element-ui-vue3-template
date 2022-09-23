@@ -106,6 +106,7 @@ export default defineComponent({
 				<AtDialog
 					closeOnClickModal={false}
 					appendToBody={true}
+					destroyOnClose={true}
 					modelValue={props.visible}
 					{...props.config?.dialogProps}
 					onUpdate:modelValue={() => {

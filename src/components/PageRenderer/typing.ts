@@ -63,7 +63,7 @@ export namespace PageRenderer {
 		method: Methods;
 		data?: FunctionButtonTriggerData;
 		callback?: () => void;
-		confirmProps: PropsType<typeof AtPopconfirm>;
+		confirmProps?: PropsType<typeof AtPopconfirm>;
 	}
 	export interface FunctionButton {
 		title: string;

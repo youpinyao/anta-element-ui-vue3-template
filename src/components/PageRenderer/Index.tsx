@@ -68,11 +68,11 @@ export default defineComponent({
 				},
 			} as PageRenderer.JSONSchema['table'];
 		});
-		const dataSource = computed(() =>
-			props.config.schema?.pagination
+		const dataSource = computed(() => {
+			return props.config.schema?.pagination
 				? data.value?.data.list ?? []
-				: data.value?.data ?? []
-		);
+				: data.value?.data ?? [];
+		});
 		const { data, run, loading } = useRequest(
 			(params: any) =>
 				request<any>({

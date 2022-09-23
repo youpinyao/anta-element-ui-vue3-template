@@ -232,7 +232,7 @@ const handleSave = async () => {
 		}
 		AtMessage.success('保存成功');
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 	} finally {
 		saveLoading.value = false;
 	}
