@@ -27,7 +27,7 @@ export default defineComponent({
 	setup(props, ctx) {
 		const loading = ref(false);
 		return () => {
-			const checked = props.data?.status === props.trueValue;
+			const checked = props.data?.status == props.trueValue;
 			return (
 				<AtSwitch
 					modelValue={checked}

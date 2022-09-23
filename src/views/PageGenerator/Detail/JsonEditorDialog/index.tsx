@@ -28,6 +28,7 @@ export default defineComponent({
 					width={800}
 					appendToBody={true}
 					closeOnClickModal={false}
+					destroyOnClose={true}
 					title="JSON配置编辑"
 					modelValue={props.visible}
 					onUpdate:modelValue={(visible) => {

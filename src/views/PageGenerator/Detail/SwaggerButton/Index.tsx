@@ -6,7 +6,7 @@ import {
 	AtLoading,
 } from 'anta-element-ui-components-next';
 import { AtSchemaForm, AtSchemaFormTypes } from 'anta-element-ui-schema-form';
-import { defineComponent, reactive, ref, toRaw, watch } from 'vue';
+import { defineComponent, reactive, ref, toRaw, watch, PropType } from 'vue';
 
 import { Resource } from 'anta-cli/lib/commands/swagger/generator/types';
 import axios from 'axios';
@@ -17,8 +17,14 @@ import {
 } from './readSwaggerPage';
 import { PageRenderer } from '@components/PageRenderer/typing';
 import DialogFooter from '@/components/DialogFooter';
+import { PropsType } from 'anta-element-ui-components-next/src/utils/propsType';
 
 export default defineComponent({
+	props: {
+		buttonProps: {
+			type: Object as PropType<PropsType<typeof AtButton>>,
+		},
+	},
 	emits: {
 		generate: (result: ReadSwaggerPageResult) => true,
 	},
@@ -214,6 +220,7 @@ export default defineComponent({
 		return () => {
 			return [
 				<AtButton
+					{...props.buttonProps}
 					onClick={() => {
 						visible.value = true;
 					}}

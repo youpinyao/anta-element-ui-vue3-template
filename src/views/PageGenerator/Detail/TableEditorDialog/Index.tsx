@@ -10,11 +10,9 @@ import {
 	toRaw,
 	watch,
 } from 'vue';
-import ButtonsEditor from '../ButtonsEditor/Index';
 import { methods, PageRenderer } from '@components/PageRenderer/typing';
-import { AtSchemaTableTypes } from 'anta-element-ui-schema-table';
-import { ArrayType } from 'anta-element-ui-components-next/src/utils/arrayType';
 import ButtonsEditorDialog from '../ButtonsEditorDialog/Index';
+import SwitchEditorDialog from '../SwitchEditorDialog/Index';
 import JsonEditorDialog from '../JsonEditorDialog';
 import { ReadSwaggerPageResult } from '../SwaggerButton/readSwaggerPage';
 import SwaggerButton from '../SwaggerButton/Index';
@@ -40,6 +38,7 @@ export default defineComponent({
 	setup(props, ctx) {
 		const { emit } = ctx;
 		const loading = ref(true);
+		const saveLoading = ref(false);
 		const model = reactive<{
 			pagination?: boolean;
 			selection?: boolean;
@@ -140,7 +139,7 @@ export default defineComponent({
 								badge: {
 									fields: ['switch'],
 									callback(model) {
-										return model?.switch?.url;
+										return !!model?.switch?.url;
 									},
 								},
 							},
@@ -228,32 +227,38 @@ export default defineComponent({
 			emit('close');
 		};
 		const handleSave = async () => {
-			try {
-				await formEditor.value?.form?.validate();
+			saveLoading.value = true;
+			setTimeout(async () => {
+				try {
+					await formEditor.value?.form?.validate();
 
-				emit(
-					'change',
-					clone()(
-						toRaw({
-							pagination: model.pagination,
-							table: {
-								...props.schema?.table,
-								url: model.url,
-								method: model.method,
-								selection: model.selection,
-								tree: model.tree,
-								schema: {
-									...props.schema?.table?.schema,
-									columns: model.columns ?? [],
+					emit(
+						'change',
+						clone()(
+							toRaw({
+								pagination: model.pagination,
+								table: {
+									...props.schema?.table,
+									url: model.url,
+									method: model.method,
+									selection: model.selection,
+									tree: model.tree,
+									schema: {
+										...props.schema?.table?.schema,
+										columns: model.columns ?? [],
+									},
 								},
-							},
-						})
-					)
-				);
-				emit('close');
-			} catch (error) {
-				console.error(error);
-			}
+							})
+						)
+					);
+
+					emit('close');
+				} catch (error) {
+					console.error(error);
+				} finally {
+					saveLoading.value = false;
+				}
+			}, 100);
 		};
 
 		watch(
@@ -291,6 +296,7 @@ export default defineComponent({
 					closeOnClickModal={false}
 					appendToBody={true}
 					title="表格编辑"
+					width={1000}
 					modelValue={visible}
 					onUpdate:modelValue={(e) => {
 						emit('close');
@@ -299,9 +305,20 @@ export default defineComponent({
 						footer() {
 							return (
 								<DialogFooter>
-									<AtButton onClick={handleCancel}>取消</AtButton>
-									<SwaggerButton onGenerate={handleGenerate} />
-									<AtButton onClick={handleSave} type="primary">
+									<AtButton loading={saveLoading.value} onClick={handleCancel}>
+										取消
+									</AtButton>
+									<SwaggerButton
+										buttonProps={{
+											loading: saveLoading.value,
+										}}
+										onGenerate={handleGenerate}
+									/>
+									<AtButton
+										loading={saveLoading.value}
+										onClick={handleSave}
+										type="primary"
+									>
 										保存
 									</AtButton>
 								</DialogFooter>
@@ -322,6 +339,21 @@ export default defineComponent({
 						<AtSchemaForm ref={formEditor} schema={formSchema} model={model} />
 					</div>
 				</AtDialog>,
+				<SwitchEditorDialog
+					visible={columnSwitchEditorIndex.value !== undefined}
+					modelValue={columnSwitchEditorContent.value?.switch}
+					onClose={() => {
+						columnSwitchEditorIndex.value = undefined;
+					}}
+					onUpdate:modelValue={(result) => {
+						if (
+							model.columns &&
+							model.columns[columnSwitchEditorIndex.value ?? 0]
+						) {
+							model.columns[columnSwitchEditorIndex.value ?? 0].switch = result;
+						}
+					}}
+				/>,
 				<ButtonsEditorDialog
 					visible={columnButtonEditorIndex.value !== undefined}
 					modelValue={columnButtonEditorContent.value?.buttons}

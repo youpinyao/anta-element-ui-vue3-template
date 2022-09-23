@@ -36,6 +36,7 @@ export default defineComponent({
 	setup(props, ctx) {
 		const { emit } = ctx;
 		const loading = ref(true);
+		const saveLoading = ref(false);
 		const formEditorModel = ref<FormEditorModelItem[]>();
 		const model = reactive<NonNullable<PageRenderer.JSONSchema['search']>>({});
 		const formEditor = ref<InstanceType<typeof FormEditor>>();
@@ -102,17 +103,22 @@ export default defineComponent({
 			emit('close');
 		};
 		const handleSave = async () => {
-			try {
-				await formEditor.value?.form?.form?.validate();
-				setModelFormProperties(
-					transformFormEditorModelToProperties(formEditorModel.value)
-				);
+			saveLoading.value = true;
+			setTimeout(async () => {
+				try {
+					await formEditor.value?.form?.form?.validate();
+					setModelFormProperties(
+						transformFormEditorModelToProperties(formEditorModel.value)
+					);
 
-				emit('change', clone()(toRaw(model)));
-				emit('close');
-			} catch (error) {
-				console.error(error);
-			}
+					emit('change', clone()(toRaw(model)));
+					emit('close');
+				} catch (error) {
+					console.error(error);
+				} finally {
+					saveLoading.value = false;
+				}
+			}, 100);
 		};
 
 		watch(
@@ -155,9 +161,20 @@ export default defineComponent({
 						footer() {
 							return (
 								<DialogFooter>
-									<AtButton onClick={handleCancel}>取消</AtButton>
-									<SwaggerButton onGenerate={handleGenerate} />
-									<AtButton onClick={handleSave} type="primary">
+									<AtButton loading={saveLoading.value} onClick={handleCancel}>
+										取消
+									</AtButton>
+									<SwaggerButton
+										buttonProps={{
+											loading: saveLoading.value,
+										}}
+										onGenerate={handleGenerate}
+									/>
+									<AtButton
+										loading={saveLoading.value}
+										onClick={handleSave}
+										type="primary"
+									>
 										保存
 									</AtButton>
 								</DialogFooter>

@@ -22,7 +22,7 @@
 			</div>
 			<div class="header__buttons">
 				<AtButton :loading="loading" @click="handleBack">返回</AtButton>
-				<SwaggerButton @generate="handleGenerate" />
+				<SwaggerButton :buttonProps="{ loading }" @generate="handleGenerate" />
 				<AtButton :loading="loading" type="primary" @click="handlePreview"
 					>预览</AtButton
 				>

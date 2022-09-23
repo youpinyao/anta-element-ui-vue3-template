@@ -31,6 +31,7 @@ export default defineComponent({
 				<AtDialog
 					appendToBody={true}
 					closeOnClickModal={false}
+					destroyOnClose={true}
 					title="按钮编辑"
 					modelValue={props.visible}
 					onUpdate:modelValue={(visible) => {
