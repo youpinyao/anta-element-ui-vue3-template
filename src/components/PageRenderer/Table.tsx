@@ -27,6 +27,7 @@ export default defineComponent({
 	render() {
 		const { tableSchema } = this;
 		const { dataSource } = this.$props;
+
 		return (
 			<AtSchemaTable ref="table" schema={tableSchema} dataSource={dataSource} />
 		);
@@ -58,8 +59,7 @@ export default defineComponent({
 					width: 40,
 				});
 			}
-			if (props.schema?.tree) {
-				tableProps.rowKey = 'id';
+			if (props.schema?.tree && !tableProps.treeProps) {
 				tableProps.treeProps = {
 					children: 'children',
 					hasChildren: 'hasChildren',
@@ -68,13 +68,9 @@ export default defineComponent({
 			return {
 				...schema,
 				props: {
-					...schema.props,
 					rowKey: 'id',
-					treeProps: {
-						children: 'children',
-						hasChildren: 'hasChildren',
-					},
 					'onSort-change': onSortChange,
+					...tableProps,
 				},
 				columns: columns.map((item) => {
 					if (item.type === 'selection') {

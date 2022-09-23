@@ -285,7 +285,8 @@ const handleSaveTableEdit = ({
 	pageConfig.schema.table = table;
 	pageConfig.schema.pagination = pagination;
 };
-const handlePreview = () => {
+const handlePreview = async () => {
+	await handleSave();
 	window.open(`${location.origin}/page-preview/${pageConfig.id}`);
 };
 </script>

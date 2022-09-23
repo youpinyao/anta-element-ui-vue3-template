@@ -167,7 +167,7 @@ export async function readSwaggerPage(
 			.filter((item) => item.innerHTML.trim() === '响应参数')[0]
 			.nextElementSibling?.querySelectorAll('tbody tr')
 	);
-	const pagination = level === 2;
+	const pagination = params['page'] && params['pageSize'] ? true : false;
 
 	document.body.removeChild(iframe);
 
@@ -182,6 +182,9 @@ export async function readSwaggerPage(
 			});
 		}
 	});
+
+	delete params['page'];
+	delete params['pageSize'];
 
 	return {
 		params,
