@@ -64,7 +64,7 @@ export default defineComponent({
 
 					Object.entries(methods).forEach(([method, value]) => {
 						const hash = `${resource.value?.basePath}/${value.tags[0]}/${value.operationId}`;
-						const tag = `${value.tags.join('_')}_${method}`;
+						const tag = `${value.tags.join('_')}_${api}_${method}`;
 						const url = `${resource.value?.basePath}${api}`;
 						const extra = {
 							method: method.toUpperCase() as PageRenderer.Methods,
@@ -114,10 +114,11 @@ export default defineComponent({
 					loading.value = true;
 					try {
 						const { params, result, pagination } = await readSwaggerPage(hash);
+						const apiConfig = apiConfigs[hash];
 						const buttons: PageRenderer.FunctionButton[] = [];
-						const post = apiConfigs[`${pickTag(hash)}_post`];
-						const put = apiConfigs[`${pickTag(hash)}_put`];
-						const del = apiConfigs[`${pickTag(hash)}_delete`];
+						const post = apiConfigs[`${pickTag(hash)}_${apiConfig.api}_post`];
+						const put = apiConfigs[`${pickTag(hash)}_${apiConfig.api}_put`];
+						const del = apiConfigs[`${pickTag(hash)}_${apiConfig.api}_delete`];
 
 						if (post) {
 							const properties = (await readSwaggerPage(post.hash ?? ''))
@@ -188,7 +189,7 @@ export default defineComponent({
 						}
 
 						swaggerResult.value = {
-							...apiConfigs[hash],
+							...apiConfig,
 							params,
 							result,
 							buttons,
