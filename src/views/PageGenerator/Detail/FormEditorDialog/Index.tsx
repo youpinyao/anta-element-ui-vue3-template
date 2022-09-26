@@ -43,6 +43,7 @@ export default defineComponent({
 					appendToBody={true}
 					closeOnClickModal={false}
 					title="表单编辑"
+					width={1000}
 					modelValue={props.visible}
 					onUpdate:modelValue={(visible) => {
 						ctx.emit('close');

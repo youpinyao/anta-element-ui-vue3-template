@@ -14,6 +14,7 @@ type KeyProperty = AtSchemaFormTypes.Property & {
 
 export type FormEditorModelItem = KeyProperty & {
 	field?: string;
+	labelWidth?: number | string;
 };
 
 export function transformPropertiesToFormEditorModel(
@@ -25,6 +26,7 @@ export function transformPropertiesToFormEditorModel(
 		items.push({
 			...item,
 			key: item.key ?? field,
+			labelWidth: item.formItemProps?.labelWidth,
 			field,
 		});
 	});
@@ -51,6 +53,10 @@ export function transformFormEditorModelToProperties(
 
 		properties[field] = {
 			...item,
+			formItemProps: {
+				...item.formItemProps,
+				labelWidth: item.labelWidth,
+			},
 		} as KeyProperty;
 	});
 
@@ -183,6 +189,17 @@ export default defineComponent({
 								placeholder: '布局跨度',
 								min: 0,
 								max: 24,
+								style: {
+									width: '110px',
+								},
+							},
+						},
+						labelWidth: {
+							component: 'input-number',
+							type: Number,
+							props: {
+								placeholder: '名称宽度',
+								min: 0,
 								style: {
 									width: '110px',
 								},

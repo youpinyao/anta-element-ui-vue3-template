@@ -153,6 +153,7 @@ export default defineComponent({
 					closeOnClickModal={false}
 					appendToBody={true}
 					title="搜索条件编辑"
+					width={1000}
 					modelValue={visible}
 					onUpdate:modelValue={(e) => {
 						emit('close');
