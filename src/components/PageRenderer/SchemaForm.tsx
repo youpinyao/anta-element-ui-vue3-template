@@ -18,20 +18,23 @@ const SchemaForm = defineComponent({
 			const { schema } = props;
 			const properties = Object.fromEntries(
 				Object.entries(schema.properties).map(([field, item]) => {
-					const isSelect =
+					const isOptions =
 						item.component === 'select' ||
 						item.component === 'virtual-select' ||
-						item.component === 'tree-select';
+						item.component === 'tree-select' ||
+						item.component === 'tree' ||
+						item.component === 'cascader' ||
+						item.component === 'transfer';
 					return [
 						field,
-						isSelect
+						isOptions
 							? {
 									...item,
 									options:
-										typeof item.options === 'string'
+										typeof (item as any).remote === 'string'
 											? async () => {
 													const result = await request<any>({
-														url: item.options as unknown as string,
+														url: (item as any).remote as unknown as string,
 														method: 'GET',
 													});
 

@@ -3,6 +3,8 @@ import { AtButton, AtDialog } from 'anta-element-ui-components-next';
 
 import { defineComponent, PropType, ref, watch } from 'vue';
 
+import Helper from './Helper';
+
 export default defineComponent({
 	props: {
 		visible: Boolean,
@@ -25,7 +27,7 @@ export default defineComponent({
 		return () => {
 			return (
 				<AtDialog
-					width={800}
+					width={1000}
 					appendToBody={true}
 					closeOnClickModal={false}
 					destroyOnClose={true}
@@ -83,7 +85,9 @@ export default defineComponent({
 								}}
 							/>
 						</div>
-						<div style={{ flex: 1 }}></div>
+						<div style={{ flex: 1, paddingLeft: '10px' }}>
+							<Helper />
+						</div>
 					</div>
 				</AtDialog>
 			);

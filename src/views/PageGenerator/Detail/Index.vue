@@ -179,7 +179,7 @@ const dataSource = computed<any[]>(() =>
 	)
 );
 
-const showSearchEditor = ref(false);
+const showSearchEditor = ref(true);
 const showTableHeaderEditor = ref(false);
 const showTableEditor = ref(false);
 
