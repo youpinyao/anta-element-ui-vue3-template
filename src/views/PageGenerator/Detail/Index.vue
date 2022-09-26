@@ -74,6 +74,7 @@
 			</EditArea>
 			<EditArea @edit="handleTableEdit">
 				<Table
+					edit
 					v-if="pageConfig.schema?.table"
 					:schema="pageConfig.schema?.table"
 					:dataSource="dataSource"

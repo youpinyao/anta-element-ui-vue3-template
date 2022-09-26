@@ -15,6 +15,10 @@ import Swtich from './Swtich';
 
 export default defineComponent({
 	props: {
+		edit: {
+			type: Boolean,
+			default: false,
+		},
 		schema: {
 			type: Object as PropType<PageRenderer.JSONSchema['table']>,
 			required: true,
@@ -150,11 +154,13 @@ export default defineComponent({
 		watch(
 			() => tableSchema.value.columns.map((item) => item.prop),
 			(keys) => {
-				loading.value = true;
+				if (props.edit) {
+					loading.value = true;
 
-				setTimeout(() => {
-					loading.value = false;
-				}, 300);
+					setTimeout(() => {
+						loading.value = false;
+					}, 300);
+				}
 			}
 		);
 		return {
