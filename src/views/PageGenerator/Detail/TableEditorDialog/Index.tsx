@@ -115,6 +115,9 @@ export default defineComponent({
 							component: 'input-number',
 							props: {
 								placeholder: '列宽',
+								style: {
+									width: '100px',
+								},
 							},
 							formItemProps: {},
 						},
@@ -129,7 +132,7 @@ export default defineComponent({
 							props: {
 								type: 'primary',
 								vSlots: {
-									default: () => 'switch编辑',
+									default: () => '开关',
 								},
 								onClick(evt, index?) {
 									columnSwitchEditorIndex.value = index;
@@ -150,7 +153,7 @@ export default defineComponent({
 							props: {
 								type: 'primary',
 								vSlots: {
-									default: () => '按钮编辑',
+									default: () => '按钮',
 								},
 								onClick(evt, index?) {
 									columnButtonEditorIndex.value = index;
