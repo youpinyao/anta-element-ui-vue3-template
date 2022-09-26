@@ -33,7 +33,9 @@ export default defineComponent({
 			() => {
 				const str = JSON.stringify(props.modelValue, null, 2) ?? '';
 
-				if (str !== code.value) {
+				if (
+					str?.replace(/\r|\n| /g, '') !== code.value?.replace(/\r|\n| /g, '')
+				) {
 					code.value = str;
 				}
 			},
