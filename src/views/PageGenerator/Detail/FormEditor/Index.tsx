@@ -97,8 +97,8 @@ export default defineComponent({
 			/>,
 
 			<JsonEditorDialog
-				// visible={codeEditContent !== undefined}
-				visible={true}
+				visible={codeEditContent !== undefined}
+				// visible={true}
 				onClose={closeJsonEditor}
 				modelValue={codeEditContent}
 				onUpdate:modelValue={(json) => {

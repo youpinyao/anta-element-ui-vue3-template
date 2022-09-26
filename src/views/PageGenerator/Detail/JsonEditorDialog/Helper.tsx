@@ -9,11 +9,14 @@ import { defineComponent, ref, watch } from 'vue';
 import * as documents from './components';
 
 export default defineComponent({
+	props: {
+		value: {
+			type: Object,
+		},
+	},
 	setup(props, ctx) {
 		const type = ref('form');
-		const component = ref<AtSchemaFormTypes.Components | 'column'>(
-			'date-picker'
-		);
+		const component = ref<AtSchemaFormTypes.Components | 'column'>('input');
 		const transform = (str: string) => {
 			const items = str.split('');
 			let mark = false;
@@ -34,6 +37,18 @@ export default defineComponent({
 				})
 				.join('') as keyof typeof documents;
 		};
+		watch(
+			() => props.value,
+			() => {
+				if (components.includes((props.value as any)?.component)) {
+					type.value = 'form';
+					component.value = (props.value as any)?.component;
+				}
+			},
+			{
+				immediate: true,
+			}
+		);
 
 		watch(
 			() => type.value,

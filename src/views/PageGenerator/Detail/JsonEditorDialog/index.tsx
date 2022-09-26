@@ -86,7 +86,7 @@ export default defineComponent({
 							/>
 						</div>
 						<div style={{ flex: 1, paddingLeft: '10px' }}>
-							<Helper />
+							<Helper value={props.modelValue} />
 						</div>
 					</div>
 				</AtDialog>

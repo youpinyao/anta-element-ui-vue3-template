@@ -1,11 +1,11 @@
 import formItemBase from './formItemBase';
-import tree from './tree';
+import select from './select';
 
 export default {
 	...formItemBase,
 	component: 'transfer',
-	remote: tree.remote,
-	options: tree.options,
+	remote: select.remote,
+	options: select.options,
 	props: {
 		filterable: '搜索 boolean',
 		titles: '自定义列表标题 string[]',
