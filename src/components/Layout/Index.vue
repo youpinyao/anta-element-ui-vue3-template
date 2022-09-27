@@ -83,7 +83,6 @@ const toggleMenu = () => {
 };
 
 userStore.updateUserInfo();
-menuStore.updateMenu();
 </script>
 
 <style lang="scss" scoped>

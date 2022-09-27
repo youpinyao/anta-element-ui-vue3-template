@@ -66,7 +66,6 @@
 </template>
 <script lang="ts" setup>
 import { adminV1LoginPost } from '@/apis/adminApiLogin';
-import { useMenuStore } from '@/store/menu';
 import { useTokenStore } from '@/store/token';
 import { useUserStore } from '@/store/user';
 import { getAxiosErrorMsg } from '@axios/msg';
@@ -117,7 +116,6 @@ const login = async () => {
 		AtMessage.success('登录成功');
 		useTokenStore().setToken(result.data.data?.token);
 		useUserStore().updateUserInfo();
-		useMenuStore().updateMenu();
 		router.push((router.currentRoute?.value?.query?.from as string) || '/');
 		// window.location.href = '/';
 	} catch (err: any) {

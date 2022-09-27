@@ -36,7 +36,7 @@ module.exports = defineConfig({
 			entry: 'src/main.ts',
 			template: 'public/index.html',
 			filename: 'index.html',
-			title: 'Vue3 Template',
+			title: 'ANTA BMS',
 			// 提取出来的通用 chunk 和 vendor chunk。
 			chunks: ['chunk-vendors', 'chunk-common', 'index'],
 		},

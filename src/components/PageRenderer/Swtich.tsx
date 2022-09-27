@@ -1,4 +1,5 @@
 import { request } from '@/utils/axios';
+import { getAxiosErrorMsg } from '@/utils/axios/msg';
 import { AtSwitch } from 'anta-element-ui-components-next';
 import { PropsType } from 'anta-element-ui-components-next/src/utils/propsType';
 import { defineComponent, PropType, ref } from 'vue';
@@ -59,8 +60,8 @@ export default defineComponent({
 								},
 							});
 							ctx.emit('change', result);
-						} catch (error) {
-							console.error(error);
+						} catch (error: any) {
+							console.error(getAxiosErrorMsg(error));
 						} finally {
 							loading.value = false;
 						}

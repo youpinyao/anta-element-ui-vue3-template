@@ -1,5 +1,5 @@
 import { request } from '@/utils/axios';
-import { getAxiosMsg } from '@/utils/axios/msg';
+import { getAxiosErrorMsg, getAxiosMsg } from '@/utils/axios/msg';
 import replaceStringParams from '@/utils/replaceStringParams';
 import {
 	AtButton,
@@ -51,10 +51,12 @@ export default defineComponent({
 				AtMessage.success(getAxiosMsg(result) || '操作成功');
 				props.config?.callback?.();
 				handleClose();
-			} catch (error) {
-				console.error(error);
+			} catch (error: any) {
+				console.error(getAxiosErrorMsg(error));
 			} finally {
-				loading.value = false;
+				setTimeout(() => {
+					loading.value = false;
+				}, 100);
 			}
 		};
 

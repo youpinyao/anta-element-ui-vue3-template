@@ -1,4 +1,4 @@
-import { defineComponent } from 'vue';
+import { defineComponent, inject } from 'vue';
 import PageRenderer from '@PageRenderer';
 
 import config from './config';

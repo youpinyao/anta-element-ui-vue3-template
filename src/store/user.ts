@@ -5,7 +5,7 @@ import { useRequest } from '@/utils/hooks/useRequest';
 import { adminV1UserInfoGet } from '@/apis/adminApiUserInfo';
 
 export const useUserStore = defineStore('user', function () {
-	const { data, run } = useRequest(adminV1UserInfoGet, {
+	const { data, run, loading } = useRequest(adminV1UserInfoGet, {
 		immediate: false,
 	});
 	const user = computed(() => data.value?.data);
@@ -17,5 +17,6 @@ export const useUserStore = defineStore('user', function () {
 	return {
 		user,
 		updateUserInfo,
+		loading,
 	};
 });

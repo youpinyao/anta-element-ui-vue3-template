@@ -1,6 +1,7 @@
 import { request } from '@/utils/axios';
 import { AtSchemaForm, AtSchemaFormTypes } from 'anta-element-ui-schema-form';
-import { defineComponent, PropType, ref } from 'vue';
+import { defineComponent, PropType, provide, ref } from 'vue';
+import { SCHEMA_FORM_MODEL } from './typing';
 
 const SchemaForm = defineComponent({
 	props: {
@@ -14,6 +15,7 @@ const SchemaForm = defineComponent({
 		},
 	},
 	setup(props, ctx) {
+		provide(SCHEMA_FORM_MODEL, props.model);
 		return () => {
 			const { schema } = props;
 			const properties = Object.fromEntries(

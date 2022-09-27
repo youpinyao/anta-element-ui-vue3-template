@@ -19,6 +19,8 @@ export const functionButtonTriggerTypes = [
 
 export const methods = ['POST', 'GET', 'PUT', 'PATCH', 'DELETE'] as const;
 
+export const SCHEMA_FORM_MODEL = Symbol('schema_form_model');
+
 export namespace PageRenderer {
 	export interface FunctionButtonTrigger {
 		type: typeof functionButtonTriggerTypes[number];
