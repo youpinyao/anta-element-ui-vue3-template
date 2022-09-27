@@ -33,54 +33,55 @@ export const useMenuStore = defineStore('menu', function () {
 	// const { data, run, loading } = useRequest(adminApiMenuGet, {
 	// 	immediate: false,
 	// });
-	// const menu = computed<AsideMenus>(() => {
-	// 	const userMenus = user.user?.menus ?? [];
-	// 	const menus: AsideMenus = [];
-	// 	const each = (
-	// 		items: Definitionad17cf51a443281f268168922cc18c74[],
-	// 		parent: any[] = menus
-	// 	) => {
-	// 		items.forEach((item) => {
-	// 			const menu = {
-	// 				id: item.id,
-	// 				title: item.title,
-	// 				path: item.path,
-	// 				icon: item.icon,
-	// 				children: [],
-	// 			};
-	// 			parent.push(menu);
-	// 			if (item.children) {
-	// 				each(menu.children, item.children);
-	// 			}
-	// 		});
-	// 	};
-	// 	each(userMenus);
 
-	// 	return menus;
-	// });
+	const menu = computed<AsideMenus>(() => {
+		const userMenus = user.user?.menus ?? [];
+		const menus: AsideMenus = [];
+		const each = (
+			items: Definitionad17cf51a443281f268168922cc18c74[],
+			parent: any[] = menus
+		) => {
+			items.forEach((item) => {
+				const menu = {
+					id: item.id,
+					title: item.title,
+					path: item.path,
+					icon: item.icon,
+					children: [],
+				};
+				if (item.children) {
+					each(item.children, menu.children);
+				}
+				parent.push(menu);
+			});
+		};
+		each(userMenus);
 
-	const menu: AsideMenus = [
-		{
-			title: '首页',
-			path: '/home',
-			icon: 'at-icon-home',
-		},
-		{
-			id: 'systemTools',
-			title: '系统工具',
-			icon: 'at-icon-tools',
-			children: [
-				{
-					title: '页面生成器',
-					path: '/page-generator',
-				},
-				{
-					title: '菜单管理',
-					path: '/menu',
-				},
-			],
-		},
-	];
+		return menus;
+	});
+
+	// const menu: AsideMenus = [
+	// 	{
+	// 		title: '首页',
+	// 		path: '/home',
+	// 		icon: 'at-icon-home',
+	// 	},
+	// 	{
+	// 		id: 'systemTools',
+	// 		title: '系统工具',
+	// 		icon: 'at-icon-tools',
+	// 		children: [
+	// 			{
+	// 				title: '页面生成器',
+	// 				path: '/page-generator',
+	// 			},
+	// 			{
+	// 				title: '菜单管理',
+	// 				path: '/menu',
+	// 			},
+	// 		],
+	// 	},
+	// ];
 
 	const updateMenu = debounce(100, async () => {
 		user.updateUserInfo();
