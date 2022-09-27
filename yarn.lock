@@ -2688,10 +2688,10 @@ anta-element-ui-components-next@^0.2.24, anta-element-ui-components-next@~0.2.24
     sortablejs "~1.14.0"
     vue-class-component "~8.0.0-0"
 
-anta-element-ui-schema-form@~0.0.52:
-  version "0.0.52"
-  resolved "https://registry.npmjs.org/anta-element-ui-schema-form/-/anta-element-ui-schema-form-0.0.52.tgz#ff9887b61d0ab4e3c6c392da1a29d76a35e3e9fe"
-  integrity sha512-veVkJ7zwrVKvETrLMGb8HbHLRLF1YX3IeILKG1joI7LoUmU15cWMjGf45XWyUdtH5LVsjvmSoe+PBJCvZsrczQ==
+anta-element-ui-schema-form@~0.0.53:
+  version "0.0.53"
+  resolved "https://registry.npmjs.org/anta-element-ui-schema-form/-/anta-element-ui-schema-form-0.0.53.tgz#84bcbfc05341d9883e3533658bb7bed04a7cfc90"
+  integrity sha512-ZepColqpNCNuAgqGo5YdNau1HdPGQFuCDGl/tGRZ/8sdX8+zb7q+CD4OfgDOYjPsZMtE4yKIqlPlFBE8m+lpAg==
   dependencies:
     "@element-plus/icons-vue" "~2.0.9"
     "@types/uuid" "^8.3.4"
@@ -2699,10 +2699,10 @@ anta-element-ui-schema-form@~0.0.52:
     anta-element-ui-styles "^0.0.44"
     uuid "^9.0.0"
 
-anta-element-ui-schema-table@~0.0.28:
-  version "0.0.28"
-  resolved "https://registry.npmjs.org/anta-element-ui-schema-table/-/anta-element-ui-schema-table-0.0.28.tgz#eab14122e2d098890e9e2a9e68cf6ea5dc3c99a4"
-  integrity sha512-b7rIERZo0nntFVyPC9idHoARb2KapiuHJonOgKQN2iHP+k7PwgPKXmSWbR9rLBOwJgEi3mBahKAmmZ1Y5YeHng==
+anta-element-ui-schema-table@~0.0.29:
+  version "0.0.29"
+  resolved "https://registry.npmjs.org/anta-element-ui-schema-table/-/anta-element-ui-schema-table-0.0.29.tgz#bf5defe2bc0d05f588aac05a664565e49d49edae"
+  integrity sha512-8uaO1g8dFWU/Z5UquJw3APDTOTHICbXHDkd5ABXdcK1S78zeC7Xwi/pD+AH0mxnGRXPgNafOeVdlspxVSq6y1A==
   dependencies:
     anta-element-ui-components-next "^0.2.24"
     anta-element-ui-styles "^0.0.44"

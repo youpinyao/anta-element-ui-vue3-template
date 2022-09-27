@@ -62,8 +62,8 @@ export default {
 						showOverflowTooltip: true,
 					},
 					{
-						label: '权限码',
-						prop: 'permCode',
+						label: '路径',
+						prop: 'path',
 						minWidth: 200,
 						showOverflowTooltip: true,
 					},

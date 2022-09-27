@@ -24,13 +24,11 @@ export function formSchema() {
 					required: true,
 				},
 			},
-			permCode: {
+			path: {
 				component: 'input',
 				type: String,
-				label: '权限码',
-				formItemProps: {
-					required: true,
-				},
+				label: '路径',
+				formItemProps: {},
 			},
 			pid: {
 				component: 'tree-select',

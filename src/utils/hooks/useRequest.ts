@@ -1,6 +1,7 @@
 import { AxiosError, AxiosPromise } from 'axios';
 import { ref } from 'vue';
 import { ResponseBody } from '@axios/types';
+import { getAxiosErrorMsg } from '../axios/msg';
 
 type Options = {
 	immediate?: boolean;
@@ -27,7 +28,7 @@ export function useRequest<T = any, D = any, K extends any[] = any>(
 			(err) => {
 				error.value = err;
 				loading.value = false;
-				return err;
+				return Promise.reject(getAxiosErrorMsg(err));
 			}
 		);
 	};
