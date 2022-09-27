@@ -9,7 +9,6 @@
 			</div>
 			<Menu :items="menuItems" :collapse="menuStore.collapse" />
 			<AtLoading
-				text="菜单加载中..."
 				:size="20"
 				background="transparent"
 				static
