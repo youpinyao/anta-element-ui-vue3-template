@@ -24,6 +24,8 @@ import imageUpload from './imageUpload';
 import array from './array';
 import editor from './editor';
 
+import column from './column';
+
 export {
 	input,
 	inputNumber,
@@ -50,4 +52,5 @@ export {
 	imageUpload,
 	array,
 	editor,
+	column,
 };

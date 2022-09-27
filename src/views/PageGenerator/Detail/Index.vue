@@ -232,6 +232,7 @@ const handleSave = async () => {
 				schema: JSON.stringify(pageConfig.schema),
 			});
 			pageConfig.id = result.data.data;
+			router.replace(`/page-generator/${pageConfig.id}`);
 		}
 		AtMessage.success('保存成功');
 	} catch (error) {

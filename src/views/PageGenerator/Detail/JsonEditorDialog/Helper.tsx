@@ -43,6 +43,9 @@ export default defineComponent({
 				if (components.includes((props.value as any)?.component)) {
 					type.value = 'form';
 					component.value = (props.value as any)?.component;
+				} else {
+					type.value = 'table';
+					component.value = 'column';
 				}
 			},
 			{

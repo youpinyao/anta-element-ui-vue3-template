@@ -197,6 +197,7 @@ export default defineComponent({
 						};
 					} catch (error) {
 						console.error(error);
+						formModel.hash = '';
 					} finally {
 						loading.value = false;
 					}

@@ -115,18 +115,24 @@ export async function readSwaggerPage(
 	const params: ReadSwaggerPageResult['params'] = {};
 	const result: ReadSwaggerPageResult['result'] = [];
 
-	const getLastLevelTrs = (trs?: NodeListOf<Element>) => {
+	const getLevelTrs = (
+		trs: NodeListOf<Element> = [] as unknown as NodeListOf<Element>,
+		level: number
+	) => {
+		return [...(trs ?? [])].filter((tr) =>
+			new RegExp(`ant-table-row-level-${level}`, 'g').test(tr.className)
+		);
+	};
+	const getLastLevelTrs = (
+		trs: NodeListOf<Element> = [] as unknown as NodeListOf<Element>
+	) => {
 		let lastLevel = 0;
-		const getLevelTrs = (level: number) => {
-			return [...(trs ?? [])].filter((tr) =>
-				new RegExp(`ant-table-row-level-${level}`, 'g').test(tr.className)
-			);
-		};
-		while (getLevelTrs(lastLevel + 1).length > 0) {
+
+		while (getLevelTrs(trs, lastLevel + 1).length > 0) {
 			lastLevel += 1;
 		}
 
-		return [getLevelTrs(lastLevel), lastLevel] as unknown as [
+		return [getLevelTrs(trs, lastLevel), lastLevel] as unknown as [
 			NodeListOf<Element>,
 			number
 		];
@@ -162,10 +168,15 @@ export async function readSwaggerPage(
 		}
 	});
 
-	const [resultTrs, level] = getLastLevelTrs(
+	const resultTrs = getLevelTrs(
 		[...element.querySelectorAll('.api-title')]
 			.filter((item) => item.innerHTML.trim() === '响应参数')[0]
-			.nextElementSibling?.querySelectorAll('tbody tr')
+			.nextElementSibling?.querySelectorAll('tbody tr'),
+		[...element.querySelectorAll('.ant-table-row-cell-break-word')].filter(
+			(item) => item.innerHTML.trim() === 'pageSize'
+		)[0]
+			? 2
+			: 1
 	);
 	const pagination = params['page'] && params['pageSize'] ? true : false;
 
