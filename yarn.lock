@@ -1228,7 +1228,7 @@
   resolved "https://registry.npmmirror.com/@discoveryjs/json-ext/-/json-ext-0.5.7.tgz#1d572bfbbe14b7704e0ba0f39b74815b84870d70"
   integrity sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==
 
-"@element-plus/icons-vue@^2.0.6", "@element-plus/icons-vue@~2.0.6", "@element-plus/icons-vue@~2.0.9":
+"@element-plus/icons-vue@*", "@element-plus/icons-vue@^2.0.6", "@element-plus/icons-vue@~2.0.6":
   version "2.0.9"
   resolved "https://registry.npmmirror.com/@element-plus/icons-vue/-/icons-vue-2.0.9.tgz"
   integrity sha512-okdrwiVeKBmW41Hkl0eMrXDjzJwhQMuKiBOu17rOszqM+LS/yBYpNQNV5Jvoh06Wc+89fMmb/uhzf8NZuDuUaQ==
@@ -2688,10 +2688,10 @@ anta-element-ui-components-next@^0.2.25, anta-element-ui-components-next@~0.2.25
     sortablejs "~1.14.0"
     vue-class-component "~8.0.0-0"
 
-anta-element-ui-schema-form@~0.0.60:
-  version "0.0.60"
-  resolved "https://registry.npmjs.org/anta-element-ui-schema-form/-/anta-element-ui-schema-form-0.0.60.tgz#70567c3918c9698e2f0cffb3a64dc43af43db512"
-  integrity sha512-4epPaHoVY6E21WBT/+EDWWj+OKO9G0wygd4x81MW+/lYiN9pgKzBvUBGfgpUKlKjAA4z75xqCma4HA/wjmAOMw==
+anta-element-ui-schema-form@~0.0.61:
+  version "0.0.61"
+  resolved "https://registry.npmjs.org/anta-element-ui-schema-form/-/anta-element-ui-schema-form-0.0.61.tgz#8357bdd182e92a19ed7a13daad7b066845bc74e6"
+  integrity sha512-RC1Qc11uUWRD+z5BeCWfCx9vlHXyDHie9wrBHeMBAAGv4w8J2teyjThCkT8e4SiFwW4TSn9OCB5dpwYsYhXaEA==
   dependencies:
     "@element-plus/icons-vue" "~2.0.9"
     "@types/uuid" "^8.3.4"

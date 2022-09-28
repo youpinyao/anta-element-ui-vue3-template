@@ -115,9 +115,9 @@ export async function readSwaggerPage(
 		...(iframe.contentWindow?.document.querySelectorAll(
 			'.ant-select-dropdown ul li'
 		) ?? []),
-	].filter((item) => {
+	].find((item) => {
 		return resource.replace(/\//g, '-').startsWith(`-${item.innerHTML.trim()}`);
-	})[0];
+	});
 
 	dispatchEvent(iframe.contentWindow?.document, option);
 
@@ -183,8 +183,8 @@ export async function readSwaggerPage(
 
 	const [paramsTrs] = getLastLevelTrs(
 		[...element.querySelectorAll('.api-title')]
-			.filter((item) => item.innerHTML.trim() === '请求参数')[0]
-			.nextElementSibling?.querySelectorAll('tbody tr')
+			.find((item) => item.innerHTML.trim() === '请求参数')
+			?.nextElementSibling?.querySelectorAll('tbody tr')
 	);
 
 	const singleTypeMap: Partial<Record<string, any>> = {
@@ -213,11 +213,11 @@ export async function readSwaggerPage(
 
 	const resultTrs = getLevelTrs(
 		[...element.querySelectorAll('.api-title')]
-			.filter((item) => item.innerHTML.trim() === '响应参数')[0]
-			.nextElementSibling?.querySelectorAll('tbody tr'),
-		[...element.querySelectorAll('.ant-table-row-cell-break-word')].filter(
+			.find((item) => item.innerHTML.trim() === '响应参数')
+			?.nextElementSibling?.querySelectorAll('tbody tr'),
+		[...element.querySelectorAll('.ant-table-row-cell-break-word')].find(
 			(item) => item.innerHTML.trim() === 'pageSize'
-		)[0]
+		)
 			? 2
 			: 1
 	);
