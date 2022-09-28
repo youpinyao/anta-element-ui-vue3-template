@@ -15,17 +15,27 @@ const transformUploadProperty = (item: AtSchemaFormTypes.Property) => {
 		item.component === 'image-upload' ||
 		item.component === 'single-upload' ||
 		item.component === 'single-image-upload';
+
 	return isUpload
-		? {
+		? ({
 				...item,
+				transformResponse(file) {
+					return (file?.response as any)?.data?.path;
+				},
 				props: {
 					action: '/support/biz/integration/v1/upload/uploadfile',
 					headers: {
 						Authorization: `Bearer ${useTokenStore().token}`,
 						...item.props?.headers,
 					},
-					onError(error: any) {
-						AtMessage.error(getAxiosErrorMsg(error));
+					onError(error) {
+						try {
+							AtMessage.error(
+								getAxiosMsg({ data: JSON.parse(error.message) } as any)
+							);
+						} catch (e) {
+							AtMessage.error(error.message);
+						}
 					},
 					onSuccess(response: any) {
 						if (response?.code !== 0) {
@@ -34,7 +44,11 @@ const transformUploadProperty = (item: AtSchemaFormTypes.Property) => {
 					},
 					...item.props,
 				},
-		  }
+		  } as
+				| AtSchemaFormTypes.Upload
+				| AtSchemaFormTypes.ImageUpload
+				| AtSchemaFormTypes.SingleUpload
+				| AtSchemaFormTypes.SingleImageUpload)
 		: item;
 };
 

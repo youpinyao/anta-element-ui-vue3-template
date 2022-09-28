@@ -12,5 +12,5 @@ runtime-core.esm-bundler.js?d2dd:6035 Uncaught (in promise) TypeError: parentCom
 ## 记录
 
 ```node
-yarn add anta-element-ui-components-next@0.2.21 anta-element-ui-schema-form@0.0.37 anta-element-ui-schema-table@0.0.23 -T
+yarn add anta-element-ui-components-next@0.2.26 anta-element-ui-schema-form@0.0.63 anta-element-ui-schema-table@0.0.32 -T
 ```
