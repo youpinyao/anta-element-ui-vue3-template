@@ -1,6 +1,6 @@
 // import { adminApiMenuGet } from '@/apis/adminApiMenu';
 // import { useRequest } from '@/utils/hooks/useRequest';
-import { Definitionad17cf51a443281f268168922cc18c74 } from '@/models/definitions/Definitionad17cf51a443281f268168922cc18c74';
+import { AdminV1MenusGetResult } from '@/models/admin/menuApi/AdminV1MenusGetResult';
 import { defineStore } from 'pinia';
 import { debounce } from 'throttle-debounce';
 import { computed, ref } from 'vue';
@@ -38,7 +38,7 @@ export const useMenuStore = defineStore('menu', function () {
 		const userMenus = user.user?.menus ?? [];
 		const menus: AsideMenus = [];
 		const each = (
-			items: Definitionad17cf51a443281f268168922cc18c74[],
+			items: NonNullable<AdminV1MenusGetResult['data']>,
 			parent: any[] = menus
 		) => {
 			items.forEach((item) => {

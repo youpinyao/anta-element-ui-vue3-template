@@ -1,0 +1,33 @@
+// 商品主表查单个
+export type GoodsBizGoodsDefinition8652b75251ec10dff9ec49fa6d03a3c8 = {
+	// 款号-不超过10
+	alias?: string;
+	// 品牌
+	brandId?: number;
+	// 分类
+	cateId?: number;
+	// 商品id
+	id?: number;
+	// 主图
+	image?: string;
+	// 关键字
+	keyword?: string;
+	// 吊牌价
+	marketPrice?: number;
+	// 高价
+	maxPrice?: number;
+	// 低价
+	minPrice?: number;
+	// 产品名
+	name?: string;
+	// 指导价
+	price?: number;
+	// 店铺id
+	shopId?: number;
+	// 商品状态：1-在架、0-下架
+	status?: number;
+	// 产品标题
+	title?: string;
+	// 上架时间
+	upTime?: number;
+};

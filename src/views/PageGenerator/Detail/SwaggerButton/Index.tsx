@@ -9,7 +9,7 @@ import { AtSchemaForm, AtSchemaFormTypes } from 'anta-element-ui-schema-form';
 import { defineComponent, reactive, ref, toRaw, watch, PropType } from 'vue';
 
 import {
-	Resource,
+	ResourceDetail,
 	ResourceItem,
 } from 'anta-cli/lib/commands/swagger/generator/types';
 import axios from 'axios';
@@ -107,8 +107,8 @@ export default defineComponent({
 			}
 			try {
 				const resource =
-					(await axios.get<Resource>(`${baseUrl}${formModel.resource}`)).data ??
-					[];
+					(await axios.get<ResourceDetail>(`${baseUrl}${formModel.resource}`))
+						.data ?? [];
 
 				Object.entries(resource.paths).forEach(([api, methods]) => {
 					const option: AtSchemaFormTypes.SelectOption<{

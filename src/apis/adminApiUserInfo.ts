@@ -1,4 +1,4 @@
-import { AdminV1UsersInfoGetResult } from '@/models/userApi/AdminV1UsersInfoGetResult';
+import { AdminV1UsersInfoGetResult } from '@/models/admin/userApi/AdminV1UsersInfoGetResult';
 import { get } from '@/utils/axios';
 
 export function adminV1UserInfoGet() {

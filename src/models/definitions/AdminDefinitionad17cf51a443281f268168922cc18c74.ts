@@ -1,0 +1,31 @@
+// 用户获取
+export type AdminDefinitionad17cf51a443281f268168922cc18c74 = {
+	// 子菜单
+	children?: Array<AdminDefinitionad17cf51a443281f268168922cc18c74>;
+	// 创建时间
+	createTime?: string;
+	// 创建人
+	createdBy?: string;
+	// 删除时间
+	deleteTime?: number;
+	// 图标
+	icon?: string;
+	// 主键
+	id?: number;
+	// 排序
+	orders?: number;
+	// 路径
+	path?: string;
+	// 父ID
+	pid?: number;
+	// 备注
+	remark?: string;
+	// 标题
+	title?: string;
+	// 类型:0-模块,1-菜单,2-功能
+	typeFlag?: number;
+	// 更新时间
+	updateTime?: string;
+	// 更新人
+	updatedBy?: string;
+};

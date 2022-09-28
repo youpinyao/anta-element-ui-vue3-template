@@ -1228,7 +1228,7 @@
   resolved "https://registry.npmmirror.com/@discoveryjs/json-ext/-/json-ext-0.5.7.tgz#1d572bfbbe14b7704e0ba0f39b74815b84870d70"
   integrity sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==
 
-"@element-plus/icons-vue@*", "@element-plus/icons-vue@^2.0.6", "@element-plus/icons-vue@~2.0.6":
+"@element-plus/icons-vue@^2.0.6", "@element-plus/icons-vue@~2.0.6", "@element-plus/icons-vue@~2.0.9":
   version "2.0.9"
   resolved "https://registry.npmmirror.com/@element-plus/icons-vue/-/icons-vue-2.0.9.tgz"
   integrity sha512-okdrwiVeKBmW41Hkl0eMrXDjzJwhQMuKiBOu17rOszqM+LS/yBYpNQNV5Jvoh06Wc+89fMmb/uhzf8NZuDuUaQ==
@@ -2638,10 +2638,10 @@ ansi-styles@^6.0.0:
   resolved "https://registry.npmmirror.com/ansi-styles/-/ansi-styles-6.1.0.tgz"
   integrity sha512-VbqNsoz55SYGczauuup0MFUyXNQviSpFTj1RQtFzmQLk18qbVSpTFFGMT293rmDaQuKCT6InmbuEyUne4mTuxQ==
 
-anta-cli@~0.0.16:
-  version "0.0.16"
-  resolved "https://registry.npmjs.org/anta-cli/-/anta-cli-0.0.16.tgz#282b59fb9ad16a519520b88c10b7553e8765fa56"
-  integrity sha512-MUdm8UoAwmVW0TfTvTkyyL8dmjAYWOOUe5OlsgPxnx3KTJ8otexEooHB3MP7zkf1AfTRDjQgswvMSHxG5CduBQ==
+anta-cli@~0.0.18:
+  version "0.0.18"
+  resolved "https://registry.npmjs.org/anta-cli/-/anta-cli-0.0.18.tgz#f1f6ad2b42a1001afaf1b5a2ea97bde0afcf9b3e"
+  integrity sha512-btpAnvvT+9AA0XHnNCU+9eadXBuf1Gm4RGYhR9iINPw8BjX+345sYt8qYy8xTane/cyZ1zokAmYBn8hPEdrqlg==
   dependencies:
     "@babel/generator" "~7.18.13"
     "@babel/parser" "~7.18.13"

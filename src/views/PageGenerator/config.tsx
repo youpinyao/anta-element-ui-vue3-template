@@ -1,5 +1,5 @@
 import { AdminV1PageGeneratorDetailGetResult } from '@/apis/adminApiPageTemplates';
-import { Definition2109f27d03411ab2d387f6d44a00e6a5 } from '@/models/definitions/Definition2109f27d03411ab2d387f6d44a00e6a5';
+import { AdminV1Page$TemplatesGetResult } from '@/models/admin/pageTemplateApi/AdminV1Page$TemplatesGetResult';
 import { put } from '@/utils/axios';
 import { AtSwitch } from 'anta-element-ui-components-next';
 import { ArrayType } from 'anta-element-ui-components-next/src/utils/arrayType';
@@ -71,5 +71,7 @@ export default {
 	},
 	title: '页面列表',
 } as AdminV1PageGeneratorDetailGetResult<
-	NonNullable<ArrayType<Definition2109f27d03411ab2d387f6d44a00e6a5['list']>>
+	NonNullable<
+		NonNullable<NonNullable<AdminV1Page$TemplatesGetResult['data']>['list']>
+	>
 >;

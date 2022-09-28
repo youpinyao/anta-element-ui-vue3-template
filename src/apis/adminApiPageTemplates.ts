@@ -1,19 +1,18 @@
-import { Definition2109f27d03411ab2d387f6d44a00e6a5 } from '@/models/definitions/Definition2109f27d03411ab2d387f6d44a00e6a5';
 import { del, get, post, put } from '@/utils/axios';
 import { PageRenderer } from '@/components/PageRenderer/typing';
 import { ArrayType } from 'anta-element-ui-components-next/src/utils/arrayType';
-import { AdminV1Page$Templates$pageTemplateId$DeleteParams } from '@/models/pageTemplateApi/AdminV1Page$Templates$pageTemplateId$DeleteParams';
-import { AdminV1Page$TemplatesPutParams } from '@/models/pageTemplateApi/AdminV1Page$TemplatesPutParams';
-import { AdminV1Page$TemplatesPutResult } from '@/models/pageTemplateApi/AdminV1Page$TemplatesPutResult';
-import { AdminV1Page$Templates$pageTemplateId$DeleteResult } from '@/models/pageTemplateApi/AdminV1Page$Templates$pageTemplateId$DeleteResult';
-import { AdminV1Page$TemplatesPostParams } from '@/models/pageTemplateApi/AdminV1Page$TemplatesPostParams';
-import { AdminV1Page$TemplatesPostResult } from '@/models/pageTemplateApi/AdminV1Page$TemplatesPostResult';
-import { AdminV1Page$Templates$pageTemplateId$GetParams } from '@/models/pageTemplateApi/AdminV1Page$Templates$pageTemplateId$GetParams';
-import { AdminV1Page$TemplatesGetParams } from '@/models/pageTemplateApi/AdminV1Page$TemplatesGetParams';
-import { AdminV1Page$TemplatesGetResult } from '@/models/pageTemplateApi/AdminV1Page$TemplatesGetResult';
-import { AdminV1Page$Templates$pageTemplateId$GetResult } from '@/models/pageTemplateApi/AdminV1Page$Templates$pageTemplateId$GetResult';
+import { AdminV1Page$Templates$pageTemplateId$DeleteParams } from '@/models/admin/pageTemplateApi/AdminV1Page$Templates$pageTemplateId$DeleteParams';
+import { AdminV1Page$TemplatesPutParams } from '@/models/admin/pageTemplateApi/AdminV1Page$TemplatesPutParams';
+import { AdminV1Page$TemplatesPutResult } from '@/models/admin/pageTemplateApi/AdminV1Page$TemplatesPutResult';
+import { AdminV1Page$Templates$pageTemplateId$DeleteResult } from '@/models/admin/pageTemplateApi/AdminV1Page$Templates$pageTemplateId$DeleteResult';
+import { AdminV1Page$TemplatesPostParams } from '@/models/admin/pageTemplateApi/AdminV1Page$TemplatesPostParams';
+import { AdminV1Page$TemplatesPostResult } from '@/models/admin/pageTemplateApi/AdminV1Page$TemplatesPostResult';
+import { AdminV1Page$Templates$pageTemplateId$GetParams } from '@/models/admin/pageTemplateApi/AdminV1Page$Templates$pageTemplateId$GetParams';
+import { AdminV1Page$TemplatesGetParams } from '@/models/admin/pageTemplateApi/AdminV1Page$TemplatesGetParams';
+import { AdminV1Page$TemplatesGetResult } from '@/models/admin/pageTemplateApi/AdminV1Page$TemplatesGetResult';
+import { AdminV1Page$Templates$pageTemplateId$GetResult } from '@/models/admin/pageTemplateApi/AdminV1Page$Templates$pageTemplateId$GetResult';
 import { ResponseBody } from '@/utils/axios/types';
-import { AdminV1Page$TemplatesAlias$alias$GetParams } from '@/models/pageTemplateApi/AdminV1Page$TemplatesAlias$alias$GetParams';
+import { AdminV1Page$TemplatesAlias$alias$GetParams } from '@/models/admin/pageTemplateApi/AdminV1Page$TemplatesAlias$alias$GetParams';
 
 export function adminV1PageTemplatesGet(data: AdminV1Page$TemplatesGetParams) {
 	return get<

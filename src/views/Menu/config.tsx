@@ -1,6 +1,5 @@
 import { AdminV1PageGeneratorDetailGetResult } from '@/apis/adminApiPageTemplates';
-import { Definition2109f27d03411ab2d387f6d44a00e6a5 } from '@/models/definitions/Definition2109f27d03411ab2d387f6d44a00e6a5';
-import { AdminV1MenusGetResult } from '@/models/menuApi/AdminV1MenusGetResult';
+import { AdminV1MenusGetResult } from '@/models/admin/menuApi/AdminV1MenusGetResult';
 import { put } from '@/utils/axios';
 import { AtSwitch } from 'anta-element-ui-components-next';
 import { ArrayType } from 'anta-element-ui-components-next/src/utils/arrayType';

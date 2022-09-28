@@ -1,0 +1,37 @@
+// 菜单访问日志列表
+export type AdminDefinitionc93ecd9ea92a80d993dfd7ed507218c8 = {
+	// 访问来源地址
+	accessAddress?: string;
+	// 访问来源地址明细
+	accessIp?: string;
+	// 访问浏览器
+	browser?: string;
+	// 创建时间
+	createTime?: string;
+	// 创建人
+	createdBy?: string;
+	// 删除时间
+	deleteTime?: number;
+	// 用户姓名
+	fullName?: string;
+	// 主键
+	id?: number;
+	// 访问菜单编码
+	menuPermCode?: string;
+	// 访问菜单名称
+	menuTitle?: string;
+	// 访问菜单地址
+	menuUri?: string;
+	// 访问系统
+	sysInfo?: string;
+	// 用户ID
+	sysUserId?: number;
+	// 访问耗时
+	times?: number;
+	// 更新时间
+	updateTime?: string;
+	// 更新人
+	updatedBy?: string;
+	// 用户账号
+	username?: string;
+};

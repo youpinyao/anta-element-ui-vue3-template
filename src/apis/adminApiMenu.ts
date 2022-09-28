@@ -1,11 +1,11 @@
-import { AdminV1Menus$menuId$DeleteParams } from '@/models/menuApi/AdminV1Menus$menuId$DeleteParams';
-import { AdminV1Menus$menuId$DeleteResult } from '@/models/menuApi/AdminV1Menus$menuId$DeleteResult';
-import { AdminV1MenusGetParams } from '@/models/menuApi/AdminV1MenusGetParams';
-import { AdminV1MenusGetResult } from '@/models/menuApi/AdminV1MenusGetResult';
-import { AdminV1MenusPostParams } from '@/models/menuApi/AdminV1MenusPostParams';
-import { AdminV1MenusPostResult } from '@/models/menuApi/AdminV1MenusPostResult';
-import { AdminV1MenusPutParams } from '@/models/menuApi/AdminV1MenusPutParams';
-import { AdminV1MenusPutResult } from '@/models/menuApi/AdminV1MenusPutResult';
+import { AdminV1Menus$menuId$DeleteParams } from '@/models/admin/menuApi/AdminV1Menus$menuId$DeleteParams';
+import { AdminV1Menus$menuId$DeleteResult } from '@/models/admin/menuApi/AdminV1Menus$menuId$DeleteResult';
+import { AdminV1MenusGetParams } from '@/models/admin/menuApi/AdminV1MenusGetParams';
+import { AdminV1MenusGetResult } from '@/models/admin/menuApi/AdminV1MenusGetResult';
+import { AdminV1MenusPostParams } from '@/models/admin/menuApi/AdminV1MenusPostParams';
+import { AdminV1MenusPostResult } from '@/models/admin/menuApi/AdminV1MenusPostResult';
+import { AdminV1MenusPutParams } from '@/models/admin/menuApi/AdminV1MenusPutParams';
+import { AdminV1MenusPutResult } from '@/models/admin/menuApi/AdminV1MenusPutResult';
 import { del, get, post, put } from '@/utils/axios';
 
 export function adminV1MenuGet(data: AdminV1MenusGetParams) {

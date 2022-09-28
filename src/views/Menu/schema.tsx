@@ -1,7 +1,7 @@
 import { adminV1MenuGet } from '@/apis/adminApiMenu';
 import { adminV1PageTemplatesGet } from '@/apis/adminApiPageTemplates';
 import { SCHEMA_FORM_MODEL } from '@/components/PageRenderer/typing';
-import { AdminV1MenusGetResult } from '@/models/menuApi/AdminV1MenusGetResult';
+import { AdminV1MenusGetResult } from '@/models/admin/menuApi/AdminV1MenusGetResult';
 import { get } from '@/utils/axios';
 import { AtIcon } from 'anta-element-ui-components-next';
 import { icons } from 'anta-element-ui-components-next/src/components/icon';
