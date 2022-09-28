@@ -12,7 +12,7 @@
 	"dependencies": {
 		"@element-plus/icons-vue": "~2.0.6",
 		"anta-element-ui-components-next": "~0.2.25",
-		"anta-element-ui-schema-form": "~0.0.59",
+		"anta-element-ui-schema-form": "~0.0.60",
 		"anta-element-ui-schema-table": "~0.0.31",
 		"anta-element-ui-styles": "~0.0.43",
 		"axios": "~0.27.2",
@@ -43,7 +43,7 @@
 		"@vue/compiler-sfc": "~3.2.37",
 		"@vue/eslint-config-typescript": "~9.1.0",
 		"add-asset-html-webpack-plugin": "~5.0.2",
-		"anta-cli": "~0.0.15",
+		"anta-cli": "~0.0.16",
 		"babel-loader": "~8.2.5",
 		"css-loader": "~6.7.1",
 		"eslint": "~7.32.0",

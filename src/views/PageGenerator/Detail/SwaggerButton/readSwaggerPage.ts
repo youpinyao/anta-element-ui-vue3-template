@@ -31,29 +31,53 @@ function dispatchEvent(
 	element.dispatchEvent(evt);
 }
 
-export function pickTag(hash: string) {
-	return hash.split('/')[2];
+export function pickTag(hash: string = '') {
+	return hash.split('/')[hash.split('/').length - 2];
+}
+
+export function transformToHref(hash: string = '') {
+	const items = hash.split('/');
+	const operationId = items.pop();
+	const tag = items.pop();
+
+	return `#${items.join('-').replace(/^-/g, '/')}/${tag}/${operationId}`;
 }
 
 export async function readSwaggerPage(
-	hash: string
+	resource?: string,
+	hash?: string
 ): Promise<Pick<ReadSwaggerPageResult, 'params' | 'result' | 'pagination'>> {
+	if (!resource) {
+		throw new Error('please set resource');
+	}
+	if (!hash) {
+		throw new Error('please set hash');
+	}
+
 	const iframe = document.createElement('iframe');
 	const waitFor = (
 		cls: string,
+		valid: (element?: Element) => boolean = (element?: Element) => true,
 		preResolve?: (value: Element | undefined | null) => void,
 		retry: number = 0
 	) => {
+		const max = 20;
+		if (retry === 0) {
+			console.log('------------------------------');
+			console.log('waitFor', cls, 'start');
+		}
 		return new Promise<Element | undefined | null>((resolve, reject) => {
 			const document = iframe.contentWindow?.document.querySelector(cls);
 
-			if (document || retry > 20) {
+			if ((document && valid(document)) || retry > max) {
 				resolve(document);
 				preResolve && preResolve(document);
+				console.log('waitFor', cls, retry > max ? 'fail' : 'success');
 			} else {
 				setTimeout(() => {
 					waitFor(
 						cls,
+						valid,
 						(document) => {
 							resolve(document);
 							preResolve && preResolve(document);
@@ -64,23 +88,39 @@ export async function readSwaggerPage(
 			}
 		});
 	};
-	iframe.style.cssText = 'display: none';
+	iframe.style.cssText =
+		'position:fixed; left: 0; top: 0; width: 100%; height: 100%;';
 	document.body.appendChild(iframe);
 
 	iframe.contentWindow?.document.write(
 		(
-			await axios.get<string>(
-				`https://admin-api-dev.atxapi.com/doc.html#${hash}`
-			)
+			await axios.get<string>(`https://admin-api-dev.atxapi.com/doc.html`)
 		).data.replace(
 			/<meta charset=utf-8>/g,
 			'<meta charset=utf-8><base href="https://admin-api-dev.atxapi.com" />'
 		)
 	);
 
-	const menu = await waitFor('.ant-menu-root');
+	const select = await waitFor('.sider .ant-select-selection');
 
-	await waitFor('.description');
+	dispatchEvent(iframe.contentWindow?.document, select);
+
+	await waitFor('.ant-select-dropdown ul li');
+	const option = [
+		...(iframe.contentWindow?.document.querySelectorAll(
+			'.ant-select-dropdown ul li'
+		) ?? []),
+	].filter((item) => {
+		return resource.replace(/\//g, '-').startsWith(`-${item.innerHTML.trim()}`);
+	})[0];
+
+	dispatchEvent(iframe.contentWindow?.document, option);
+
+	await waitFor('.description', (el) => {
+		return el?.innerHTML.indexOf(resource) !== -1;
+	});
+
+	const menu = await waitFor('.ant-menu-root');
 
 	[...(menu?.querySelectorAll('.ant-menu-submenu-title') ?? [])].forEach(
 		(element) => {
@@ -99,15 +139,13 @@ export async function readSwaggerPage(
 
 	dispatchEvent(
 		iframe.contentWindow?.document,
-		sub?.querySelector(`a[href^="#${hash.split('_')[0]}"]`)
+		sub?.querySelector(`a[href^="${transformToHref(hash)}"]`)
 	);
-
-	// iframe.contentWindow!.location.hash = `#${hash}`;
 
 	const element = await waitFor('.document');
 
 	if (!element) {
-		document.body.removeChild(iframe);
+		// document.body.removeChild(iframe);
 		AtMessage.error('拉取失败，请重试');
 		throw new Error('waitFor timeout');
 	}

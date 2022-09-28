@@ -8,7 +8,10 @@ import {
 import { AtSchemaForm, AtSchemaFormTypes } from 'anta-element-ui-schema-form';
 import { defineComponent, reactive, ref, toRaw, watch, PropType } from 'vue';
 
-import { Resource } from 'anta-cli/lib/commands/swagger/generator/types';
+import {
+	Resource,
+	ResourceItem,
+} from 'anta-cli/lib/commands/swagger/generator/types';
 import axios from 'axios';
 import {
 	pickTag,
@@ -30,12 +33,38 @@ export default defineComponent({
 	},
 	setup(props, ctx) {
 		const visible = ref(false);
-		const resourceUrl = 'https://admin-api-dev.atxapi.com/admin/v2/api-docs';
-		const resource = ref<Resource>();
-		const formModel = reactive<Record<string, any>>({});
+		const baseUrl = 'https://admin-api-dev.atxapi.com';
+		const resourceUrl = '/swagger-resources';
+
+		const resourceOptions = ref<AtSchemaFormTypes.SelectOption[]>([]);
+		const apiOptions = ref<AtSchemaFormTypes.SelectOption[]>([]);
+		const formSchema = ref({
+			properties: {
+				resource: {
+					component: 'select',
+					type: String,
+					options: resourceOptions,
+					props: {
+						placeholder: '请选择资源',
+						filterable: true,
+					},
+				},
+				hash: {
+					component: 'tree-select',
+					type: String,
+					options: apiOptions,
+					props: {
+						placeholder: '请选择接口',
+						filterable: true,
+					},
+				},
+			},
+		});
+		const formModel = reactive<
+			AtSchemaFormTypes.ModelTypes<typeof formSchema.value>
+		>({});
 		const loading = ref(false);
 		const swaggerResult = ref<ReadSwaggerPageResult>();
-		const apiOptions = ref<AtSchemaFormTypes.SelectOption[]>([]);
 		const apiConfigs = reactive<
 			Record<
 				string,
@@ -46,13 +75,42 @@ export default defineComponent({
 			>
 		>({});
 
-		const getApiTreeSelectOptions = async function () {
+		const getApiResourceSelectOptions = async function () {
 			loading.value = true;
 			const options: AtSchemaFormTypes.SelectOption[] = [];
 			try {
-				resource.value = (await axios.get<Resource>(resourceUrl)).data ?? [];
+				const resources =
+					(await axios.get<ResourceItem[]>(`${baseUrl}${resourceUrl}`)).data ??
+					[];
 
-				Object.entries(resource.value.paths).forEach(([api, methods]) => {
+				resources.forEach((item) => {
+					options.push({
+						label: item.name,
+						value: item.url,
+					});
+				});
+			} catch (error) {
+				console.error(error);
+			} finally {
+				loading.value = false;
+			}
+
+			return options;
+		};
+
+		const getApiTreeSelectOptions = async function () {
+			loading.value = true;
+			const options: AtSchemaFormTypes.SelectOption[] = [];
+			if (!formModel.resource) {
+				console.error('please select resource');
+				return [];
+			}
+			try {
+				const resource =
+					(await axios.get<Resource>(`${baseUrl}${formModel.resource}`)).data ??
+					[];
+
+				Object.entries(resource.paths).forEach(([api, methods]) => {
 					const option: AtSchemaFormTypes.SelectOption<{
 						method?: PageRenderer.Methods;
 						url?: string;
@@ -63,9 +121,9 @@ export default defineComponent({
 					};
 
 					Object.entries(methods).forEach(([method, value]) => {
-						const hash = `${resource.value?.basePath}/${value.tags[0]}/${value.operationId}`;
+						const hash = `${resource?.basePath}/${value.tags[0]}/${value.operationId}`;
 						const tag = `${value.tags.join('_')}_${api}_${method}`;
-						const url = `${resource.value?.basePath}${api}`;
+						const url = `${resource?.basePath}${api}`;
 						const extra = {
 							method: method.toUpperCase() as PageRenderer.Methods,
 							url,
@@ -94,26 +152,16 @@ export default defineComponent({
 			return options;
 		};
 
-		const formSchema = ref<AtSchemaFormTypes.JSONSchema>({
-			properties: {
-				hash: {
-					component: 'tree-select',
-					type: String,
-					options: apiOptions,
-					props: {
-						placeholder: '请选择接口',
-						filterable: true,
-					},
-				},
-			},
-		});
 		watch(
 			() => formModel.hash,
 			async (hash) => {
 				if (hash) {
 					loading.value = true;
 					try {
-						const { params, result, pagination } = await readSwaggerPage(hash);
+						const { params, result, pagination } = await readSwaggerPage(
+							formModel.resource,
+							hash
+						);
 						const apiConfig = apiConfigs[hash];
 						const buttons: PageRenderer.FunctionButton[] = [];
 						const post = apiConfigs[`${pickTag(hash)}_${apiConfig.api}_post`];
@@ -121,8 +169,9 @@ export default defineComponent({
 						const del = apiConfigs[`${pickTag(hash)}_${apiConfig.api}_delete`];
 
 						if (post) {
-							const properties = (await readSwaggerPage(post.hash ?? ''))
-								?.params;
+							const properties = (
+								await readSwaggerPage(formModel.resource, post.hash ?? '')
+							)?.params;
 							delete properties.id;
 							buttons.push({
 								title: '新增',
@@ -152,8 +201,9 @@ export default defineComponent({
 							});
 						}
 						if (put) {
-							const properties = (await readSwaggerPage(put.hash ?? ''))
-								?.params;
+							const properties = (
+								await readSwaggerPage(formModel.resource, put.hash ?? '')
+							)?.params;
 							delete properties.id;
 							result[result.length - 1].buttons?.push({
 								title: '编辑',
@@ -210,8 +260,20 @@ export default defineComponent({
 			() => visible.value,
 			async () => {
 				if (visible.value === true) {
-					apiOptions.value = await getApiTreeSelectOptions();
+					resourceOptions.value = await getApiResourceSelectOptions();
+					apiOptions.value = [];
+					formModel.resource = '';
+					formModel.hash = '';
 				}
+			}
+		);
+
+		watch(
+			() => formModel.resource,
+			async () => {
+				if (!formModel.resource) return;
+				apiOptions.value = await getApiTreeSelectOptions();
+				formModel.hash = '';
 			}
 		);
 
@@ -263,7 +325,10 @@ export default defineComponent({
 					}}
 				>
 					<AtLoading visible={loading.value}>
-						<AtSchemaForm schema={formSchema.value} model={formModel} />
+						<AtSchemaForm
+							schema={formSchema.value as AtSchemaFormTypes.JSONSchema}
+							model={formModel}
+						/>
 					</AtLoading>
 				</AtDialog>,
 			];
