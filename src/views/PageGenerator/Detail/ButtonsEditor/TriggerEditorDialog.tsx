@@ -21,6 +21,32 @@ import {
 import { ReadSwaggerPageResult } from '../SwaggerButton/readSwaggerPage';
 import SwaggerButton from '../SwaggerButton/Index';
 
+type RouteModel = {
+	type: 'route';
+	path: string;
+};
+type LinkModel = {
+	type: 'link';
+	url: string;
+};
+type DialogModel = {
+	type: 'dialog';
+	title: string;
+	url: string;
+	method: PageRenderer.Methods;
+	dataUrl: string;
+	dataMethod: PageRenderer.Methods;
+	okText: string | boolean;
+	cancelText: string | boolean;
+	form: PageRenderer.FunctionButtonTriggerDialog['form'];
+};
+type PopconfirmModel = {
+	type: 'popconfirm';
+	title: string;
+	url: string;
+	method: PageRenderer.Methods;
+};
+
 export default defineComponent({
 	props: {
 		visible: Boolean,
@@ -35,28 +61,32 @@ export default defineComponent({
 		const formEditorVisible = ref(false);
 		const formEditorModel = ref<FormEditorModelItem[]>();
 		const form = ref<InstanceType<typeof AtSchemaForm>>();
-		const formModel = reactive<AtSchemaFormTypes.Model>({});
+		const formModel = reactive<
+			Partial<RouteModel | LinkModel | DialogModel | PopconfirmModel>
+		>({});
 		const formSchema = ref<AtSchemaFormTypes.JSONSchema>({
 			properties: {},
 		});
 		const setFormModelFormSchemProperties = (
 			properties: AtSchemaFormTypes.JSONSchema['properties']
 		) => {
-			if (!formModel.form) {
-				formModel.form = {
-					url: '',
-					method: 'POST',
-					schema: {
+			if (formModel.type === 'dialog') {
+				if (!formModel.form) {
+					formModel.form = {
+						url: '',
+						method: 'POST',
+						schema: {
+							properties: {},
+						},
+					};
+				}
+				if (!formModel.form?.schema) {
+					formModel.form.schema = {
 						properties: {},
-					},
-				};
+					};
+				}
+				formModel!.form!.schema.properties = properties;
 			}
-			if (!formModel.form?.schema) {
-				formModel.form.schema = {
-					properties: {},
-				};
-			}
-			formModel!.form!.schema.properties = properties;
 		};
 
 		const handleGenerate = (result: ReadSwaggerPageResult) => {
@@ -81,6 +111,7 @@ export default defineComponent({
 				if (!props.modelValue) {
 					return;
 				}
+				// @ts-ignore
 				Object.keys(formModel).forEach((key) => delete formModel[key]);
 				formModel.type = props.modelValue.type;
 				switch (formModel.type) {
@@ -203,7 +234,7 @@ export default defineComponent({
 									>
 										取消
 									</AtButton>
-									{['dialog', 'popconfirm'].includes(formModel.type) ? (
+									{['dialog', 'popconfirm'].includes(formModel.type ?? '') ? (
 										<SwaggerButton onGenerate={handleGenerate} />
 									) : null}
 									<AtButton
@@ -215,13 +246,13 @@ export default defineComponent({
 												case 'route':
 													trigger = {
 														type: 'route',
-														path: formModel.path,
+														path: formModel.path ?? '',
 													};
 													break;
-												case 'lnk':
+												case 'link':
 													trigger = {
 														type: 'link',
-														url: formModel.url,
+														url: formModel.url ?? '',
 													};
 													break;
 												case 'dialog':
@@ -230,12 +261,14 @@ export default defineComponent({
 															type: 'dialog',
 
 															form: {
-																url: formModel.url,
-																method: formModel.method,
+																url: formModel.url ?? '',
+																method: formModel.method ?? 'GET',
 																dataUrl: formModel.dataUrl,
 																dataMethod: formModel.dataMethod,
 
-																schema: formModel.form?.schema,
+																schema: formModel.form?.schema ?? {
+																	properties: {},
+																},
 															},
 															cancelText: formModel.cancelText,
 															okText: formModel.okText,
@@ -252,8 +285,8 @@ export default defineComponent({
 															confirmProps: {
 																title: formModel.title,
 															},
-															url: formModel.url,
-															method: formModel.method,
+															url: formModel.url ?? '',
+															method: formModel.method ?? 'GET',
 														};
 													}
 													break;

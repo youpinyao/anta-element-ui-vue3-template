@@ -64,9 +64,10 @@ export default defineComponent({
 			);
 		};
 		const tableSchema = computed<AtSchemaTableTypes.JSONSchema>(() => {
-			const schema = props.schema?.schema || {
-				columns: [],
-			};
+			const schema: NonNullable<PageRenderer.JSONSchema['table']>['schema'] =
+				props.schema?.schema || {
+					columns: [],
+				};
 			const columns = [...(schema.columns ?? [])];
 			const tableProps = {
 				...schema.props,
