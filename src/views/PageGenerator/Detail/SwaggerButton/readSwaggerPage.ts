@@ -54,6 +54,7 @@ export async function readSwaggerPage(
 		throw new Error('please set hash');
 	}
 
+	const iframeBox = document.createElement('div');
 	const iframe = document.createElement('iframe');
 	const waitFor = (
 		cls: string,
@@ -88,9 +89,13 @@ export async function readSwaggerPage(
 			}
 		});
 	};
+	// iframe.style.cssText = 'display: none';
+	iframeBox.style.cssText =
+		'position: fixed; width: 0; height: 0; overflow: hidden;';
 	iframe.style.cssText =
-		'position:fixed; left: 0; top: 0; width: 100%; height: 100%;';
-	document.body.appendChild(iframe);
+		'position: absolute; left: 0; top: 0; width: 1920px; height: 1080px;';
+	document.body.appendChild(iframeBox);
+	iframeBox.appendChild(iframe);
 
 	iframe.contentWindow?.document.write(
 		(
@@ -145,7 +150,7 @@ export async function readSwaggerPage(
 	const element = await waitFor('.document');
 
 	if (!element) {
-		// document.body.removeChild(iframe);
+		document.body.removeChild(iframeBox);
 		AtMessage.error('拉取失败，请重试');
 		throw new Error('waitFor timeout');
 	}
@@ -218,7 +223,7 @@ export async function readSwaggerPage(
 	);
 	const pagination = params['page'] && params['pageSize'] ? true : false;
 
-	document.body.removeChild(iframe);
+	document.body.removeChild(iframeBox);
 
 	[...(resultTrs ?? [])].forEach((tr) => {
 		const tds = tr.querySelectorAll('td');
