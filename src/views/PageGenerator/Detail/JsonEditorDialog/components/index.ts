@@ -21,6 +21,8 @@ import transfer from './transfer';
 import rate from './rate';
 import upload from './upload';
 import imageUpload from './imageUpload';
+import singleUpload from './singleUpload';
+import singleImageUpload from './singleImageUpload';
 import array from './array';
 import editor from './editor';
 
@@ -50,6 +52,8 @@ export {
 	rate,
 	upload,
 	imageUpload,
+	singleUpload,
+	singleImageUpload,
 	array,
 	editor,
 	column,
